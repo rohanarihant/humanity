@@ -1,127 +1,160 @@
-import React, { useState } from 'react'
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
-import TodoItem from './TodoItem'
-
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Person from '@material-ui/icons/Person';
+import AcUnit from '@material-ui/icons/AcUnit';
+import Group from '@material-ui/icons/Group';
+import Info from '@material-ui/icons/Info';
+import LiveTv from '@material-ui/icons/LiveTv';
+import Notifications from '@material-ui/icons/Notifications';
+import SettingsPower from '@material-ui/icons/SettingsPower';
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import BugReport from '@material-ui/icons/BugReport';
+import EventAvailable from '@material-ui/icons/EventAvailable';
+import PostAdd from '@material-ui/icons/PostAdd';
+import LibraryAdd from '@material-ui/icons/LibraryAdd';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@material-ui/core/Typography';
+// const useStyles = makeStyles({
+// root: {
+// flexGrow: 1,
+// },
+//   list: {
+//     width: 250,
+//   },
+//   fullList: {
+//     width: 'auto',
+//   },
+// });
 const useStyles = makeStyles((theme) => ({
-	todo: {
-		maxWidth: 400,
-		margin: 'auto',
-		marginTop: 40,
-		textAlign: 'center',
+	root: {
+	  flexGrow: 1,
 	},
-	srOnly: {
-		width: 0,
-		height: 0,
-		position: 'absolute',
-		left: '-9999px',
-		overflow: 'hidden',
+	menuButton: {
+	  marginRight: theme.spacing(2),
 	},
-	paper: {
-		width: '100%',
+	title: {
+	  flexGrow: 1,
 	},
-	form: {
-		padding: theme.spacing(2),
-	},
-	list: {
-		listStyle: 'none',
-		padding: 0,
-		marginBottom: 0,
-		borderRadius: '0 0 4px 4px',
-	},
-}))
-
-export default () => {
-	const classes = useStyles()
-	const initialState = [
-		{
-			id: 'vnode',
-			text: 'A simple initial todo',
-			completed: false,
-		},
-	]
-	const [todos, setTodos] = useState(initialState)
-	const [text, setText] = useState('')
-
-	const addTodo = (text) => {
-		const todo = {
-			id: Math.random().toString(36).substring(2),
-			text,
-			completed: false,
-		}
-		setTodos([...todos, todo])
+	notification : {
+		marginRight: 15,
 	}
+  }));
 
-	const removeTodo = (todo) => {
-		const filteredTodos = todos.filter((v) => v !== todo)
-		setTodos(filteredTodos)
-	}
+export default function TemporaryDrawer() {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+  const [open, setOpen] = React.useState(false);
+  const categories = [
+	  {title: 'My Profile', icon: <Person />},
+	  {title: 'Escalation', icon: <AcUnit />},
+	  {title: 'My District Team', icon: <Group />},
+	  {title: 'Add Sewa', icon: <PostAdd />},
+	  {title: 'My Hazri Details', icon: <LibraryAdd />},
+	  {title: 'Useful Information', icon: <Info />},
+	  {title: 'Events', icon: <EventAvailable />},
+	  {title: 'Issues', icon: <BugReport />},
+	  {title: 'Broadcast', icon: <LiveTv />},
+	  {title: 'Logout', icon: <ExitToApp />},
+  ];
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
 
-	const updateTodo = (todo) => {
-		const updatedTodos = todos.map((v) => (v.id === todo.id ? todo : v))
-		setTodos(updatedTodos)
-	}
+	// setState({ ...state, [anchor]: open });
+	setOpen(open)
+  };
 
-	const completedTodos = todos.filter((todo) => todo.completed)
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-	const handleAddTodo = (e) => {
-		e.preventDefault()
-		const trimmedText = text.trim()
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {categories.map(({title, icon}) => (
+          <ListItem button key={title}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={title} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
 
-		trimmedText && addTodo(trimmedText)
-		setText('')
-	}
-
-	const handleTextChange = (e) => {
-		setText(e.target.value)
-	}
-
-	return (
-		<Grid
-			container
-			className={classes.todo}
-			justify="center"
-			direction="column"
-		>
-			<header>
-				<img
-					src="/static/img/android-chrome-192x192.png"
-					alt="Logo"
-					width="192"
-					height="192"
-				/>
-			</header>
-			<Paper component="main" className={classes.paper} elevation={3}>
-				<form onSubmit={handleAddTodo} className={classes.form}>
-					<TextField
-						fullWidth
-						value={text}
-						margin="normal"
-						label="What must be done?"
-						onChange={handleTextChange}
-						inputProps={{ 'aria-label': 'What must be done?' }}
-					/>
-					<button className={classes.srOnly}> Submit Todo </button>
-					{!!todos.length && (
-						<Grid container justify="space-between">
-							<Grid item>Total: {todos.length}</Grid>
-							<Grid item>Completed: {completedTodos.length}</Grid>
-						</Grid>
-					)}
-				</form>
-				<ul className={classes.list}>
-					{todos.map((todo, i) => (
-						<TodoItem
-							key={i}
-							todo={todo}
-							updateTodo={updateTodo}
-							removeTodo={removeTodo}
-						/>
-					))}
-				</ul>
-			</Paper>
-		</Grid>
-	)
+  return (
+    <div>
+      {['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Drawer anchor={anchor} open={open} onClose={toggleDrawer(anchor, false)}>
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+	  ))}
+	  {/* <div className={classes.root}>
+	  <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            Humanity
+          </Typography>
+			<Notifications />
+			<SettingsPower />
+		  
+        </Toolbar>
+      </AppBar>
+	  </div> */}
+	  <div className={classes.root}>
+      <AppBar position="fixed">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} onClick={handleDrawerOpen} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Humanity
+          </Typography>
+          	<Notifications className={classes.notification} />
+			<SettingsPower className={classes.logout} />
+        </Toolbar>
+      </AppBar>
+    </div>
+    </div>
+  );
 }
