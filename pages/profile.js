@@ -1,8 +1,11 @@
 import React from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+import NavBar from '../components/NavBarBack';
 
 const Profile = () => {
     return (
+        <>
+        <NavBar />
         <div class="container">
             <div class="profile-card">
                 <div class="card-header">
@@ -81,6 +84,7 @@ const Profile = () => {
                 </MDBContainer>
             </div>
         </div>
+    </>
     )
 };
 

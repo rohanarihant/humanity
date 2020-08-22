@@ -1,12 +1,11 @@
 import React from 'react'
-import Todo from '../components/Todo'
+import NavBar from '../components/NavBar'
 import Slider from '../components/Slider';
 import Dashboard from '../components/Dashboard';
 
 const Index = () => (
 	<React.Fragment>
-		{/* <Fork  /> */}
-		<Todo />
+		<NavBar />
 		<Slider />
 		<Dashboard />
 	</React.Fragment>
