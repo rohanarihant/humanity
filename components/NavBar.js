@@ -139,7 +139,7 @@ export default function TemporaryDrawer() {
           <Typography variant="h6" className={classes.title}>
             Humanity
           </Typography>
-          	<Notifications className={classes.notification}/>
+          	<Notifications className={classes.notification} onClick={() => router.push('/notifications')}/>
           	{!loginStatus ? 
             <AccountCircle className={classes.notification} onClick={() => router.push('/login')} />
             :

@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <>
         <NavBar />
-        <div class="container">
+        <div class="container" >
             <div class="profile-card">
                 <div class="card-header">
                     <img class="profile-image" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="profile image" />
@@ -25,7 +25,7 @@ const Profile = () => {
                         </svg>
                     </div>
                 </div>
-                <MDBContainer>
+                <MDBContainer style={{marginTop: 0, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -54,7 +54,7 @@ const Profile = () => {
                     </MDBRow>
                 </MDBContainer>
                 <hr />
-                <MDBContainer>
+                <MDBContainer style={{marginTop: 0, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
