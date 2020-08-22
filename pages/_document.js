@@ -27,9 +27,9 @@ class MyDocument extends Document {
 					<Main />
 					<NextScript />
 				</body>
-<script src="/__/firebase/7.18.0/firebase-app.js"></script>
-<script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
-<script src="/__/firebase/init.js"></script>
+				<script src="/__/firebase/7.18.0/firebase-app.js"></script>
+				<script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+				<script src="/__/firebase/init.js"></script>
 			</html>
 		)
 	}

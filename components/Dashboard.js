@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Assessment from '@material-ui/icons/Assessment';
+import AddCircle from '@material-ui/icons/AddCircle';
 import Link from '@material-ui/core/Link';
 
 
@@ -12,15 +13,21 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     icons: {
-        height: 75,
-        width: 100,
+        height: 50,
+        width: 60,
+    },
+    text: {
+        marginTop: 0,
+        fontWeight: 500,
+        textShadow: '2px 2px #000',
     },
     paper: {
         padding: theme.spacing(1),
         textAlign: 'center',
         color: '#fff',
-        height: 150,
-        backgroundColor: '#673ab7'
+        height: 120,
+        backgroundColor: '#673ab7',
+        boxShadow: '10px 10px 5px #aaaaaa',
     },
     link: {
         marginTop: '20px',
@@ -37,13 +44,13 @@ function FormRow() {
             <Grid item xs={6}>
                 <Paper className={classes.paper}>
                     <Assessment className={classes.icons} />
-                    <Typography component="h1" variant="h5" align="center" >Trending Handles</Typography>
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} >Trending Handles</Typography>
                 </Paper>
             </Grid>
             <Grid item xs={6}>
                 <Paper className={classes.paper}>
-                    <Assessment className={classes.icons} />
-                    <Typography component="h1" variant="h5" align="center" >My Hazri Detail</Typography>
+                    <AddCircle className={classes.icons} />
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} >My Hazri Detail</Typography>
                     </Paper>
             </Grid>
             {/* <Grid item xs={4}>
@@ -67,9 +74,9 @@ export default function SimplePaper() {
                 <Grid container item xs={12} spacing={3}>
                     <FormRow />
                 </Grid>
-                <Grid container item xs={12} spacing={3}>
+                {/* <Grid container item xs={12} spacing={3}>
                     <FormRow />
-                </Grid>
+                </Grid> */}
             </Grid>
             <Grid container justify="center">
             <Link

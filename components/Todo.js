@@ -14,6 +14,7 @@ import Group from '@material-ui/icons/Group';
 import Info from '@material-ui/icons/Info';
 import LiveTv from '@material-ui/icons/LiveTv';
 import Notifications from '@material-ui/icons/Notifications';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import SettingsPower from '@material-ui/icons/SettingsPower';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import BugReport from '@material-ui/icons/BugReport';
@@ -25,6 +26,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
+import { useRouter } from 'next/router'
+
 // const useStyles = makeStyles({
 // root: {
 // flexGrow: 1,
@@ -52,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function TemporaryDrawer() {
+  const router = useRouter();
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -60,17 +64,18 @@ export default function TemporaryDrawer() {
     right: false,
   });
   const [open, setOpen] = React.useState(false);
+  const [loginStatus, updateLoginStatus] = React.useState(false);
   const categories = [
-	  {title: 'My Profile', icon: <Person />},
-	  {title: 'Escalation', icon: <AcUnit />},
-	  {title: 'My District Team', icon: <Group />},
-	  {title: 'Add Sewa', icon: <PostAdd />},
-	  {title: 'My Hazri Details', icon: <LibraryAdd />},
-	  {title: 'Useful Information', icon: <Info />},
-	  {title: 'Events', icon: <EventAvailable />},
-	  {title: 'Issues', icon: <BugReport />},
-	  {title: 'Broadcast', icon: <LiveTv />},
-	  {title: 'Logout', icon: <ExitToApp />},
+	  {title: 'My Profile', icon: <Person />, route: '/profile'},
+	  {title: 'Escalation', icon: <AcUnit />, route: '/escalation'},
+	  {title: 'My District Team', icon: <Group />, route: '/team'},
+	  {title: 'Add Sewa', icon: <PostAdd />, route: '/sewa'},
+	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: '/my-hazri'},
+	  {title: 'Useful Information', icon: <Info />, route: '/info'},
+	  {title: 'Events', icon: <EventAvailable />, route: '/events'},
+	  {title: 'Issues', icon: <BugReport />, route: '/issues'},
+	  {title: 'Broadcast', icon: <LiveTv />, route: '/broadcast'},
+	  {title: 'Logout', icon: <ExitToApp />, route: '/logout'},
   ];
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -84,7 +89,17 @@ export default function TemporaryDrawer() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
+  const openRoute = (link) => {
+	  router.push(link);
+  }
+  React.useEffect(() => {
+    updateLoginStatus(localStorage.getItem('login'));
+  },[]);
+  const onLogout = () => {
+    localStorage.setItem('login', false);
+    updateLoginStatus(false);
+    router.push('/login');
+  }
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -95,8 +110,8 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {categories.map(({title, icon}) => (
-          <ListItem button key={title}>
+        {categories.map(({title, icon, route}) => (
+          <ListItem button key={title} onClick={() => openRoute(route)}>
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={title} />
           </ListItem>
@@ -115,32 +130,6 @@ export default function TemporaryDrawer() {
           </Drawer>
         </React.Fragment>
 	  ))}
-	  {/* <div className={classes.root}>
-	  <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Humanity
-          </Typography>
-			<Notifications />
-			<SettingsPower />
-		  
-        </Toolbar>
-      </AppBar>
-	  </div> */}
 	  <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
@@ -150,8 +139,11 @@ export default function TemporaryDrawer() {
           <Typography variant="h6" className={classes.title}>
             Humanity
           </Typography>
-          	<Notifications className={classes.notification} />
-			<SettingsPower className={classes.logout} />
+          	<Notifications className={classes.notification}/>
+          	{!loginStatus ? 
+            <AccountCircle className={classes.notification} onClick={() => router.push('/login')} />
+            :
+			      <SettingsPower className={classes.logout} onClick={() => onLogout()} />}
         </Toolbar>
       </AppBar>
     </div>

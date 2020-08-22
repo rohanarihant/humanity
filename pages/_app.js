@@ -19,12 +19,12 @@ export default class MyApp extends App {
 		}
 	}
 
-	componentDidMount() {
-		if (process.env.NODE_ENV !== 'production') {
-			const axe = require('react-axe')
-			axe(React, ReactDOM, 1000)
-		}
-	}
+	// componentDidMount() {
+	// 	if (process.env.NODE_ENV !== 'production') {
+	// 		const axe = require('react-axe')
+	// 		axe(React, ReactDOM, 1000)
+	// 	}
+	// }
 
 	render() {
 		const { Component, pageProps } = this.props
