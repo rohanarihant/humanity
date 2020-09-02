@@ -35,6 +35,7 @@
 	"scripts": {
 		"dev": "next",
 		"start": "next start -p $PORT",
+		"heroku-postbuild": "npm run build",
 		"lint": "eslint components",
 		"build": "next build",
 		"build:server": "NEXT_TARGET=server next build",
