@@ -1,0 +1,1 @@
+export const API_URLS = 'http://humanitydemo.rubrutech.com/';

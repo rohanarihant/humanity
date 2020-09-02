@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -27,6 +27,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router'
+import AccountContext from '../contexts/accountContext';
+import { toast } from 'react-toastify';
 
 // const useStyles = makeStyles({
 // root: {
@@ -77,6 +79,7 @@ export default function TemporaryDrawer() {
 	  {title: 'Broadcast', icon: <LiveTv />, route: '/broadcast'},
 	  {title: 'Logout', icon: <ExitToApp />, route: '/logout'},
   ];
+  const {isSignedIn} = useContext(AccountContext);
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -94,12 +97,14 @@ export default function TemporaryDrawer() {
   }
   React.useEffect(() => {
     updateLoginStatus(localStorage.getItem('login'));
+    !localStorage.getItem('userId') && router.push('/login');
   },[]);
   const onLogout = () => {
-    localStorage.setItem('login', false);
+    localStorage.clear();
     updateLoginStatus(false);
     router.push('/login');
   }
+  
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -140,10 +145,10 @@ export default function TemporaryDrawer() {
             Humanity
           </Typography>
           	<Notifications className={classes.notification} onClick={() => router.push('/notifications')}/>
-          	{!loginStatus ? 
-            <AccountCircle className={classes.notification} onClick={() => router.push('/login')} />
+          	{!isSignedIn ? 
+            <AccountCircle className={classes.notification} onClick={() => onLogout()} />
             :
-			      <SettingsPower className={classes.logout} onClick={() => onLogout()} />}
+			      <SettingsPower className={classes.logout}onClick={() => router.push('/login')} />}
         </Toolbar>
       </AppBar>
     </div>

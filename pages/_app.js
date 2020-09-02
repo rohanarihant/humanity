@@ -4,9 +4,13 @@ import Head from 'next/head'
 import App from 'next/app'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import {AccountProvider} from '../contexts/accountContext';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ToastContainer, toast } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default class MyApp extends App {
 	static async getInitialProps({ Component, ctx }) {
 		return {
@@ -45,11 +49,14 @@ export default class MyApp extends App {
 				<Head>
 					<title>Todo App</title>
 				</Head>
+				<AccountProvider>
 				<ThemeProvider theme={theme}>
 					<CssBaseline>
 							<Component {...pageProps} />
+							<ToastContainer autoClose={5000} position={toast.POSITION.TOP_RIGHT} className="toasterposition" />
 					</CssBaseline>
 				</ThemeProvider>
+				</AccountProvider>
 			</>
 		)
 	}
