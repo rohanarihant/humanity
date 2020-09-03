@@ -34,7 +34,8 @@
 	},
 	"scripts": {
 		"dev": "next",
-		"start": "next start -p $PORT",
+		"start1": "next start -p $PORT",
+		"start": "npm run build:server && npm run export:server",
 		"heroku-postbuild": "npm run build",
 		"lint": "eslint components",
 		"build": "next build",

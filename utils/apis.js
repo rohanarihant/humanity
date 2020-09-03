@@ -111,5 +111,9 @@ async function fetchData({
           endpoint: 'api/my_profile/',
           data: { userid, authpassword },
       }),
+      updatePassword: async (newpassword, code, password) => postData({
+          endpoint: 'login/update_newpassword/',
+          data: { newpassword, code, password },
+      }),
     },
   };

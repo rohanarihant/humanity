@@ -22,7 +22,7 @@ const ForgotPassword = () => {
           const response = await auth.user.validatePassword(password, resetPasswordEmail );
           if(response.success){
             toast.info("Your Password has been changesd");
-            router.push('/login');
+            router.push('/changePassword');
           }else{
             toast.error(response && response.message);
           }
