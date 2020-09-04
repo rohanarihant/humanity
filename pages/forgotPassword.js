@@ -18,7 +18,7 @@ const ForgotPassword = () => {
       }
       if(email !== '' && emailError === ''){
         try{
-          const response = await auth.user.resetPassword(email);
+          const response = await auth.resetPassword(email);
           if(response.success){
             saveResetPasswordEmail(email);
             localStorage.setItem('email',email);

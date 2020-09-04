@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  auth
+  auth, user,
 } from '../utils/apis';
 
 /* eslint-disable class-methods-use-this */
@@ -49,7 +49,7 @@ export class AccountProvider extends React.Component {
   async getProfileDetails(){
     const userId = localStorage.getItem('userId');
     const authpassword = localStorage.getItem('authpassword');
-    return await auth.user.getProfile(userId, authpassword);
+    return await user.getProfile(userId, authpassword);
   }
   async updateLoginStatus(status){
     this.setState({isSignedIn: status});

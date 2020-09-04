@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,7 +16,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
-
+import {user} from '../utils/apis';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxWidth: 360,
     padding: 0,
+    overflowWrap: 'break-word',
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -83,7 +84,34 @@ export default function Escalation() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  // const {account: { getProfileDetails}} = useContext(AccountContext);
+  const [managementMem, setManagementMem] = useState([{}]);
+  const [nationalMem, setNationalMem] = useState([{}]);
+  const [stateMem, setStateMem] = useState([{}]);
 
+  useEffect(() => {
+    setManagementMem(JSON.parse(localStorage.getItem('ManagementMem')));
+      async function getMyTeam() {
+          const userid = localStorage.getItem('userId')
+          const authpassword = localStorage.getItem('authpassword')
+          const power = JSON.parse(localStorage.getItem('ItwingRank'));
+          const gender = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrgen;
+          const stateid = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrstaid;
+          const countryid = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrcouid;
+          const response = await user.getMyTeam(userid, authpassword, power, gender, countryid, stateid);
+          if (response.success) {
+              setManagementMem(response.allmanagementmem);
+              setStateMem(response.allstatemembers);
+              setNationalMem(response.allnmmembers);
+              localStorage.setItem('ManagementMem', JSON.stringify(response.allmanagementmem));
+              localStorage.setItem('allstatemembers', JSON.stringify(response.allstatemembers));
+              localStorage.setItem('allnmmembers', JSON.stringify(response.allnmmembers));
+          }
+      }
+      (!managementMem && !!localStorage.getItem('userId')) && getMyTeam();
+      getMyTeam();
+  }, []);
+  
   return (
     <div className={classes.root}>
     <NavBar />
@@ -100,80 +128,51 @@ export default function Escalation() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-      <List className={classes.listRoot}>
-            <ListItem>
-                <Avatar>
-                    <ImageIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User1" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
-            <Divider />
-            <ListItem>
-                <Avatar>
-                    <ImageIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User2" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
-            <Divider />
-            <ListItem>
-                <Avatar>
-                    <ImageIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User3" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
+        <List className={classes.listRoot}>
+          {stateMem && stateMem.map((mem) => (
+            <>
+              <ListItem>
+                  <Avatar>
+                      <ImageIcon />
+                  </Avatar>
+                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
+                  <ListItemText className={classes.listItem} primary={mem.statename} secondary={mem.usrpriemail} />
+              </ListItem>
+              <Divider />
+            </>
+          ))}
         </List>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <List className={classes.listRoot}>
-            <ListItem>
-                <Avatar>
-                    <BeachAccessIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User1" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
-            <ListItem>
-                <Avatar>
-                    <BeachAccessIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User2" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
-            <ListItem>
-                <Avatar>
-                    <BeachAccessIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User3" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
+          {nationalMem && nationalMem.map((mem) => (
+            <>
+              <ListItem>
+                  <Avatar>
+                      <ImageIcon />
+                  </Avatar>
+                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
+                  <ListItemText className={classes.listItemSec} primary={mem.statename} secondary={mem.usrpriemail} />
+              </ListItem>
+              <Divider />
+            </>
+          ))}
         </List>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <List className={classes.listRoot}>
-            <ListItem>
-                <Avatar>
-                    <BeachAccessIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User1" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
-            <ListItem>
-                <Avatar>
-                    <BeachAccessIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User2" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
-            <ListItem>
-                <Avatar>
-                    <BeachAccessIcon />
-                </Avatar>
-                <ListItemText className={classes.listItem} primary="User3" secondary="July 20, 2014" />
-                <ListItemText primary="Karnataka" secondary="c.rohit2111@gmail.com" />
-            </ListItem>
+          {managementMem && managementMem.map((mem) => (
+            <>
+              <ListItem>
+                  <Avatar>
+                      <ImageIcon />
+                  </Avatar>
+                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
+                  <ListItemText primary={mem.statename} secondary={mem.usrpriemail} />
+              </ListItem>
+              <Divider />
+            </>
+          ))}
         </List>
       </TabPanel>
     </div>

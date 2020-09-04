@@ -86,7 +86,6 @@ async function fetchData({
   });
 
   export const auth = {
-    user: {
       register: async user => postData({
         endpoint: 'login/registeracc/',
         data: user,
@@ -107,13 +106,30 @@ async function fetchData({
           endpoint: 'login/check_passcode',
           data: { checkresetcode, mail },
       }),
+      updatePassword: async (newpassword, code, password) => postData({
+        endpoint: 'login/update_newpassword/',
+        data: { newpassword, code, password },
+      }),
+  };
+  export const user = {
       getProfile: async (userid, authpassword) => postData({
           endpoint: 'api/my_profile/',
           data: { userid, authpassword },
       }),
-      updatePassword: async (newpassword, code, password) => postData({
-          endpoint: 'login/update_newpassword/',
-          data: { newpassword, code, password },
+      getMyTeam: async (userid, authpassword, power, gender, countryid, stateid) => postData({
+          endpoint: 'api/my_teamdetail/',
+          data: { userid, authpassword, power, gender, countryid, stateid },
       }),
-    },
+      addHazri: async (userid, authpassword, sewaat, sewadid, sewadate, hajri) => postData({
+          endpoint: 'api/add_mysewa/',
+          data: { userid, authpassword, sewaat, sewadid, sewadate, hajri },
+      }),
+      getHazri: async (userid, authpassword, power, pagging = 0) => postData({
+          endpoint: 'api/download_sewareport/',
+          data: { userid, authpassword, power, pagging },
+      }),
+      getOfficialHandler: async (userid, authpassword, gender) => postData({
+          endpoint: 'api/get_official_handler_list/',
+          data: { userid, authpassword, gender },
+      }),
   };

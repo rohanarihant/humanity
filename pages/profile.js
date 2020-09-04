@@ -1,10 +1,24 @@
-import React, {useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import NavBar from '../components/NavBarBack';
 import AccountContext from '../contexts/accountContext';
 
 const Profile = () => {
-    const {account: { userProfileData}} = useContext(AccountContext);
+    const {account: { getProfileDetails}} = useContext(AccountContext);
+    const [userProfileData, setUserProfileData] = useState([{}]);
+    useEffect(() => {
+        setUserProfileData(JSON.parse(localStorage.getItem('MemberDetaildet')));
+        async function getProfile() {
+            const response = await getProfileDetails();
+            if (response.success) {
+                setUserProfileData(response.MemberDetaildet);
+                localStorage.setItem('MemberDetaildet', JSON.stringify(response.MemberDetaildet));
+                localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname));
+                localStorage.setItem('samiti', JSON.stringify(response.samiti));
+            }
+        }
+        (!userProfileData && !!localStorage.getItem('userId')) && getProfile();
+    }, []);
     return (
         <>
         <NavBar />

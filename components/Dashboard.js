@@ -64,17 +64,7 @@ function FormRow() {
 export default function SimplePaper() {
     const classes = useStyles();
     const { account: { getProfileDetails } } = useContext(AccountContext);
-    useEffect(() => {
-        async function getProfile() {
-            const response = await getProfileDetails();
-            if (response.success) {
-                localStorage.setItem('MemberDetaildet', JSON.stringify(response.MemberDetaildet));
-                localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname));
-                localStorage.setItem('samiti', JSON.stringify(response.samiti));
-            }
-        }
-        !localStorage.getItem('MemberDetaildet') && !!localStorage.getItem('userId') && getProfile();
-    }, []);
+
     return (
         <div style={{ marginTop: 20 }}>
             <Grid container direction="row" justify="center" alignItems="center" spacing={3}>

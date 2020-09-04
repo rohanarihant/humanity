@@ -8,7 +8,7 @@ import AccountContext from '../contexts/accountContext';
 const ForgotPassword = () => {
     const [password, updatePassword] = useState('');
     const [errorPassword, updateErrorPassword] = useState('');
-    const {account: {resetPasswordEmail}} = useContext(AccountContext);
+    let {account: {resetPasswordEmail}} = useContext(AccountContext);
     const router = useRouter();
     const checkForm = async() => {
       if(!password){ 
@@ -19,9 +19,10 @@ const ForgotPassword = () => {
       if(password !== '' && errorPassword === ''){
         try{
             if(!resetPasswordEmail){ resetPasswordEmail = localStorage.getItem('email') }
-          const response = await auth.user.validatePassword(password, resetPasswordEmail );
-          if(response.success){
-            toast.info("Your Password has been changesd");
+            const response = await auth.validatePassword(password, resetPasswordEmail );
+            if(response.success){
+              localStorage.setItem('otp',password);
+            toast.info("Your Password has been changed");
             router.push('/changePassword');
           }else{
             toast.error(response && response.message);

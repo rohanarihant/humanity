@@ -72,7 +72,7 @@ export default function TemporaryDrawer() {
 	  {title: 'Escalation', icon: <AcUnit />, route: '/escalation'},
 	  {title: 'My District Team', icon: <Group />, route: '/team'},
 	  {title: 'Add Sewa', icon: <PostAdd />, route: '/sewa'},
-	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: '/my-hazri'},
+	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: '/myHazri'},
 	  {title: 'Useful Information', icon: <Info />, route: '/info'},
 	  {title: 'Events', icon: <EventAvailable />, route: '/events'},
 	  {title: 'Issues', icon: <BugReport />, route: '/issues'},

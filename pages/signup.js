@@ -172,7 +172,7 @@ class Register extends React.Component{
                         gender: gender,
                         bloodg: bloodGroup,
                     }
-                    const response = await auth.user.register(payload);
+                    const response = await auth.register(payload);
                     if(response.success){
                     toast.success('Account Created Successfully');
                     Router.push({
@@ -235,7 +235,7 @@ class Register extends React.Component{
 
     async searchBlock(e){
         this.setState({block: e.target.value}, async() => {
-            const blockResponse = await auth.user.searchBlock(this.state.block);
+            const blockResponse = await auth.searchBlock(this.state.block);
             this.setState({blocksList: blockResponse && blockResponse.block });
         })
     }

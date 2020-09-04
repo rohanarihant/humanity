@@ -434,3 +434,32 @@ background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
   .card-header{
     border-bottom: 0px;
   }
+
+  .my-hazri-instruction{
+    margin-top: 60px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .plus-icon{
+    height: 80px;
+    position: absolute;
+    bottom: 25px;
+    right: 15px;
+  }
+
+  .add-hazri-input{
+    width: 70%;
+    text-align: center;
+    margin: 17vw;
+  }
+
+  .iframe-class{
+    height: 100vh;
+    width: 100vw;
+    border: 0px;
+  }
+  .official-info{
+    background-color: #fff;
+  }
