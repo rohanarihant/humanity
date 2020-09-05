@@ -39,7 +39,7 @@ export class AccountProvider extends React.Component {
     });
   }
   async getLogin(email, password){
-    return await auth.user.login(email, password);
+    return await auth.login(email, password);
   }
   async saveUserDetailLogin(userDetail){
     localStorage.setItem('userId',userDetail.mylog[0].usrid);
