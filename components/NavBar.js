@@ -16,6 +16,8 @@ import LiveTv from '@material-ui/icons/LiveTv';
 import Notifications from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SettingsPower from '@material-ui/icons/SettingsPower';
+import PeopleOutline from '@material-ui/icons/PeopleOutline';
+import Accessibility from '@material-ui/icons/Accessibility';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import BugReport from '@material-ui/icons/BugReport';
 import EventAvailable from '@material-ui/icons/EventAvailable';
@@ -68,18 +70,22 @@ export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
   const [loginStatus, updateLoginStatus] = React.useState(false);
   const categories = [
-	  {title: 'My Profile', icon: <Person />, route: '/profile'},
-	  {title: 'Escalation', icon: <AcUnit />, route: '/escalation'},
-	  {title: 'My District Team', icon: <Group />, route: '/team'},
-	  {title: 'Add Sewa', icon: <PostAdd />, route: '/sewa'},
-	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: '/myHazri'},
-	  {title: 'Useful Information', icon: <Info />, route: '/info'},
-	  {title: 'Events', icon: <EventAvailable />, route: '/events'},
-	  {title: 'Issues', icon: <BugReport />, route: '/issues'},
-	  {title: 'Broadcast', icon: <LiveTv />, route: '/broadcast'},
-	  {title: 'Logout', icon: <ExitToApp />, route: '/logout'},
+	  {title: 'My Profile', icon: <Person />, route: 'profile'},
+	  {title: 'Escalation', icon: <AcUnit />, route: 'escalation'},
+	  {title: 'My District Team', icon: <Group />, route: 'team'},
+	  {title: 'Add Sewa', icon: <PostAdd />, route: 'sewa'},
+	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: 'myHazri'},
+	  {title: 'Useful Information', icon: <Info />, route: 'info'},
+	  {title: 'Events', icon: <EventAvailable />, route: 'events'},
+	  {title: 'Issues', icon: <BugReport />, route: 'issues'},
+	  {title: 'Delete Member', icon: <PeopleOutline />, route: 'searchMember'},
+	  {title: 'Change Role', icon: <Accessibility />, route: 'searchMember'},
+	  {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
+	  // {title: 'Change Role', icon: <BugReport />, route: 'changeRole'},
+	  {title: 'Broadcast', icon: <LiveTv />, route: 'broadcast'},
+	  {title: 'Logout', icon: <ExitToApp />, route: 'logout'},
   ];
-  const {isSignedIn} = useContext(AccountContext);
+  const {account: {isSignedIn, setRoute, setTitle, title, updateSelectedScreen}} = useContext(AccountContext);
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -92,8 +98,10 @@ export default function TemporaryDrawer() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const openRoute = (link) => {
-	  router.push(link);
+  const openRoute = (title, link) => {
+    setRoute(link);
+	  setTitle(title);
+	  updateSelectedScreen(link);
   }
   React.useEffect(() => {
     updateLoginStatus(localStorage.getItem('login'));
@@ -116,7 +124,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {categories.map(({title, icon, route}) => (
-          <ListItem button key={title} onClick={() => openRoute(route)}>
+          <ListItem button key={title} onClick={() => openRoute(route, title)}>
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={title} />
           </ListItem>
@@ -142,7 +150,7 @@ export default function TemporaryDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Humanity
+            {title}
           </Typography>
           	<Notifications className={classes.notification} onClick={() => router.push('/notifications')}/>
           	{!isSignedIn ? 

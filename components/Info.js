@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import NavBar from '../components/NavBarBack';
+import NavBar from './NavBarBack';
 import { makeStyles } from '@material-ui/core/styles';
 import { Twitter, YouTube, Facebook, Instagram } from '@material-ui/icons';
 import { user } from '../utils/apis';

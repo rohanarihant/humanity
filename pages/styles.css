@@ -4,7 +4,7 @@
 
   .container {
     display: flex;
-    min-height: 80vh;
+    min-height: 60vh;
     margin: 0px;
     align-items: center;
     justify-content: center;
@@ -167,6 +167,8 @@
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
             flex-direction: row;
+    padding: 20px;
+    font-size: 20px;
   }
   .checkbox-layout input {
     width: 20px;
@@ -280,13 +282,14 @@
 
 
   .profile {
-    height: 125px;
+    height: 200px;
     width: calc(100% - 20px);
     margin: 0 auto;
     margin-bottom: 1em;
     position: relative;
     background: #ededed;
     border-radius: 12px;
+    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
   }
   .profile img {
     border-radius: 12px;
@@ -310,15 +313,17 @@
     color: rgba(255, 255, 255, 0.65);
     padding-top: 5px;
   }
+  #profile0 {
+    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+  }
   #profile1 {
     background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
   }
   #profile2 {
-background-image: linear-gradient(315deg, #fad0c4 0%, #f1a7f1 74%);
-
+  background-image: linear-gradient(315deg, #fad0c4 0%, #f1a7f1 74%);
   }
   #profile3 {
-background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
+  background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
   }
   #profile4 {
     background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
@@ -326,7 +331,10 @@ background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
   #profile5 {
     background-color: #f907fc;
     background-image: linear-gradient(315deg, #f907fc 0%, #05d6d9 74%);
-
+  }
+  #profile5 {
+    background-color: #f907fc;
+    background-image: linear-gradient(315deg, #f907fc 0%, #05d6d9 74%);
   }
 
 
@@ -336,6 +344,19 @@ background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
   .social-links {
     display: flex;
     justify-content: center;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0px 5px;
+    height: 110px;
+  }
+
+  .sewa-category{
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
   }
   
   .social-btn {
@@ -436,10 +457,10 @@ background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
   }
 
   .my-hazri-instruction{
-    margin-top: 60px;
     padding: 15px;
     font-size: 15px;
     font-weight: 600;
+    color: #673ab7;
   }
 
   .plus-icon{
@@ -462,4 +483,79 @@ background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
   }
   .official-info{
     background-color: #fff;
+  }
+  .search-date-input{
+    margin: 6px;
+    border-radius: 5px;
+    border-color: #6610f2;
+    padding: 0.20rem;
+    margin-top: 75px;
+    width: 40vw;
+  }
+  .total-hazri{
+    font-size: 20px;
+    text-align: center;
+    color: #673ab7;
+    font-weight: 600;
+    margin-bottom: 0rem;
+  }
+
+  .search-date-icon{
+    width: 2rem !important;
+    height: 2rem !important;
+    fill: #673ab7 !important;
+  }
+  .create-event-container{
+    margin-top: 80px;
+    text-align: center;
+  }
+  .form-control-event{
+    width:90vw;
+    margin-left: 5vw;
+    display: block;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  .event-checkbox{
+    text-align: left;
+    margin-left: 5vw;
+  }
+  .event-checkbox-input{
+    margin-right: 5px;
+  }
+  .event-checkbox-title{
+    text-align: left;
+    margin-left: 5vw;
+    color: #6610f2;
+  }
+  .event-select-state{
+    width: 90vw;
+    margin-left: 5vw;
+    margin-bottom: 10px;
+  }
+
+  .MuiGrid-root{
+    z-index: 30;
+  }
+
+  .issues-container{
+    margin-top: 60px;
+  }
+  .search-input{
+    padding: 0.5em;
+    width: 80vw;
+    margin-left: 10vw;
+  }
+  .memberList{
+    display: flex;
+    justify-content: space-evenly;
   }

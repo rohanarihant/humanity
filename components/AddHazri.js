@@ -1,6 +1,6 @@
 import React, {useEffect, useContext, useState} from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-import NavBar from '../components/NavBarBack';
+import NavBar from './NavBarBack';
 import AccountContext from '../contexts/accountContext';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';

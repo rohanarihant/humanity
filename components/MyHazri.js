@@ -8,10 +8,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import NavBar from '../components/NavBarBack';
+import NavBar from './NavBarBack';
 import AccountContext from '../contexts/accountContext';
 import { useRouter } from 'next/router';
 import {user} from '../utils/apis';
+import Search from '@material-ui/icons/Search';
 
 const columns = [
   { id: 'name', label: 'Date', minWidth: 50 },
@@ -66,9 +67,14 @@ const MyHazri = () => {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const {account: { getProfileDetails}} = useContext(AccountContext);
+    const {account: { getProfileDetails, setRoute}} = useContext(AccountContext);
     const [userHazri, setUserHazri] = useState([{}]);
     const [pagging, setPagging] = useState(0);
+    const [enableSearch, setEnableSearch] = useState(false);
+    const [searchFrom, setSearchFrom] = useState('');
+    const [searchTo, setSearchTo] = useState('');
+    const [totalHazri, setTotalHazri] = useState('');
+    const [responseMsg, setResponseMsg] = useState('');
     const router = useRouter();
   
     const handleChangePage = (event, newPage) => {
@@ -79,25 +85,39 @@ const MyHazri = () => {
       setRowsPerPage(+event.target.value);
       setPage(0);
     };
-  
-    useEffect(() => {
-        async function getMyHazri() {
-            const userid = localStorage.getItem('userId');
-            const authpassword = localStorage.getItem('authpassword');
-            const power = localStorage.getItem('ItwingRank');
-            const response = await user.getHazri(userid, authpassword, power, pagging);
-            if (response.success) {
-                setUserHazri(response.sewalist);
-            }
+    async function getMyHazri() {
+        const userid = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const power = localStorage.getItem('power');
+        const response = await user.getHazri(userid, authpassword, power, searchFrom, searchTo, pagging);
+        if (response.success) {
+          setUserHazri(response.sewalist);
+          setTotalHazri(response.hazri);
+        }else{
+          setResponseMsg(response.message);
         }
+    }
+    useEffect(() => {
         getMyHazri();
     }, []);
+    const searchMyHazri = () => {
+        if(searchFrom !== '' && searchTo !== ''){
+            getMyHazri();
+        }
+    }
+    console.log(responseMsg,'enableSearch')
     return (
         <>
-        <NavBar />
+        <NavBar setEnableSearch={setEnableSearch} enableSearch={enableSearch} />
         <div>
-            <p class="my-hazri-instruction">यहाँ पर आप पिछले 45 दिनों में की गई सेवा की जानकारी भर सकते हैं। भरी गई सेवा के अनुसार आपकी हाज़री अपने आप ही जुड़ती जाएगी।वर्ष 2020 में आपकी अब तक की कुल हाज़री सबसे ऊपर दिखाई गयी है।</p>
-            <img className="plus-icon" src="/static/img/plus.svg" onClick={() => router.push('/addHazri')} />
+            {enableSearch && <div>
+                <input type="date" className="search-date-input" value={searchFrom} onChange={(e) => setSearchFrom(e.target.value)}  />
+                <input type="date" className="search-date-input" value={searchTo} onChange={(e) => setSearchTo(e.target.value)} />
+                <Search className={classes.notification} className="search-date-icon" onClick={() => searchMyHazri()} />
+            </div>}
+            <p class="my-hazri-instruction" style={{marginTop: enableSearch ? 0 : 60}}>यहाँ पर आप पिछले 45 दिनों में की गई सेवा की जानकारी भर सकते हैं। भरी गई सेवा के अनुसार आपकी हाज़री अपने आप ही जुड़ती जाएगी।वर्ष 2020 में आपकी अब तक की कुल हाज़री सबसे ऊपर दिखाई गयी है।</p>
+            <p className="total-hazri">Total Hazri :- {totalHazri}</p>
+            <img className="plus-icon" src="/static/img/plus.svg" onClick={() => setRoute('addHazri')} />
         </div>
         <div>
         <Paper className={classes.root}>
@@ -148,6 +168,7 @@ const MyHazri = () => {
                 onChangeRowsPerPage={handleChangeRowsPerPage}
             />
         </Paper>
+        <div className="total-hazri">{responseMsg}</div>
         </div>
        
     </>

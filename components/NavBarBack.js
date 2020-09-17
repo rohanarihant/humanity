@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -13,6 +13,7 @@ import AcUnit from '@material-ui/icons/AcUnit';
 import Group from '@material-ui/icons/Group';
 import Info from '@material-ui/icons/Info';
 import LiveTv from '@material-ui/icons/LiveTv';
+import Search from '@material-ui/icons/Search';
 import Notifications from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SettingsPower from '@material-ui/icons/SettingsPower';
@@ -27,7 +28,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router'
-
+import AccountContext from '../contexts/accountContext';
 // const useStyles = makeStyles({
 // root: {
 // flexGrow: 1,
@@ -54,9 +55,10 @@ const useStyles = makeStyles((theme) => ({
 	}
   }));
 
-export default function Navbar() {
+export default function Navbar({setEnableSearch, enableSearch}) {
   const router = useRouter();
   const classes = useStyles();
+  const {account: { setRoute, route, title }} = useContext(AccountContext);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -66,16 +68,16 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const [loginStatus, updateLoginStatus] = React.useState(false);
   const categories = [
-	  {title: 'My Profile', icon: <Person />, route: '/profile'},
-	  {title: 'Escalation', icon: <AcUnit />, route: '/escalation'},
-	  {title: 'My District Team', icon: <Group />, route: '/team'},
-	  {title: 'Add Sewa', icon: <PostAdd />, route: '/sewa'},
-	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: '/my-hazri'},
-	  {title: 'Useful Information', icon: <Info />, route: '/info'},
-	  {title: 'Events', icon: <EventAvailable />, route: '/events'},
-	  {title: 'Issues', icon: <BugReport />, route: '/issues'},
-	  {title: 'Broadcast', icon: <LiveTv />, route: '/broadcast'},
-	  {title: 'Logout', icon: <ExitToApp />, route: '/logout'},
+	  {title: 'My Profile', icon: <Person />, route: 'profile'},
+	  {title: 'Escalation', icon: <AcUnit />, route: 'escalation'},
+	  {title: 'My District Team', icon: <Group />, route: 'team'},
+	  {title: 'Add Sewa', icon: <PostAdd />, route: 'sewa'},
+	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: 'my-hazri'},
+	  {title: 'Useful Information', icon: <Info />, route: 'info'},
+	  {title: 'Events', icon: <EventAvailable />, route: 'events'},
+	  {title: 'Issues', icon: <BugReport />, route: 'issues'},
+	  {title: 'Broadcast', icon: <LiveTv />, route: 'broadcast'},
+	  {title: 'Logout', icon: <ExitToApp />, route: 'logout'},
   ];
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -90,7 +92,7 @@ export default function Navbar() {
     setOpen(true);
   };
   const openRoute = (link) => {
-	  router.push(link);
+	  setRoute(link);
   }
   React.useEffect(() => {
     updateLoginStatus(localStorage.getItem('login'));
@@ -98,7 +100,7 @@ export default function Navbar() {
   const onLogout = () => {
     localStorage.setItem('login', false);
     updateLoginStatus(false);
-    router.push('/login');
+    rsetRoute('login');
   }
   const list = (anchor) => (
     <div
@@ -124,11 +126,12 @@ export default function Navbar() {
       <AppBar position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} onClick={handleDrawerOpen} color="inherit" aria-label="menu">
-            <ArrowBack onClick={() => router.push('/')} />
+            <ArrowBack onClick={() => setRoute('home')} />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Humanity
+            {title}
           </Typography>
+          {router.pathname === '/myHazri' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
         </Toolbar>
       </AppBar>
     </div>

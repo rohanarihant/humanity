@@ -19,6 +19,10 @@ export class AccountProvider extends React.Component {
       authpassword:'',
       ItwingRank:'',
       samiti:'',
+      route: 'home',
+      title: 'Humanity',
+      changeRoleUser: '',
+      screen: '',
     };
     this.state = this.defaultState;
 
@@ -29,6 +33,10 @@ export class AccountProvider extends React.Component {
       saveResetPasswordEmail: this.saveResetPasswordEmail.bind(this),
       saveUserDetailLogin: this.saveUserDetailLogin.bind(this),
       getProfileDetails: this.getProfileDetails.bind(this),
+      setChangeRoleUser: this.setChangeRoleUser.bind(this),
+      updateSelectedScreen: this.updateSelectedScreen.bind(this),
+      setRoute: this.setRoute.bind(this),
+      setTitle: this.setRoute.bind(this),
     };
   }
   componentDidMount(){
@@ -44,6 +52,7 @@ export class AccountProvider extends React.Component {
   async saveUserDetailLogin(userDetail){
     localStorage.setItem('userId',userDetail.mylog[0].usrid);
     localStorage.setItem('authpassword',userDetail.authpassword);
+    localStorage.setItem('power',userDetail.enroll_category_id);
     this.setState({userDetailLogin: userDetail || [{}], userId: userDetail.mylog[0].usrid, authpassword: userDetail.authpassword});
   }
   async getProfileDetails(){
@@ -56,6 +65,19 @@ export class AccountProvider extends React.Component {
   }
   async saveResetPasswordEmail(email){
     this.setState({resetPasswordEmail: email});
+  }
+
+  async setRoute(route){
+    this.setState({route});
+  }
+  async setTitle(title){
+    this.setState({title});
+  }
+  async setChangeRoleUser(changeRoleUser){
+    this.setState({changeRoleUser});
+  }
+  async updateSelectedScreen(screen){
+    this.setState({screen});
   }
 
   render() {

@@ -88,7 +88,7 @@ export default function SimplePaper() {
                     }}
                 >
                     msghumanity@gmail.com
-</Link>
+                </Link>
             </Grid>
 
         </div>
