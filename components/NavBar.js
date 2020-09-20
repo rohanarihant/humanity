@@ -81,7 +81,8 @@ export default function TemporaryDrawer() {
 	  {title: 'Delete Member', icon: <PeopleOutline />, route: 'searchMember'},
 	  {title: 'Change Role', icon: <Accessibility />, route: 'searchMember'},
 	  {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
-	  // {title: 'Change Role', icon: <BugReport />, route: 'changeRole'},
+	  {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
+	  {title: 'Download', icon: <Person />, route: 'download'},
 	  {title: 'Broadcast', icon: <LiveTv />, route: 'broadcast'},
 	  {title: 'Logout', icon: <ExitToApp />, route: 'logout'},
   ];

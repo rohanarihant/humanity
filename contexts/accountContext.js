@@ -23,6 +23,8 @@ export class AccountProvider extends React.Component {
       title: 'Humanity',
       changeRoleUser: '',
       screen: '',
+      memberid: '',
+      showLoader: false,
     };
     this.state = this.defaultState;
 
@@ -37,6 +39,8 @@ export class AccountProvider extends React.Component {
       updateSelectedScreen: this.updateSelectedScreen.bind(this),
       setRoute: this.setRoute.bind(this),
       setTitle: this.setRoute.bind(this),
+      updateMemberid: this.updateMemberid.bind(this),
+      toggleShowLoader: this.toggleShowLoader.bind(this),
     };
   }
   componentDidMount(){
@@ -78,6 +82,12 @@ export class AccountProvider extends React.Component {
   }
   async updateSelectedScreen(screen){
     this.setState({screen});
+  }
+  async updateMemberid(memberid){
+    this.setState({memberid});
+  }
+  async toggleShowLoader(showLoader){
+    this.setState({showLoader});
   }
 
   render() {

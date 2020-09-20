@@ -52,21 +52,29 @@ function FormRow() {
                     <Typography component="h3" variant="h5" align="center" className={classes.text} >My Hazri Detail</Typography>
                 </Paper>
             </Grid>
-            {/* <Grid item xs={4}>
-                <Paper className={classes.paper}>
-                    <Assessment className={classes.icons} />
-                    <Typography component="h1" variant="h6" align="center" >Results</Typography>
-                    </Paper>
-            </Grid> */}
         </React.Fragment>
     );
 }
 export default function SimplePaper() {
     const classes = useStyles();
     const { account: { getProfileDetails } } = useContext(AccountContext);
-
+    useEffect(() => {
+        async function getProfile() {
+            const response = await getProfileDetails();
+            if (response.success) {
+                localStorage.setItem('MemberDetaildet', JSON.stringify(response.MemberDetaildet));
+                localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname));
+                localStorage.setItem('samiti', JSON.stringify(response.samiti));
+            }
+        }
+        getProfile();
+    }, []);
     return (
         <div style={{ marginTop: 20 }}>
+            <div className="user-detail-dashboard">
+                <p>Dummy MM</p>
+                <p>Management Member</p>
+            </div>
             <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
                 <Grid container item xs={12} spacing={3}>
                     <FormRow />

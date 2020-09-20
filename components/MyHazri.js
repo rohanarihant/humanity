@@ -67,7 +67,7 @@ const MyHazri = () => {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const {account: { getProfileDetails, setRoute}} = useContext(AccountContext);
+    const {account: { getProfileDetails, setRoute, toggleShowLoader}} = useContext(AccountContext);
     const [userHazri, setUserHazri] = useState([{}]);
     const [pagging, setPagging] = useState(0);
     const [enableSearch, setEnableSearch] = useState(false);
@@ -86,6 +86,7 @@ const MyHazri = () => {
       setPage(0);
     };
     async function getMyHazri() {
+        toggleShowLoader(true);
         const userid = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
         const power = localStorage.getItem('power');
@@ -93,8 +94,10 @@ const MyHazri = () => {
         if (response.success) {
           setUserHazri(response.sewalist);
           setTotalHazri(response.hazri);
+          toggleShowLoader(false);
         }else{
           setResponseMsg(response.message);
+          toggleShowLoader(false);
         }
     }
     useEffect(() => {

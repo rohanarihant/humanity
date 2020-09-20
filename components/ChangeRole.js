@@ -74,11 +74,11 @@ const Profile = () => {
                                 Address
         </label>
                                 <input type="text" id="defaultFormRegisterPasswordEx" value={user.usradd} className="form-control" />
-                                <select class="form-control" value={role} name="role" onChange={(e) => setRole(e.target.value)}>
+                                <select style={{marginTop: 20}} class="form-control" value={role} name="role" onChange={(e) => setRole(e.target.value)}>
                                     <option>Select Role</option>
                                     {myrole.map(rol => (<option value={rol.categoryid}>{rol.categoryname}</option>))}
                                 </select>
-                                <p class="iconSwitch" onClick={() => updateRole(user)}>Update Role</p>
+                                <p class="iconSwitch" style={{marginTop: 12}} onClick={() => updateRole(user)}>Update Role</p>
                             </form>
                         </MDBCol>
                     </MDBRow>

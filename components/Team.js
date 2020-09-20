@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -17,6 +17,8 @@ import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
 import {user} from '../utils/apis';
+import AccountContext from '../contexts/accountContext';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -84,7 +86,7 @@ export default function Escalation() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // const {account: { getProfileDetails}} = useContext(AccountContext);
+  const {account: { toggleShowLoader}} = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
@@ -92,6 +94,7 @@ export default function Escalation() {
   useEffect(() => {
     setManagementMem(JSON.parse(localStorage.getItem('ManagementMem')));
       async function getMyTeam() {
+          toggleShowLoader(true);
           const userid = localStorage.getItem('userId')
           const authpassword = localStorage.getItem('authpassword')
           const power = JSON.parse(localStorage.getItem('power'));
@@ -107,6 +110,7 @@ export default function Escalation() {
               localStorage.setItem('allstatemembers', JSON.stringify(response.allstatemembers));
               localStorage.setItem('allnmmembers', JSON.stringify(response.allnmmembers));
           }
+          toggleShowLoader(false);
       }
       (!managementMem && !!localStorage.getItem('userId')) && getMyTeam();
       getMyTeam();

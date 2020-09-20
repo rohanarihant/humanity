@@ -33,7 +33,7 @@ export default function Sewa() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [selectedIndex, setSelectedIndex] = React.useState('Select Social Media');
     const [socialMediaList, setSocialMediaList] = React.useState(['Select']);
     const [socialMediaDetail, setSocialMediaDetail] = React.useState(['Select']);
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
@@ -77,7 +77,6 @@ export default function Sewa() {
         getOfficialHandler();
     }, []);
 
-    console.log(selectedIndex, 'officialHandlerList')
     return (
         <div className="official-info">
             <NavBar />

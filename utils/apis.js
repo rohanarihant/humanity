@@ -111,6 +111,12 @@ async function fetchData({
         data: { newpassword, code, password },
       }),
   };
+  export const commonMethods = {
+      getAllStates: async (userid, authpassword, power, countryid, stateid) => postData({
+          endpoint: 'api/select_state_list/',
+          data: { userid, authpassword, power, countryid, stateid },
+      })
+    }
   export const user = {
       getProfile: async (userid, authpassword) => postData({
           endpoint: 'api/my_profile/',
@@ -173,4 +179,29 @@ async function fetchData({
       data: { userid, authpassword, power, updatepermission, uby, appmem, singlestate, allstate, downloadpoints, sendbroadcast },
     }),
   };
+  export const download = {
+    downloadMembers: async (userid, authpassword, countryid, gender) => postData({
+      endpoint: `downloadapi/download_selected_state/${userid}/${authpassword}/${countryid}/${gender}`,
+      data: {}
+    }),
+  };
+  export const accountApproval = {
+    fetchPendingAccounts: async (userid, authpassword,power, countryid, stateid, gender) => postData({
+      endpoint: `api/fetch_pendingaccount/`,
+      data: {userid, authpassword,power, countryid, stateid, gender}
+    }),
+    fetchUserDetail: async (userid, authpassword, memberid) => postData({
+      endpoint: `api/fetch_memberdetail/`,
+      data: {userid, authpassword, memberid}
+    }),
+    approveAccount: async (userid, authpassword, power, account_id, emailid, name, dmname, dmcon, dmcommnts, role, humanityid, enroll_id) => postData({
+      endpoint: `api/approveaccount/`,
+      data: {userid, authpassword, power, account_id, emailid, name, dmname, dmcon, dmcommnts, role, humanityid, enroll_id}
+    }),
+    rejectAccount: async (userid, authpassword, power, countryid, reason, memberid) => postData({
+      endpoint: `api/delete_member/`,
+      data: {userid, authpassword, power, countryid, reason, memberid}
+    }),
+  };
+
   

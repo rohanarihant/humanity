@@ -96,6 +96,14 @@ class Register extends React.Component{
         this.moveBack = this.moveBack.bind(this);
         this.updateMobile = this.updateMobile.bind(this);
     }
+    componentDidMount(){
+        if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
+          Router.push({
+            pathname: '/',
+        });
+        }
+      }
+
     validateField(selectedPage, pageNo){
         let validate = [];
         const selectedCheck = (page) => pageNo === 0 ? (page !== 'gender' || page !== 'insanNo') : pageNo === 1 ?
@@ -268,6 +276,7 @@ class Register extends React.Component{
         }
       });
     }
+    
     render(){
         const {pageNo, name, fatherName, gender, address, insanNo, nameError, fatherNameError, insanNoError,
             addressError, dateofBirth, dateofBirthError, email, emailError, alternateEmail, password, passwordError,

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -13,6 +13,7 @@ import NavBar from './NavBarBack';
 import { makeStyles } from '@material-ui/core/styles';
 import { Twitter, YouTube, Facebook, Instagram } from '@material-ui/icons';
 import { user } from '../utils/apis';
+import AccountContext from '../contexts/accountContext';
 
 const options = ['Official Handles', 'OBD Detail India', 'International OBD'];
 
@@ -36,6 +37,8 @@ export default function SplitButton() {
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [officialHandlerList, setofficialHandlerList] = React.useState(['Select']);
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
+    const {account: { toggleShowLoader }} = useContext(AccountContext);
+
     const officialHandles = [
         {
             name: 'Pujniya Guru Ji',
@@ -80,6 +83,7 @@ export default function SplitButton() {
     };
     useEffect(() => {
         async function getOfficialHandler(){
+            toggleShowLoader(true);
             const userId = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
             const gender = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrgen;
@@ -87,6 +91,7 @@ export default function SplitButton() {
             response.map((res) => officialHandlerList.push(res.handler_title));
             setofficialHandlerList(officialHandlerList);
             setofficialHandlerDetail(response);
+            toggleShowLoader(false);
         }
         getOfficialHandler();
     },[])

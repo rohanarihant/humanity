@@ -88,7 +88,7 @@ export default function Events() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const {account: { getProfileDetails, setRoute}} = useContext(AccountContext);
+  const {account: { getProfileDetails, setRoute, toggleShowLoader }} = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
@@ -97,6 +97,7 @@ export default function Events() {
   useEffect(() => {
     setManagementMem(JSON.parse(localStorage.getItem('ManagementMem')));
       async function getMyEvents() {
+          toggleShowLoader(true);
           const userid = localStorage.getItem('userId')
           const authpassword = localStorage.getItem('authpassword')
           const power = JSON.parse(localStorage.getItem('power'));
@@ -107,7 +108,7 @@ export default function Events() {
           const blockid = MemberDetaildet && MemberDetaildet[0].usrblkid;
           const usrdstid = MemberDetaildet && MemberDetaildet[0].usrdstid;
           const response = await events.getEvents(userid, authpassword, gender, power, countryid, stateid, blockid, new Date().toLocaleDateString());
-
+          toggleShowLoader(false);
       }
       getMyEvents();
   }, []);

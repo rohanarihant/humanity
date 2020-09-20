@@ -4,11 +4,12 @@ import NavBar from '../components/NavBarBack';
 import AccountContext from '../contexts/accountContext';
 
 const Profile = () => {
-    const {account: { getProfileDetails}} = useContext(AccountContext);
+    const {account: { getProfileDetails, screen, toggleShowLoader}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
     useEffect(() => {
         setUserProfileData(JSON.parse(localStorage.getItem('MemberDetaildet')));
         async function getProfile() {
+            toggleShowLoader(true);
             const response = await getProfileDetails();
             if (response.success) {
                 setUserProfileData(response.MemberDetaildet);
@@ -16,6 +17,7 @@ const Profile = () => {
                 localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname));
                 localStorage.setItem('samiti', JSON.stringify(response.samiti));
             }
+            toggleShowLoader(false);
         }
         getProfile();
     }, []);
@@ -31,7 +33,7 @@ const Profile = () => {
             <div class="profile-card">
                 <div class="card-header">
                     <img class="profile-image" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="profile image" />
-                    <div class="profile-name">{user.usrname}<span class="dob">({user.usrdob && user.usrdob.split(' ')[0]})</span></div>
+                    <div class="profile-name">{user.usrname}<p class="dob">({user.usrdob && user.usrdob.split(' ')[0]})</p></div>
                     <div class="profile-role">Team Member ({user.usrid})</div>
                     <div class="profile-location">
                        Gender :- {user.usrgen} <span class="dob">({user.bloodgrp})</span>
@@ -118,7 +120,7 @@ const Profile = () => {
                 </MDBContainer>
             </div>
         </div>))}
-        <p class="iconSwitch" style={{marginTop:100}} onClick={() => deleteMember()}>Delete Profile</p>
+        {screen === 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => deleteMember()}>Delete Profile</p>}
     </>
     )
 };

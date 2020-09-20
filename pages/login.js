@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
 import { toast } from 'react-toastify';
@@ -38,6 +38,11 @@ const LoginRegister = () => {
       }
     }
   }
+  useEffect(() => {
+    if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
+      router.push('/');
+    }
+  },[]);
   return (
     <div class="container" id="myApp">
       <section class="section login" v-class="flip : signup">

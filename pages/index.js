@@ -16,12 +16,14 @@ import AddMyEvent from '../components/AddEvent';
 import AddHazri from '../components/AddHazri';
 import SearchMember from '../components/SearchMember';
 import ChangeRole from '../components/ChangeRole';
-
+import ApproveAccounts from '../components/ApproveAccounts';
+import MemberDetail from '../components/MemberDetail';
+import Download from '../components/Download';
+import IssueDetail from '../components/issueDetail';
 
 const Index = () => {
-	const { account : { route }} = useContext(AccountContext);
+	const { account : { route, showLoader }} = useContext(AccountContext);
 	const renderComponent = () => {
-		console.log(route,'route')
 		switch(route) {
 			case 'home':
 			return <HomePage />;
@@ -41,6 +43,8 @@ const Index = () => {
 			return <Events />;
 			case 'issues':
 			return <Issues />;
+			case 'issueDetail':
+			return <IssueDetail />;
 			case 'addEvent':
 			return <AddMyEvent />;
 			case 'addHazri':
@@ -49,6 +53,12 @@ const Index = () => {
 			return <SearchMember />;
 			case 'changeRole':
 			return <ChangeRole />;
+			case 'approveAccounts':
+			return <ApproveAccounts />;
+			case 'memberDetail':
+			return <MemberDetail />;
+			case 'download':
+			return <Download />;
 			default:
 			return <HomePage />;
 		}
@@ -56,9 +66,12 @@ const Index = () => {
 
 	return(
 	<React.Fragment>
-		{
-			renderComponent()
-		}
+		{showLoader && <img className="loader" src="./static/img/loader.svg" />}
+		<div style={{opacity : showLoader ? 0.2 : 1 }}>
+			{	
+				renderComponent()
+			}
+		</div>
 		
 		
 	</React.Fragment>

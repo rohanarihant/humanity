@@ -137,7 +137,7 @@
 
 
   body {
-    background-color: #222;
+    background-color: #fff !important;
   }
   
   .container {
@@ -167,7 +167,7 @@
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
             flex-direction: row;
-    padding: 20px;
+    padding: 10px 10px;
     font-size: 20px;
   }
   .checkbox-layout input {
@@ -554,8 +554,33 @@
     padding: 0.5em;
     width: 80vw;
     margin-left: 10vw;
+    font-size: 18px;
   }
   .memberList{
     display: flex;
     justify-content: space-evenly;
+  }
+
+  .user-account{
+    display: flex;
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
+  }
+  .user-detail{
+    padding: 10px 30px;
+    font-size: 20px;
+  }
+  .user-detail-dashboard{
+    text-align: center;
+    font-size: 20px;
+    color: #673ab7;
+    font-weight: 700;
+  }
+  .loader{
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    z-index: 60;
+    height: 100px;
+    width: 100px;
   }
