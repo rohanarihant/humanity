@@ -15,29 +15,29 @@ const SewaResults = () => (
                 <th>Members</th>
             </tr>
             <tr>
-                <td>Peter</td>
-                <td>Griffin</td>
-                <td>$100</td>
+                <td>Punjab</td>
+                <td>200</td>
+                <td>112</td>
             </tr>
             <tr>
-                <td>Lois</td>
-                <td>Griffin</td>
-                <td>$150</td>
+                <td>Punjab</td>
+                <td>200</td>
+                <td>112</td>
             </tr>
             <tr>
-                <td>Joe</td>
-                <td>Swanson</td>
-                <td>$300</td>
+                <td>Punjab</td>
+                <td>200</td>
+                <td>112</td>
             </tr>
             <tr>
-                <td>Cleveland</td>
-                <td>Brown</td>
-                <td>$250</td>
+                <td>Punjab</td>
+                <td>200</td>
+                <td>112</td>
             </tr>
             <tr>
-                <td>Cleveland</td>
-                <td>Brown</td>
-                <td>$250</td>
+                <td>Punjab</td>
+                <td>200</td>
+                <td>112</td>
             </tr>
         </table>
         <hr />
