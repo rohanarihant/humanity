@@ -17,7 +17,7 @@ import AddHazri from '../components/AddHazri';
 import SearchMember from '../components/SearchMember';
 import ChangeRole from '../components/ChangeRole';
 import ApproveAccounts from '../components/ApproveAccounts';
-import MemberDetail from '../components/MemberDetail';
+import MemberDetail from '../components/memberDetail';
 import Download from '../components/download';
 import IssueDetail from '../components/issueDetail';
 import ChangeMyPassword from '../components/changePassword';
