@@ -2,6 +2,8 @@ import React, {useEffect, useContext, useState} from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import NavBar from '../components/NavBarBack';
 import AccountContext from '../contexts/accountContext';
+import { accountApproval } from '../utils/apis';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
     const {account: { getProfileDetails, screen, toggleShowLoader}} = useContext(AccountContext);
@@ -23,7 +25,14 @@ const Profile = () => {
     }, []);
 
     const deleteMember = () => {
-
+        const userid = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const power = JSON.parse(localStorage.getItem('power'));
+        const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
+        const countryId = MemberDetaildet && MemberDetaildet[0].usrcouid;
+        const usrid = MemberDetaildet && MemberDetaildet[0].usrid;
+        const res = accountApproval.rejectAccount(userid, authpassword, power, countryId, "", usrid);
+        res.success && toast.error('Member Deleted successfully!');
     }
     return (
         <>

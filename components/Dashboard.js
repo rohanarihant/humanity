@@ -38,12 +38,17 @@ const useStyles = makeStyles((theme) => ({
 
 function FormRow() {
     const classes = useStyles();
+    const { account: { setRoute } } = useContext(AccountContext);
+
+    const showResult = () => {
+        setRoute('sewaResults');
+    }
     return (
         <React.Fragment>
             <Grid item xs={6}>
                 <Paper className={classes.paper}>
                     <Assessment className={classes.icons} />
-                    <Typography component="h3" variant="h5" align="center" className={classes.text} >Trending Handles</Typography>
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => showResult()}>Results</Typography>
                 </Paper>
             </Grid>
             <Grid item xs={6}>
@@ -55,6 +60,7 @@ function FormRow() {
         </React.Fragment>
     );
 }
+
 export default function SimplePaper() {
     const classes = useStyles();
     const { account: { getProfileDetails } } = useContext(AccountContext);
@@ -69,6 +75,7 @@ export default function SimplePaper() {
         }
         getProfile();
     }, []);
+
     return (
         <div style={{ marginTop: 20 }}>
             <div className="user-detail-dashboard">

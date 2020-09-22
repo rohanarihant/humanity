@@ -13,6 +13,7 @@ import AcUnit from '@material-ui/icons/AcUnit';
 import Group from '@material-ui/icons/Group';
 import Info from '@material-ui/icons/Info';
 import LiveTv from '@material-ui/icons/LiveTv';
+import LockOpen from '@material-ui/icons/LockOpen';
 import Notifications from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SettingsPower from '@material-ui/icons/SettingsPower';
@@ -84,6 +85,7 @@ export default function TemporaryDrawer() {
 	  {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
 	  {title: 'Download', icon: <Person />, route: 'download'},
 	  {title: 'Broadcast', icon: <LiveTv />, route: 'broadcast'},
+	  {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
 	  {title: 'Logout', icon: <ExitToApp />, route: 'logout'},
   ];
   const {account: {isSignedIn, setRoute, setTitle, title, updateSelectedScreen}} = useContext(AccountContext);
@@ -108,9 +110,12 @@ export default function TemporaryDrawer() {
     updateLoginStatus(localStorage.getItem('login'));
     !localStorage.getItem('userId') && router.push('/login');
   },[]);
-  const onLogout = () => {
-    localStorage.clear();
+  const onLogout = async() => {
+    localStorage.removeItem('userId')
+    localStorage.removeItem('authpassword')
+    await localStorage.clear();
     updateLoginStatus(false);
+    
     router.push('/login');
   }
   
@@ -157,7 +162,7 @@ export default function TemporaryDrawer() {
           	{!isSignedIn ? 
             <AccountCircle className={classes.notification} onClick={() => onLogout()} />
             :
-			      <SettingsPower className={classes.logout}onClick={() => router.push('/login')} />}
+			      <SettingsPower className={classes.logout }onClick={() => onLogout()} />}
         </Toolbar>
       </AppBar>
     </div>

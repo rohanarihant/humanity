@@ -39,7 +39,7 @@ const LoginRegister = () => {
     }
   }
   useEffect(() => {
-    if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
+    if(localStorage.getItem('userId') !== null && localStorage.getItem('authpassword') !== null){
       router.push('/');
     }
   },[]);

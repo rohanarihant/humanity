@@ -25,6 +25,7 @@ export class AccountProvider extends React.Component {
       screen: '',
       memberid: '',
       showLoader: false,
+      selectedIssue: {},
     };
     this.state = this.defaultState;
 
@@ -41,6 +42,7 @@ export class AccountProvider extends React.Component {
       setTitle: this.setRoute.bind(this),
       updateMemberid: this.updateMemberid.bind(this),
       toggleShowLoader: this.toggleShowLoader.bind(this),
+      setSelectedIssue: this.setSelectedIssue.bind(this),
     };
   }
   componentDidMount(){
@@ -88,6 +90,9 @@ export class AccountProvider extends React.Component {
   }
   async toggleShowLoader(showLoader){
     this.setState({showLoader});
+  }
+  async setSelectedIssue(selectedIssue){
+    this.setState({selectedIssue});
   }
 
   render() {

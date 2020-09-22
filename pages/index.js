@@ -20,6 +20,8 @@ import ApproveAccounts from '../components/ApproveAccounts';
 import MemberDetail from '../components/MemberDetail';
 import Download from '../components/Download';
 import IssueDetail from '../components/issueDetail';
+import ChangeMyPassword from '../components/changePassword';
+import SewaResults from '../components/sewaResults';
 
 const Index = () => {
 	const { account : { route, showLoader }} = useContext(AccountContext);
@@ -59,6 +61,10 @@ const Index = () => {
 			return <MemberDetail />;
 			case 'download':
 			return <Download />;
+			case 'changeMyPassword':
+			return <ChangeMyPassword />;
+			case 'sewaResults':
+			return <SewaResults />;
 			default:
 			return <HomePage />;
 		}

@@ -30,7 +30,13 @@ async function fetchData({
           return undefined;
         }
         const res = await response.json();
-        return res;
+        if(!res.success && res.message === 'Device not found'){
+          localStorage.removeItem('userId');
+          localStorage.removeItem('authpassword');
+        }else{
+          return res;
+        }
+        console.log(res,'res res')
       }
     } catch (err) {
       throw err;
@@ -138,6 +144,10 @@ async function fetchData({
           endpoint: 'api/get_official_handler_list/',
           data: { userid, authpassword, gender },
       }),
+      deleteProfile: async (userid, authpassword, gender) => postData({
+          endpoint: 'api/delete_member/',
+          data: { userid, authpassword, gender },
+      }),
   };
   export const events = {
     getEvents: async (userid, authpassword) => postData({
@@ -160,6 +170,14 @@ async function fetchData({
       endpoint: 'api/fetch_issue/',
       data: { userid, authpassword, gender, power },
     }),
+    closeIssue: async (userid, authpassword, power, issueid, issueclose) => postData({
+      endpoint: 'api/fetch_issue_byid/',
+      data: { userid, authpassword, power, issueid, issueclose },
+    }),
+    addCommentIssue: async (userid, authpassword, power, issue, sendto, issueby, type, issueids, senddate) => postData({
+      endpoint: 'api/addissue_comment/',
+      data: { userid, authpassword, power, issue, sendto, issueby, type, issueids, senddate },
+    })
   };
   export const searchUsers = {
     listUserSearch: async (userid, authpassword, gender, searchmymem, power) => postData({

@@ -38,7 +38,7 @@ export default function Issues() {
     const [socialMediaList, setSocialMediaList] = React.useState(['Select']);
     const [issuesList, setIssuesList] = React.useState([]);
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
-    const {account: { toggleShowLoader, setRoute }} = useContext(AccountContext);
+    const {account: { toggleShowLoader, setRoute, setSelectedIssue }} = useContext(AccountContext);
 
     const handleClick = () => {
         console.info(`You clicked ${options[selectedIndex]}`);
@@ -70,7 +70,6 @@ export default function Issues() {
             const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
             const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
             const response = await issues.getAllIssues(userid, authpassword, gender, power);
-            console.log(response,'response')
             if(response.success){
                 setIssuesList(response.itissues);
             }
@@ -79,8 +78,13 @@ export default function Issues() {
         getAllIssues();
     }, []);
 
-    const openIssue = () => {
-        setRoute('issueDetail');
+    const openIssue = async(issueId) => {
+        const userid = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const power = JSON.parse(localStorage.getItem('power'));
+        const res = await issues.closeIssue(userid, authpassword, power, issueId, "No");
+        res.success && setSelectedIssue(res.itissues);
+        res.success && setRoute('issueDetail');
     }
 
     return (
@@ -91,10 +95,10 @@ export default function Issues() {
                     issuesList && issuesList.map((detail, index) => {
                         const issuedes = detail && detail.issuedes;
                             return (
-                                <div id={`profile${index}`} class="profile" onClick={() => openIssue()} style={{height: issuedes.length < 100 ? 140 : issuedes.length < 200 ? 180 :issuedes.length < 250 ? 250:300}}>
+                                <div id={`profile${index}`} class="profile" onClick={() => openIssue(detail.issueid)} style={{height: issuedes.length < 100 ? 140 : issuedes.length < 200 ? 180 :issuedes.length < 250 ? 250:300}}>
                                     <div >
                                         <div class="profile-info-wrapper">
-                                            <p class="profile-name-label" style={{ marginBottom: 0 }}>{detail.usrname}{detail.catshortname}</p>
+                                            <p class="profile-name-label" style={{ marginBottom: 0 }}>{detail.usrname} ({detail.catshortname})</p>
                                             <p className="profile-name-label" style={{margin:0}}>{detail.issuedate}</p>
                                             <div class='social-links' style={{height: 0}}>
                                                 {issuedes}
