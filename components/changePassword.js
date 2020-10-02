@@ -13,7 +13,7 @@ const ChangeMyPassword = () => {
   const [errorOldPassword, updateErrorOldPassword] = useState('');
   const [errorNewPassword, updateErrorNewPassword] = useState('');
   const [errorConfirmNewPassword, updateErrorConfirmNewPassword] = useState('');
-  const { account: { resetPasswordEmail } } = useContext(AccountContext);
+  const { account: { setRoute } } = useContext(AccountContext);
   const router = useRouter();
   const checkForm = async () => {
     if (!oldPassword) {
@@ -42,12 +42,12 @@ const ChangeMyPassword = () => {
     }
     if (oldPassword !== '' && newPassword !== '' && confirmNewPassword !== '' && errorConfirmNewPassword === '' && errorOldPassword === '' && errorNewPassword === '') {
       try {
-        const resetPasswordEmail = localStorage.getItem('email');
-        const otp = localStorage.getItem('otp');
-        const response = await auth.updatePassword(resetPasswordEmail, otp, oldPassword);
+        const userid = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const response = await auth.changePassword(userid, authpassword, oldPassword, newPassword);
         if (response.success) {
           toast.info("Your Password has been changesd");
-          router.push('/login');
+          setRoute('login');
         } else {
           toast.error(response && response.message);
         }

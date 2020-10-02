@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,15 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import NavBar from './NavBarBack';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
-import Divider from '@material-ui/core/Divider';
-import {user} from '../utils/apis';
+import { user } from '../utils/apis';
 import AccountContext from '../contexts/accountContext';
 
 function TabPanel(props) {
@@ -86,39 +78,39 @@ export default function Escalation() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const {account: { toggleShowLoader}} = useContext(AccountContext);
+  const { account: { toggleShowLoader } } = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
 
   useEffect(() => {
     setManagementMem(JSON.parse(localStorage.getItem('ManagementMem')));
-      async function getMyTeam() {
-          toggleShowLoader(true);
-          const userid = localStorage.getItem('userId')
-          const authpassword = localStorage.getItem('authpassword')
-          const power = JSON.parse(localStorage.getItem('power'));
-          const gender = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrgen;
-          const stateid = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrstaid;
-          const countryid = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrcouid;
-          const response = await user.getMyTeam(userid, authpassword, power, gender, countryid, stateid);
-          if (response.success) {
-              setManagementMem(response.allmanagementmem);
-              setStateMem(response.allstatemembers);
-              setNationalMem(response.allnmmembers);
-              localStorage.setItem('ManagementMem', JSON.stringify(response.allmanagementmem));
-              localStorage.setItem('allstatemembers', JSON.stringify(response.allstatemembers));
-              localStorage.setItem('allnmmembers', JSON.stringify(response.allnmmembers));
-          }
-          toggleShowLoader(false);
+    async function getMyTeam() {
+      toggleShowLoader(true);
+      const userid = localStorage.getItem('userId')
+      const authpassword = localStorage.getItem('authpassword')
+      const power = JSON.parse(localStorage.getItem('power'));
+      const gender = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrgen;
+      const stateid = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrstaid;
+      const countryid = JSON.parse(localStorage.getItem('MemberDetaildet'))[0].usrcouid;
+      const response = await user.getMyTeam(userid, authpassword, power, gender, countryid, stateid);
+      if (response.success) {
+        setManagementMem(response.allmanagementmem);
+        setStateMem(response.allstatemembers);
+        setNationalMem(response.allnmmembers);
+        localStorage.setItem('ManagementMem', JSON.stringify(response.allmanagementmem));
+        localStorage.setItem('allstatemembers', JSON.stringify(response.allstatemembers));
+        localStorage.setItem('allnmmembers', JSON.stringify(response.allnmmembers));
       }
-      (!managementMem && !!localStorage.getItem('userId')) && getMyTeam();
-      getMyTeam();
+      toggleShowLoader(false);
+    }
+    (!managementMem && !!localStorage.getItem('userId')) && getMyTeam();
+    getMyTeam();
   }, []);
-  
+
   return (
     <div className={classes.root}>
-    <NavBar />
+      <NavBar />
       <AppBar position="static">
         <Tabs
           variant="fullWidth"
@@ -134,51 +126,73 @@ export default function Escalation() {
       <TabPanel value={value} index={0}>
         <List className={classes.listRoot}>
           {stateMem && stateMem.map((mem) => (
-            <>
-              <ListItem>
-                  <Avatar>
-                      <ImageIcon />
-                  </Avatar>
-                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
-                  <ListItemText className={classes.listItem} primary={mem.statename} secondary={mem.usrpriemail} />
-              </ListItem>
-              <Divider />
-            </>
+            <div className="team-container">
+              <img src="/static/img/head.png" className="profile-image" />
+              <div className="team-user-details">
+                <p className="team-user-detail">{mem.usrname}</p>
+                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
+              </div>
+              <div className="team-user-details">
+                <p className="team-user-detail">{mem.statename}</p>
+                <p className="team-user-detail">{mem.usrpriemail}</p>
+              </div>
+            </div>
           ))}
         </List>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <List className={classes.listRoot}>
           {nationalMem && nationalMem.map((mem) => (
-            <>
-              <ListItem>
-                  <Avatar>
-                      <ImageIcon />
-                  </Avatar>
-                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
-                  <ListItemText className={classes.listItemSec} primary={mem.statename} secondary={mem.usrpriemail} />
-              </ListItem>
-              <Divider />
-            </>
+            <div className="team-container">
+              <img src="/static/img/head.png" className="profile-image" />
+              <div className="team-user-details">
+                <p className="team-user-detail">{mem.usrname}</p>
+                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
+              </div>
+              <div className="team-user-details">
+                <p className="team-user-detail">{mem.statename}</p>
+                <p className="team-user-detail">{mem.usrpriemail}</p>
+              </div>
+            </div>
           ))}
         </List>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <List className={classes.listRoot}>
           {managementMem && managementMem.map((mem) => (
-            <>
-              <ListItem>
-                  <Avatar>
-                      <ImageIcon />
-                  </Avatar>
-                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
-                  <ListItemText primary={mem.statename} secondary={mem.usrpriemail} />
-              </ListItem>
-              <Divider />
-            </>
+            <div className="team-container">
+              <img src="/static/img/head.png" className="profile-image" />
+              <div className="team-user-details">
+                <p className="team-user-detail">{mem.usrname}</p>
+                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
+              </div>
+              <div className="team-user-details">
+                <p className="team-user-detail">{mem.statename}</p>
+                <p className="team-user-detail">{mem.usrpriemail}</p>
+              </div>
+            </div>
           ))}
         </List>
       </TabPanel>
+      <style jsx>
+        {`
+        .team-container{
+          display: flex;
+        }
+        .profile-image{
+          height: 90px;
+          width: 80px;
+        }
+        .team-user-details{
+          padding: 10px;
+          font-size: 12px;
+          font-weight: 600;
+        }
+        .team-user-detail{
+          margin-bottom: 0.5rem;
+        }
+        `}
+      </style>
     </div>
   );
 }

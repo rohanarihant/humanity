@@ -120,7 +120,7 @@ const MyHazri = () => {
             </div>}
             <p class="my-hazri-instruction" style={{marginTop: enableSearch ? 0 : 60}}>यहाँ पर आप पिछले 45 दिनों में की गई सेवा की जानकारी भर सकते हैं। भरी गई सेवा के अनुसार आपकी हाज़री अपने आप ही जुड़ती जाएगी।वर्ष 2020 में आपकी अब तक की कुल हाज़री सबसे ऊपर दिखाई गयी है।</p>
             <p className="total-hazri">Total Hazri :- {totalHazri}</p>
-            <img className="plus-icon" src="/static/img/plus.svg" onClick={() => setRoute('addHazri')} />
+            <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addHazri')} />
         </div>
         <div>
         <Paper className={classes.root}>
@@ -140,7 +140,7 @@ const MyHazri = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {userHazri.map((row, index) => {
+                    {userHazri && userHazri.map((row, index) => {
                     return (
                         <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                             <TableCell key={index} padding="default">

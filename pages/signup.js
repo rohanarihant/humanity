@@ -97,11 +97,12 @@ class Register extends React.Component{
         this.updateMobile = this.updateMobile.bind(this);
     }
     componentDidMount(){
-        if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
-          Router.push({
-            pathname: '/',
-        });
-        }
+      console.log(localStorage.getItem('userId'),'123')
+        // if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
+        //   Router.push({
+        //     pathname: '/',
+        // });
+        // }
       }
 
     validateField(selectedPage, pageNo){

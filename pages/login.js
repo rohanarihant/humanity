@@ -43,6 +43,10 @@ const LoginRegister = () => {
       router.push('/');
     }
   },[]);
+  const moveToSignUp = () => {
+    console.log('dsfkjlahjkh')
+    router.push('/signup');
+  }
   return (
     <div class="container" id="myApp">
       <section class="section login" v-class="flip : signup">
@@ -60,7 +64,7 @@ const LoginRegister = () => {
             <p class="error">{errorPassword}</p>
           </div>
           <p class="iconSwitch" onClick={() => checkForm()}>Login</p>
-          <p style={{ width: '80vw' }}><a href="javascript:;" onClick={() => router.push('/signup')} class="create-account">Create Account</a><a href="javascript:;" onClick={() => router.push('/forgotPassword')} class="create-account">Forgot Password</a></p>
+          <p style={{ width: '80vw' }}><a  onClick={() => moveToSignUp()} class="create-account">Create Account</a><a href="javascript:;" onClick={() => router.push('/forgotPassword')} class="create-account">Forgot Password</a></p>
         </form>
       </section>
     </div>

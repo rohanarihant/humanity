@@ -85,8 +85,8 @@ export default function TemporaryDrawer() {
 	  {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
 	  {title: 'Download', icon: <Person />, route: 'download'},
 	  {title: 'Broadcast', icon: <LiveTv />, route: 'broadcast'},
+	  {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
 	  {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
-	  {title: 'Logout', icon: <ExitToApp />, route: 'logout'},
   ];
   const {account: {isSignedIn, setRoute, setTitle, title, updateSelectedScreen}} = useContext(AccountContext);
   const toggleDrawer = (anchor, open) => (event) => {

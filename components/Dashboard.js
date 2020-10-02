@@ -7,7 +7,7 @@ import Assessment from '@material-ui/icons/Assessment';
 import AddCircle from '@material-ui/icons/AddCircle';
 import Link from '@material-ui/core/Link';
 import AccountContext from '../contexts/accountContext';
-
+import {auth} from '../utils/apis';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,7 +73,15 @@ export default function SimplePaper() {
                 localStorage.setItem('samiti', JSON.stringify(response.samiti));
             }
         }
+        async function checkLoginStatus() {
+            const userId = localStorage.getItem('userId');
+            const authpassword = localStorage.getItem('authpassword');
+            const response = await auth.checkLoginStatus(userId, authpassword);
+            Number(response.success) && console.log(response,'response')
+            !Number(response.success) && console.log('response not working')
+        }
         getProfile();
+        checkLoginStatus();
     }, []);
 
     return (

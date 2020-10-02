@@ -6,7 +6,7 @@ import { accountApproval } from '../utils/apis';
 import { toast } from 'react-toastify';
 
 const Profile = () => {
-    const {account: { getProfileDetails, screen, toggleShowLoader}} = useContext(AccountContext);
+    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
     useEffect(() => {
         setUserProfileData(JSON.parse(localStorage.getItem('MemberDetaildet')));
@@ -129,6 +129,7 @@ const Profile = () => {
                 </MDBContainer>
             </div>
         </div>))}
+        {screen !== 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => setRoute('editProfile')}>Edit Profile</p>}
         {screen === 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => deleteMember()}>Delete Profile</p>}
     </>
     )

@@ -95,6 +95,7 @@ export default function Events() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log('sdfafdfds')
     setManagementMem(JSON.parse(localStorage.getItem('ManagementMem')));
       async function getMyEvents() {
           toggleShowLoader(true);
@@ -108,11 +109,12 @@ export default function Events() {
           const blockid = MemberDetaildet && MemberDetaildet[0].usrblkid;
           const usrdstid = MemberDetaildet && MemberDetaildet[0].usrdstid;
           const response = await events.getEvents(userid, authpassword, gender, power, countryid, stateid, blockid, new Date().toLocaleDateString());
+          console.log(response,'event response')
           toggleShowLoader(false);
       }
       getMyEvents();
   }, []);
-  
+
   return (
     <div className={classes.root}>
     <NavBar />
@@ -175,7 +177,7 @@ export default function Events() {
           ))}
         </List>
       </TabPanel>
-      <img className="plus-icon" src="/static/img/plus.svg" onClick={() => setRoute('addEvent')} />
+      <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addEvent')} />
     </div>
   );
 }

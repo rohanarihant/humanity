@@ -125,7 +125,7 @@ export default function SearchMember() {
                 {
                     listSearchedUser && listSearchedUser.map((user, index) => {
                             return (
-                                <div style={{ marginTop: 20, border: '1px solid #ddd', fontSize: 18 }} onClick={(e) => deleteMember(e.target.value,user)}>
+                                <div style={{ marginTop: 20, border: '1px solid #ddd', fontSize: 18, width: '108vw' }} onClick={(e) => deleteMember(e.target.value,user)}>
                                     <div className="memberList">
                                         <span>{user.usrname}</span>
                                         <span>{user.blockname}</span>

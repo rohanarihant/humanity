@@ -36,7 +36,6 @@ async function fetchData({
         }else{
           return res;
         }
-        console.log(res,'res res')
       }
     } catch (err) {
       throw err;
@@ -115,6 +114,18 @@ async function fetchData({
       updatePassword: async (newpassword, code, password) => postData({
         endpoint: 'login/update_newpassword/',
         data: { newpassword, code, password },
+      }),
+      updateUser: async (userid, authpassword, mobno, wmobno, othermail, twitter, education, profession, skills, device, othertwitter) => postData({
+        endpoint: 'api/update_profile/',
+        data: { userid, authpassword, mobno, wmobno, othermail, twitter, education, profession, skills, device, othertwitter },
+      }),
+      checkLoginStatus: async (userid, authpassword) => postData({
+        endpoint: 'api/check_login/',
+        data: { userid, authpassword },
+      }),
+      changePassword: async (userid, authpassword, oldpwd, newpwd) => postData({
+        endpoint: 'api/change_password/',
+        data: { userid, authpassword, oldpwd, newpwd },
       }),
   };
   export const commonMethods = {
@@ -219,6 +230,20 @@ async function fetchData({
     rejectAccount: async (userid, authpassword, power, countryid, reason, memberid) => postData({
       endpoint: `api/delete_member/`,
       data: {userid, authpassword, power, countryid, reason, memberid}
+    }),
+  };
+  export const results = {
+    getPointResults: async (userid, authpassword, power, countryid, state_id, dist_id, block_id, gender) => postData({
+      endpoint: `api/get_point_result/`,
+      data: {userid, authpassword, power, countryid, state_id, dist_id, block_id, gender}
+    }),
+    getDistrictPointResults: async (userid, authpassword, power, countryid, state_id, dist_id, block_id, gender) => postData({
+      endpoint: `api/get_point_result_dist/`,
+      data: {userid, authpassword, power, countryid, state_id, dist_id, block_id, gender}
+    }),
+    getBlockPointResults: async (userid, authpassword, power, countryid, state_id, dist_id, block_id, gender, distid) => postData({
+      endpoint: `api/get_point_result_block/`,
+      data: {userid, authpassword, power, countryid, state_id, dist_id, block_id, gender, distid}
     }),
   };
 
