@@ -19,7 +19,6 @@ const Profile = () => {
         const userid = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
         const res = await searchUsers.updateUserRole(userid, authpassword, user.usrid, role, userid);
-        console.log(res,'response')
     }
     const updateUserPermission = async(user) => {
         const userid = localStorage.getItem('userId');
@@ -34,12 +33,10 @@ const Profile = () => {
     useEffect(() => {
         async function getUserRoles(){
         const res = await searchUsers.getUserRoles();
-        console.log(res,'response')
         setMyrole(res.myrole);
         }
         getUserRoles();
     },[]);
-    console.log(role,'title title')
     return (
         <>
         <NavBar />

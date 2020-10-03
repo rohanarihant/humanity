@@ -40,10 +40,9 @@ export default function SearchMember() {
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
     const [searchKeyword, updateSearchKeyword] = React.useState('');
     const [listSearchedUser, updateListSearchedUser] = React.useState([]);
-    const {account: { setRoute, title, setChangeRoleUser, screen, route }} = useContext(AccountContext);
+    const {account: { setRoute, title, setChangeRoleUser, screen, setSelectedUser }} = useContext(AccountContext);
 
     const handleClick = () => {
-        console.info(`You clicked ${options[selectedIndex]}`);
     };
 
     const handleMenuItemClick = (option, index) => {
@@ -95,8 +94,15 @@ export default function SearchMember() {
     //     }
     //     getSearchUserList();
     // },[searchKeyword]);
-    const deleteMember = (e, user) => {
+    const onMemberClick = async(e, user) => {
         setChangeRoleUser([user]);
+        const userId = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const usrid = user.usrid;
+        const response = await searchUsers.getUserDetail(userId, authpassword, usrid);
+        if(response.success){
+            setSelectedUser(response.MemberDetaildet);
+        }
         setRoute(screen === 'Delete Member' ? 'profile' : 'changeRole');
     }
     const searcForUsers = async(e) => {
@@ -125,7 +131,7 @@ export default function SearchMember() {
                 {
                     listSearchedUser && listSearchedUser.map((user, index) => {
                             return (
-                                <div style={{ marginTop: 20, border: '1px solid #ddd', fontSize: 18, width: '108vw' }} onClick={(e) => deleteMember(e.target.value,user)}>
+                                <div style={{ marginTop: 20, border: '1px solid #ddd', fontSize: 18, width: '108vw' }} onClick={(e) => onMemberClick(e.target.value,user)}>
                                     <div className="memberList">
                                         <span>{user.usrname}</span>
                                         <span>{user.blockname}</span>

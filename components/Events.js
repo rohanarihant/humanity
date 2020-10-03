@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,7 +16,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
-import {events} from '../utils/apis';
+import { events } from '../utils/apis';
 import { useRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
 
@@ -88,36 +88,42 @@ export default function Events() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const {account: { getProfileDetails, setRoute, toggleShowLoader }} = useContext(AccountContext);
+  const { account: { getProfileDetails, setRoute, toggleShowLoader } } = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
+  const [eventsList, setEventsList] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
-    console.log('sdfafdfds')
     setManagementMem(JSON.parse(localStorage.getItem('ManagementMem')));
-      async function getMyEvents() {
-          toggleShowLoader(true);
-          const userid = localStorage.getItem('userId')
-          const authpassword = localStorage.getItem('authpassword')
-          const power = JSON.parse(localStorage.getItem('power'));
-          const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
-          const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
-          const stateid = MemberDetaildet && MemberDetaildet[0].usrstaid;
-          const countryid = MemberDetaildet && MemberDetaildet[0].usrcouid;
-          const blockid = MemberDetaildet && MemberDetaildet[0].usrblkid;
-          const usrdstid = MemberDetaildet && MemberDetaildet[0].usrdstid;
-          const response = await events.getEvents(userid, authpassword, gender, power, countryid, stateid, blockid, new Date().toLocaleDateString());
-          console.log(response,'event response')
-          toggleShowLoader(false);
-      }
-      getMyEvents();
+    async function getMyEvents() {
+      toggleShowLoader(true);
+      const userid = localStorage.getItem('userId')
+      const authpassword = localStorage.getItem('authpassword')
+      const power = JSON.parse(localStorage.getItem('power'));
+      const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
+      const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
+      const stateid = MemberDetaildet && MemberDetaildet[0].usrstaid;
+      const countryid = MemberDetaildet && MemberDetaildet[0].usrcouid;
+      const blockid = MemberDetaildet && MemberDetaildet[0].usrblkid;
+      const response = await events.getEvents(userid, authpassword, gender, power, countryid, stateid, blockid, new Date().toLocaleDateString());
+      response.success && setEventsList(response.eventslist);
+      toggleShowLoader(false);
+    }
+    getMyEvents();
   }, []);
-
+  const getImage = (userId) => {
+    const image = `http://humanity.rubrutech.com/profileimage/${userId}.jpg`;
+    // console.log(image,'image')
+    return image;
+  }
+  const onError = (e) => {
+    console.log(e.target.src,'dsaf')
+  }
   return (
     <div className={classes.root}>
-    <NavBar />
+      <NavBar />
       <AppBar position="static">
         <Tabs
           variant="fullWidth"
@@ -130,54 +136,80 @@ export default function Events() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <List className={classes.listRoot}>
-          {stateMem && stateMem.map((mem) => (
-            <>
-              <ListItem>
-                  <Avatar>
-                      <ImageIcon />
-                  </Avatar>
-                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
-                  <ListItemText className={classes.listItem} primary={mem.statename} secondary={mem.usrpriemail} />
-              </ListItem>
-              <Divider />
-            </>
-          ))}
-        </List>
+      {eventsList && eventsList.map(event => {
+        if(new Date() - new Date(event.ToDate) < 0){
+          return(<div className="event-container">
+          <div className="event-title">
+            <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg` || "/static/img/head.png"} className="event-user-image" onError={onError} />
+            <div className="event-user-detail">
+              <p className="event-text">{event.Title}</p>
+              <p className="event-schedule">{event.FromDate} - {event.ToDate}</p>
+            </div>
+          </div>
+          <p className="event-description event-text">{event.Caption}</p>
+          <p className="event-user event-text">{event.test}</p>
+          <p className="event-date event-text">{event.CreateON}</p>
+
+        </div>)}
+      })}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <List className={classes.listRoot}>
-          {nationalMem && nationalMem.map((mem) => (
-            <>
-              <ListItem>
-                  <Avatar>
-                      <ImageIcon />
-                  </Avatar>
-                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
-                  <ListItemText className={classes.listItemSec} primary={mem.statename} secondary={mem.usrpriemail} />
-              </ListItem>
-              <Divider />
-            </>
-          ))}
-        </List>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <List className={classes.listRoot}>
-          {managementMem && managementMem.map((mem) => (
-            <>
-              <ListItem>
-                  <Avatar>
-                      <ImageIcon />
-                  </Avatar>
-                  <ListItemText className={classes.listItem} primary={mem.usrname} secondary={mem.usrmob} />
-                  <ListItemText primary={mem.statename} secondary={mem.usrpriemail} />
-              </ListItem>
-              <Divider />
-            </>
-          ))}
-        </List>
+      {eventsList && eventsList.map(event => {
+        if(new Date() - new Date(event.ToDate) > 0){
+          return(<div className="event-container">
+          <div className="event-title">
+            <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg` || "/static/img/head.png"} className="event-user-image" onError={onError} />
+            <div className="event-user-detail">
+              <p className="event-text">{event.Title}</p>
+              <p className="event-schedule">From {event.FromDate} to {event.ToDate}</p>
+            </div>
+          </div>
+          <p className="event-description event-text">{event.Caption}</p>
+          <p className="event-user event-text">{event.test}</p>
+          <p className="event-date event-text">{event.CreateON}</p>
+
+        </div>)}
+      })}
       </TabPanel>
       <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addEvent')} />
+      <style jsx>
+        {`
+      .event-container{
+        padding: 20px;
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 0px 5px #888888;
+        margin: 10px;
+      }
+      .event-title{
+        font-size: 20px;
+        display:flex;
+        font-weight: 600;
+      }
+      .event-description{
+        margin: 5px 0px;
+      }
+      .event-user-detail{
+        margin-left: 10px;
+      }
+      .event-schedule{
+        font-size: 15px;
+      }
+      .event-user-image{
+        height: 70px;
+        border-radius: 50%;
+      }
+      .event-text{
+        margin-bottom: 0rem;
+      }
+      .event-user{
+        text-align: left;
+      }
+      .event-date{
+        text-align: right;
+      }
+      `}
+      </style>
     </div>
   );
 }

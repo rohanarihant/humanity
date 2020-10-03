@@ -41,7 +41,6 @@ export default function Issues() {
     const {account: { toggleShowLoader, setRoute, setSelectedIssue }} = useContext(AccountContext);
 
     const handleClick = () => {
-        console.info(`You clicked ${options[selectedIndex]}`);
     };
 
     const handleMenuItemClick = (option, index) => {

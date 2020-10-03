@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar({setEnableSearch, enableSearch}) {
   const router = useRouter();
   const classes = useStyles();
-  const {account: { setRoute, route, title }} = useContext(AccountContext);
+  const {account: { setRoute, route, title, screen }} = useContext(AccountContext);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -129,7 +129,7 @@ export default function Navbar({setEnableSearch, enableSearch}) {
             <ArrowBack onClick={() => setRoute('home')} />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            {title}
+            {screen}
           </Typography>
           {router.pathname === '/myHazri' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
         </Toolbar>

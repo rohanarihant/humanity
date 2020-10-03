@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Assessment from '@material-ui/icons/Assessment';
+import DateRange from '@material-ui/icons/DateRange';
+import EventNote from '@material-ui/icons/EventNote';
 import AddCircle from '@material-ui/icons/AddCircle';
 import Link from '@material-ui/core/Link';
 import AccountContext from '../contexts/accountContext';
@@ -40,21 +42,46 @@ function FormRow() {
     const classes = useStyles();
     const { account: { setRoute } } = useContext(AccountContext);
 
-    const showResult = () => {
-        setRoute('sewaResults');
+    const openRoute = (route) => {
+        setRoute(`${route}`);
     }
+
     return (
         <React.Fragment>
             <Grid item xs={6}>
                 <Paper className={classes.paper}>
                     <Assessment className={classes.icons} />
-                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => showResult()}>Results</Typography>
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => openRoute('sewaResults')}>Results</Typography>
                 </Paper>
             </Grid>
             <Grid item xs={6}>
                 <Paper className={classes.paper}>
+                    <DateRange className={classes.icons} />
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => openRoute('myHazri')}>My Hazri Detail</Typography>
+                </Paper>
+            </Grid>
+        </React.Fragment>
+    );
+}
+function FormRowSecond() {
+    const classes = useStyles();
+    const { account: { setRoute } } = useContext(AccountContext);
+
+    const openRoute = (route) => {
+        setRoute(`${route}`);
+    }
+    return (
+        <React.Fragment>
+            <Grid item xs={6}>
+                <Paper className={classes.paper}>
                     <AddCircle className={classes.icons} />
-                    <Typography component="h3" variant="h5" align="center" className={classes.text} >My Hazri Detail</Typography>
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => openRoute('sewa')}>Add Sewa Detail</Typography>
+                </Paper>
+            </Grid>
+            <Grid item xs={6}>
+                <Paper className={classes.paper}>
+                    <EventNote className={classes.icons} />
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => openRoute('events')}>Events</Typography>
                 </Paper>
             </Grid>
         </React.Fragment>
@@ -77,8 +104,8 @@ export default function SimplePaper() {
             const userId = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
             const response = await auth.checkLoginStatus(userId, authpassword);
-            Number(response.success) && console.log(response,'response')
-            !Number(response.success) && console.log('response not working')
+            // Number(response.success) && console.log(response,'response')
+            // !Number(response.success) && console.log('response not working')
         }
         getProfile();
         checkLoginStatus();
@@ -95,7 +122,7 @@ export default function SimplePaper() {
                     <FormRow />
                 </Grid>
                 <Grid container item xs={12} spacing={3}>
-                    <FormRow />
+                    <FormRowSecond />
                 </Grid>
                 {/* <Grid container item xs={12} spacing={3}>
                     <FormRow />

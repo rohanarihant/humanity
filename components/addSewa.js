@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -12,14 +12,16 @@ import MenuList from '@material-ui/core/MenuList';
 import NavBar from './NavBarBack';
 import { makeStyles } from '@material-ui/core/styles';
 import { Twitter, YouTube, Facebook, Instagram } from '@material-ui/icons';
-import { events } from '../utils/apis';
+import { user, events } from '../utils/apis';
+import { toast } from 'react-toastify';
+import AccountContext from '../contexts/accountContext';
 
 const options = ['Official Handles', 'OBD Detail India', 'International OBD'];
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        marginTop: 70,
+        marginTop: 10,
         '& > * + *': {
             marginTop: theme.spacing(2),
         },
@@ -37,9 +39,10 @@ export default function Sewa() {
     const [socialMediaList, setSocialMediaList] = React.useState(['Select']);
     const [socialMediaDetail, setSocialMediaDetail] = React.useState(['Select']);
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
+    const [pointsList, updatePointsList] = React.useState({ pointlist : [] });
+    const {account: { setRoute }} = useContext(AccountContext);
 
     const handleClick = () => {
-        console.info(`You clicked ${options[selectedIndex]}`);
     };
 
     const handleMenuItemClick = (option, index) => {
@@ -77,9 +80,46 @@ export default function Sewa() {
         getOfficialHandler();
     }, []);
 
+    const addSewa = async() => {
+        const userId = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'))[0];
+        const gender = MemberDetaildet && MemberDetaildet.usrgen;
+        const countryid = MemberDetaildet && MemberDetaildet.usrgen;
+        const stateid = MemberDetaildet && MemberDetaildet.usrstaid;
+        const distidd = MemberDetaildet && MemberDetaildet.usrdstid;
+        const blockid = MemberDetaildet && MemberDetaildet.usrblkid;
+        const postdate = new Date().toLocaleDateString();
+        const res = await user.addSewa(userId, authpassword, gender, JSON.stringify(pointsList), countryid, stateid, distidd, blockid, postdate);
+        res.success && toast.success('Sewa added successfully');
+        res.success && setRoute('home')
+    }
+
+    const updateField = (value, catId, catPoints) => {
+        const { pointlist } = pointsList;
+        const obj = {
+            point_cat_id: '',
+            point_point: '',
+            point_entry: ''
+          }
+        if(pointlist.findIndex(arr => arr.point_cat_id === catId) === -1){
+            obj.point_cat_id = catId;
+            obj.point_point = catPoints;
+            obj.point_entry = value;
+            pointlist.push(obj);
+        }else{
+            const index = pointlist.findIndex(arr => arr.point_cat_id === catId)
+            pointlist[index].point_cat_id = catId;
+            pointlist[index].point_point = catPoints;
+            pointlist[index].point_entry = value;
+        }
+    }
+
     return (
         <div className="official-info">
             <NavBar />
+            <img src="http://humanitydemo.rubrutech.com/uploads/instruction.jpg" className="add-sewa-instruction" />
+            <p className="add-sewa-date">Date: {new Date().toLocaleDateString()}</p>
             <Grid container direction="column" alignItems="center" className={classes.root}>
                 <Grid item xs={12}>
                     <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
@@ -139,7 +179,7 @@ export default function Sewa() {
                                             </div>
                                             <div className="sewa-category">
                                                 <p>{detail.sewacategory_point}</p>
-                                                <input type="text" style={{ width: 100 }} className="add-sewa-input" />
+                                                <input type="text" style={{ width: 100 }} className="add-sewa-input" onChange={(e) => updateField(e.target.value,detail.sewacategory_id, detail.sewacategory_point)} />
                                             </div>
                                         </div>
                                     </div>
@@ -148,8 +188,26 @@ export default function Sewa() {
                         }
                     })
                 }
+                {pointsList.pointlist.length > 0 && <p className="iconSwitch" style={{margin: "20px 10px 20px"}} onClick={() => addSewa()}>Add Sewa</p>}
             </div>
-
+            <style>
+                {`
+                .add-sewa-instruction{
+                    padding: 10px;
+                    width: 100vw;
+                    margin-top: 60px;
+                }
+                .add-sewa-date{
+                    color: rgb(72, 40, 128);
+                    font-size: 17px;
+                    text-align: center;
+                    font-weight: 600;
+                }
+                .iconSwitch{
+                    margin:10px;
+                }
+                `}
+            </style>
         </div>
     );
 }

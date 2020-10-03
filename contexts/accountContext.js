@@ -26,6 +26,9 @@ export class AccountProvider extends React.Component {
       memberid: '',
       showLoader: false,
       selectedIssue: {},
+      selectedUser: {},
+      educationList: [],
+      professionList: [],
     };
     this.state = this.defaultState;
 
@@ -43,14 +46,19 @@ export class AccountProvider extends React.Component {
       updateMemberid: this.updateMemberid.bind(this),
       toggleShowLoader: this.toggleShowLoader.bind(this),
       setSelectedIssue: this.setSelectedIssue.bind(this),
+      setSelectedUser: this.setSelectedUser.bind(this),
     };
   }
-  componentDidMount(){
+  async componentDidMount(){
     this.setState({
       userProfileData : JSON.parse(localStorage.getItem('MemberDetaildet')) || [{}],
       ItwingRank: localStorage.getItem('ItwingRank') || '',
       samiti: localStorage.getItem('samiti') || '',
     });
+    const eduList = await user.getEducationList();
+    const proList = await user.getProfessionList();
+    this.setState({educationList : eduList.educations });
+    this.setState({professionList : proList.profession });
   }
   async getLogin(email, password){
     return await auth.login(email, password);
@@ -93,6 +101,9 @@ export class AccountProvider extends React.Component {
   }
   async setSelectedIssue(selectedIssue){
     this.setState({selectedIssue});
+  }
+  async setSelectedUser(selectedUser){
+    this.setState({selectedUser});
   }
 
   render() {

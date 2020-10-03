@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import NavBarBack from './NavBarBack';
 import AccountContext from '../contexts/accountContext';
 import { commonMethods, download } from '../utils/apis';
+// import DownloadReportsExcel from './DownloadReportsExcel';
 
 export default function Download() {
     const { account: { getProfileDetails } } = useContext(AccountContext);
@@ -30,16 +31,17 @@ export default function Download() {
         await download.downloadMembers(userid, authpassword, countryid, gender);
     }
     return (
-        <div style={{ marginTop: 20 }}>
+        <div style={{ marginTop: 20, padding: 20 }}>
             <NavBarBack />
             <div style={{ marginTop: 80 }}>
-                <div class="form-group">
+            {/* <DownloadReportsExcel /> */}
+                {/* <div class="form-group">
                     <label for="email">Select State</label>
                     <select class="form-control" value={selectedState} name="itWingPrashad" onChange={(e) => updateSelectedState(e.target.value)}>
                         {allStates && allStates.map(state => (<option>{state.statename}</option>))}
                     </select>
                     <p class="iconSwitch" onClick={() => exportMember()}>Export Members</p>
-                </div>
+                </div> */}
             </div>
         </div>
     );

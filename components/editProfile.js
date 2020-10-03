@@ -32,15 +32,18 @@ const devices = [{name: 'Desktop', id: 1},{name: 'Laptop', id: 2},{name: 'Smart 
 class EditProfile extends React.Component{
     constructor(props){
         super(props);
+        const MemberDetaildet = localStorage.getItem('MemberDetaildet') && JSON.parse(localStorage.getItem('MemberDetaildet'))[0];
+        const memberDevices = MemberDetaildet && MemberDetaildet.usrown.split(',');
+        const memberSkills = MemberDetaildet && MemberDetaildet.skillother.split(',');
         this.state = {
-            mobileNumber:'',
-            skills:'',
-            device:'',
-            skillsList:'',
+            mobileNumber: MemberDetaildet.wmobno,
+            skills: skillsLists.filter(d => memberSkills.includes(d.name)),
+            device: devices.filter(d => memberDevices.includes(d.name)),
+            skillsList: '',
             devicesList:'',
-            telegramNumber:'',
+            telegramNumber: MemberDetaildet.refdmmobno || '',
             otherEmail:'',
-            twitterHandle:'',
+            twitterHandle: MemberDetaildet.twhandle,
             education:'',
             profession:'',
         }
@@ -111,12 +114,12 @@ class EditProfile extends React.Component{
                     <form action="#">
                         <>
                             <div class="form-group">
-                                <label for="text">Mobile Number</label>
+                                <label for="text">Mobile Number</label><span class="asterisk">*</span>
                                 <input type="number" maxLength="13" id="text" name="mobileNumber" placeholder="Mobile Number" value={mobileNumber} onChange={(e) => this.updateField(e)} class="form-control" />
                                 <p class="error">{mobileNumberError}</p>
                             </div>
                             <div class="form-group">
-                                <label for="text">Telegram Number</label>
+                                <label for="text">Telegram Number</label><span class="asterisk">*</span>
                                 <input type="number" maxLength="13" id="text" name="telegramNumber" placeholder="Telegram Number" value={telegramNumber} onChange={(e) => this.updateField(e)} class="form-control" />
                                 <p class="error">{telegramNumberError}</p>
                             </div>
@@ -126,7 +129,7 @@ class EditProfile extends React.Component{
                                 <p class="error">{otherEmailError}</p>
                             </div>
                             <div class="form-group">
-                                <label for="text">Twitter Handle</label>
+                                <label for="text">Twitter Handle</label><span class="asterisk">*</span>
                                 <input type="text" id="text" name="twitterHandle" placeholder="Twitter Handle" value={twitterHandle} onChange={(e) => this.updateField(e)} class="form-control" />
                                 <p class="error">{twitterHandleError}</p>
                             </div>
@@ -157,7 +160,7 @@ class EditProfile extends React.Component{
                                 />
                             </div>
                             <div class="form-group">
-                                <label for="email">Devices for Sewa</label>
+                                <label for="email">Devices for Sewa</label><span class="asterisk">*</span>
                                 <Multiselect
                                     options={devices} // Options to display in the dropdown
                                     selectedValues={device} // Preselected value to persist in dropdown

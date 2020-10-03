@@ -108,7 +108,6 @@ const MyHazri = () => {
             getMyHazri();
         }
     }
-    console.log(responseMsg,'enableSearch')
     return (
         <>
         <NavBar setEnableSearch={setEnableSearch} enableSearch={enableSearch} />

@@ -159,11 +159,23 @@ async function fetchData({
           endpoint: 'api/delete_member/',
           data: { userid, authpassword, gender },
       }),
+      addSewa: async (userid, authpassword, gender, points_entrydata, countryid, stateid, distidd, blockid, postdate) => postData({
+          endpoint: 'api/send_points/',
+          data: { userid, authpassword, gender, points_entrydata, countryid, stateid, distidd, blockid, postdate },
+      }),
+      getEducationList: async () => postData({
+          endpoint: 'api/select_education/',
+          data: {  },
+      }),
+      getProfessionList: async () => postData({
+          endpoint: 'api/select_profession/',
+          data: { },
+      }),
   };
   export const events = {
-    getEvents: async (userid, authpassword) => postData({
+    getEvents: async (userid, authpassword, gender, power, countryid, stateid, blockid, timing) => postData({
       endpoint: 'api/upcoming_events/',
-      data: { userid, authpassword },
+      data: { userid, authpassword, gender, power, countryid, stateid, blockid, timing },
     }),
     addEvent: async (userid, authpassword, gen, nameof, countryid, stateid, distidd,
       block, startdate, enddate, detail, mm, nm, sm, dm, bm, tm, stateids, power) => postData({
@@ -207,10 +219,14 @@ async function fetchData({
       endpoint: 'api/updatepermission/',
       data: { userid, authpassword, power, updatepermission, uby, appmem, singlestate, allstate, downloadpoints, sendbroadcast },
     }),
+    getUserDetail: async (userid, authpassword, memberid) => postData({
+      endpoint: 'api/fetch_memberdetail/',
+      data: { userid, authpassword, memberid},
+    }),
   };
   export const download = {
     downloadMembers: async (userid, authpassword, countryid, gender) => postData({
-      endpoint: `downloadapi/download_selected_state/${userid}/${authpassword}/${countryid}/${gender}`,
+      endpoint: `downloadapi/download_selected_state_json/${userid}/${authpassword}/${countryid}/${gender}`,
       data: {}
     }),
   };

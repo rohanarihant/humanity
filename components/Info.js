@@ -62,7 +62,6 @@ export default function SplitButton() {
         }
     ]
     const handleClick = () => {
-        console.info(`You clicked ${options[selectedIndex]}`);
     };
 
     const handleMenuItemClick = (event, index) => {

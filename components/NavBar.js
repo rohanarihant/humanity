@@ -107,7 +107,7 @@ export default function TemporaryDrawer() {
 	  updateSelectedScreen(link);
   }
   React.useEffect(() => {
-    updateLoginStatus(localStorage.getItem('login'));
+    updateLoginStatus(!localStorage.getItem('userId'));
     !localStorage.getItem('userId') && router.push('/login');
   },[]);
   const onLogout = async() => {
@@ -159,9 +159,7 @@ export default function TemporaryDrawer() {
             {title}
           </Typography>
           	<Notifications className={classes.notification} onClick={() => router.push('/notifications')}/>
-          	{!isSignedIn ? 
-            <AccountCircle className={classes.notification} onClick={() => onLogout()} />
-            :
+          	{!loginStatus &&
 			      <SettingsPower className={classes.logout }onClick={() => onLogout()} />}
         </Toolbar>
       </AppBar>

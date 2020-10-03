@@ -6,8 +6,12 @@ import { accountApproval } from '../utils/apis';
 import { toast } from 'react-toastify';
 
 const Profile = () => {
-    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute}} = useContext(AccountContext);
+    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
+    const selectedUserData = screen === 'Delete Member' ? selectedUser : userProfileData;
+    const educationName = educationList && educationList.find(edu => edu.qualificationid ===  selectedUserData && selectedUserData[0].qualificationname);
+    const professionName = professionList && professionList.find(edu => edu.professionid ===  selectedUserData && selectedUserData[0].professionname);
+
     useEffect(() => {
         setUserProfileData(JSON.parse(localStorage.getItem('MemberDetaildet')));
         async function getProfile() {
@@ -32,12 +36,13 @@ const Profile = () => {
         const countryId = MemberDetaildet && MemberDetaildet[0].usrcouid;
         const usrid = MemberDetaildet && MemberDetaildet[0].usrid;
         const res = accountApproval.rejectAccount(userid, authpassword, power, countryId, "", usrid);
-        res.success && toast.error('Member Deleted successfully!');
+        res.success && toast.success('Member Deleted successfully!');
+        res.success && setRoute('home');
     }
     return (
         <>
         <NavBar />
-        {userProfileData && userProfileData.map(user => (
+        {selectedUserData && selectedUserData.map(user => (
         <div class="container" >
             <div class="profile-card">
                 <div class="card-header">
@@ -107,12 +112,12 @@ const Profile = () => {
                                 <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
                                     Education
         </label>
-                                <input type="text" id="defaultFormRegisterNameEx" value={user.qualificationname} className="form-control" />
+                                <input type="text" id="defaultFormRegisterNameEx" value={educationName} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
                                     Professional
         </label>
-                                <input type="email" id="defaultFormRegisterEmailEx" value={user.professionname} className="form-control" />
+                                <input type="email" id="defaultFormRegisterEmailEx" value={professionName} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
                                     Skills

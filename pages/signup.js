@@ -3,7 +3,7 @@ import Router, { withRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
 import { unstable_createMuiStrictModeTheme } from '@material-ui/core';
 import dynamic from 'next/dynamic';
-import {auth} from '../utils/apis';
+import {auth, user} from '../utils/apis';
 import { toast } from 'react-toastify';
 
 
@@ -18,22 +18,23 @@ const skillsList = [
     {name: 'Good Communication skills in English', id: 6},{name: 'Mobile App Developer', id: 7},{name: 'Networking', id: 8},{name: 'Content Writing in Hindi', id: 9},{name: 'Public Speaking', id: 10},
     {name: 'Quality Analyst', id: 11},{name: 'SEO', id: 12},{name: 'Social Media Expert', id: 13},{name: 'Web Designing', id: 14},{name: 'Web Development', id: 15},{name: 'Other', id: 15}
 ];
-const professionList = ['A.C Repairing', 'Accountant', 'Advocate', 'Agent', 'Agriculture/farmer', 'Anganwadi Worker',
-'ANM', 'Army Servent', 'Artist', 'Barber Hair Dresser', 'Beautician', 'Beldaar', 'Black Smith', 'Bool Seller', 'Broker',
-'Businessman', 'Care Taker', 'Carpenter', 'Chartered Accountant', 'Chemist', 'Civil Engineer', 'Cloth Die (kapade di chappai)',
-'Cobbler', 'Combine Operator', 'Computer-Operator', 'Conductor', 'Construction', 'Contractor', 'Cook', 'D.J Sound', 'Dairy Farm',
-'Dentor', 'Driver', 'Electrician', 'Engineer', 'Ex-man'];
+// const professionList = ['A.C Repairing', 'Accountant', 'Advocate', 'Agent', 'Agriculture/farmer', 'Anganwadi Worker',
+// 'ANM', 'Army Servent', 'Artist', 'Barber Hair Dresser', 'Beautician', 'Beldaar', 'Black Smith', 'Bool Seller', 'Broker',
+// 'Businessman', 'Care Taker', 'Carpenter', 'Chartered Accountant', 'Chemist', 'Civil Engineer', 'Cloth Die (kapade di chappai)',
+// 'Cobbler', 'Combine Operator', 'Computer-Operator', 'Conductor', 'Construction', 'Contractor', 'Cook', 'D.J Sound', 'Dairy Farm',
+// 'Dentor', 'Driver', 'Electrician', 'Engineer', 'Ex-man'];
 const devices = [{name: 'Desktop', id: 1},{name: 'Laptop', id: 2},{name: 'Smart Phone', id: 3}]
-const educationList = ['Class 1st','Class 2nd','Class 3rd','Class 4th','Class 5th','Class 6th','Class 7th','Class 8th','Class 9th','Class 10th','Class 11th','Class 12th',
-'B.Arch - Bechelor of Architecure', 'B.A - Bechelore of Arts', 'BAMS - Bechelore of Ayurvedic Medicine & Surgery', 'B.B.A - Bechelore of Business Administration', 'B.Com - Bechelore of Commerce',
-'B.C.A - Bechelore of Computer Application', 'B.D.S - Bechelore of Dental Surgery', 'B.Des/B.D', 'B.Ed', 'B.E/B.Tech', 'BFA/BVA', 'B.F.Sc/B.Sc','B.H.M.S','L.L.B',
-'B.Lib/B.Lib.Sc','B.M.C/B.M.M','M.B.B.S','Bechelore of Nursing','B.Pharm/B.Pharma','B.P.Ed','B.P.T','B.Sc','BSW/B.A(SW)','B.V.Sc & A.H / B.V.Sc','M.D','M.D (Homeophathy)',
-'Pharm D','Ph. D','D.M','M.Arch','M.A','M.B.A','M.CH','M.Com','M.C.A','M.D.S','M.Des/M.Design','M.Ed','M.E/M.Tech','MFA/MVA','L.L.M','MLib / MLib.Sc','M.M.C / M.M.M','M.Pharm',
-'M.Phil','MPEd / M.P.E','M.P.T','M.Sc','M.S.W/M.A (SW)','M.Sc (Agriculture)','M.S (Master in Surgury)','M.V.Sc','3 Years of Diploma','2 Years of ITI Cource']
+// const educationList = ['Class 1st','Class 2nd','Class 3rd','Class 4th','Class 5th','Class 6th','Class 7th','Class 8th','Class 9th','Class 10th','Class 11th','Class 12th',
+// 'B.Arch - Bechelor of Architecure', 'B.A - Bechelore of Arts', 'BAMS - Bechelore of Ayurvedic Medicine & Surgery', 'B.B.A - Bechelore of Business Administration', 'B.Com - Bechelore of Commerce',
+// 'B.C.A - Bechelore of Computer Application', 'B.D.S - Bechelore of Dental Surgery', 'B.Des/B.D', 'B.Ed', 'B.E/B.Tech', 'BFA/BVA', 'B.F.Sc/B.Sc','B.H.M.S','L.L.B',
+// 'B.Lib/B.Lib.Sc','B.M.C/B.M.M','M.B.B.S','Bechelore of Nursing','B.Pharm/B.Pharma','B.P.Ed','B.P.T','B.Sc','BSW/B.A(SW)','B.V.Sc & A.H / B.V.Sc','M.D','M.D (Homeophathy)',
+// 'Pharm D','Ph. D','D.M','M.Arch','M.A','M.B.A','M.CH','M.Com','M.C.A','M.D.S','M.Des/M.Design','M.Ed','M.E/M.Tech','MFA/MVA','L.L.M','MLib / MLib.Sc','M.M.C / M.M.M','M.Pharm',
+// 'M.Phil','MPEd / M.P.E','M.P.T','M.Sc','M.S.W/M.A (SW)','M.Sc (Agriculture)','M.S (Master in Surgury)','M.V.Sc','3 Years of Diploma','2 Years of ITI Cource']
 const bloodGroupList = ['A+','A-','B+','B-','AB+','AB-','O+','O-']
 class Register extends React.Component{
-    constructor(props){
-        super(props);
+  constructor(props){
+    super(props);
+    const {account: { educationList, professionList}} = useContext(AccountContext);
         this.state = {
             pageNo: 0,
             email: '',
@@ -85,6 +86,8 @@ class Register extends React.Component{
             skillsList:[],
             deviceList:[],
             blocksList:[],
+            educationList: educationList,
+            professionList: professionList,
         }
         // const {account: {getLogin}} = useContext(AccountContext);
         this.checkForm = this.checkForm.bind(this);
@@ -95,14 +98,18 @@ class Register extends React.Component{
         this.searchBlock = this.searchBlock.bind(this);
         this.moveBack = this.moveBack.bind(this);
         this.updateMobile = this.updateMobile.bind(this);
+
     }
-    componentDidMount(){
+
+    async componentDidMount(){
       console.log(localStorage.getItem('userId'),'123')
         // if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
         //   Router.push({
         //     pathname: '/',
         // });
         // }
+
+
       }
 
     validateField(selectedPage, pageNo){
@@ -129,7 +136,6 @@ class Register extends React.Component{
         const selectedPage = pageNo === 0 ? pageNo0 : pageNo === 1 ? pageNo1 : pageNo === 2 ? pageNo2 : null;
         const selectedCheck = (page) => pageNo === 0 ? (page !== 'gender' && page !== 'insanNo') : pageNo === 1 ?
         (page !== 'alternateEmail' && page !== 'bloodGroup') : pageNo === 2 ? (page !== 'device' && page !== 'skills') : null;
-
         if(pageNo <= 2 && selectedPage){
             {selectedPage.map( page => {
                 if(selectedCheck(page)){
@@ -155,7 +161,7 @@ class Register extends React.Component{
         // }
         if(this.validateField(selectedPage, pageNo)){
             const { email, password, fatherName, name, statecountryid, stateid, districtid, blockId, address,
-                insanNo, mobileNo, dateofBirth, alternateEmail, twitterHandle, education, profession,
+                insanNo, mobileNo, telegramMobileNo, dateofBirth, alternateEmail, twitterHandle, education, profession,
                 skillsList, deviceList, gender, bloodGroup } = this.state;
             if(pageNo === 2){
                 try{
@@ -171,13 +177,14 @@ class Register extends React.Component{
                         address: address,
                         insanno: insanNo,
                         wmobno: mobileNo,
+                        mobno: telegramMobileNo,
                         dob: dateofBirth,
                         othermail: alternateEmail,
                         twitter: twitterHandle,
                         education: education,
                         profession: profession,
-                        skills: skillsList,
-                        device: deviceList,
+                        skills: skillsList.map(({name}) => name).join(','),
+                        device: deviceList.map(({name}) => name).join(','),
                         gender: gender,
                         bloodg: bloodGroup,
                     }
@@ -282,7 +289,7 @@ class Register extends React.Component{
         const {pageNo, name, fatherName, gender, address, insanNo, nameError, fatherNameError, insanNoError,
             addressError, dateofBirth, dateofBirthError, email, emailError, alternateEmail, password, passwordError,
             confirmPassword, confirmPasswordError, mobileNo, mobileNoError, telegramMobileNo, telegramMobileNoError,
-            twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, twitterHandleError,
+            twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, educationList, professionList, twitterHandleError,
             profession, educationError, block, blockError, blocksList, alternateEmailError, professionError } = this.state;
     return(
         <div class="container" id="myApp">
@@ -392,16 +399,12 @@ class Register extends React.Component{
         <label for="email">Education</label><span class="asterisk">*</span>
         <select class="form-control" value={education} name="education" onChange={(e) => this.updateField(e)}>
             <option>Select Education</option>
-            {educationList.map(edu => (<option>{edu}</option>))}
+            {educationList && educationList.map(edu => (<option value={edu.qualificationid}>{edu.qualificationname}</option>))}
         </select>
         <p class="error">{educationError}</p>
       </div>
       <div class="form-group">
         <label for="email">Skills</label>
-        {/* <select class="form-control" value={skills} onChange={(e) => this.updateField(e)}>
-            <option>Select Skills</option>
-          {skillsList.map(skill => (<option>{skill}</option>))}
-        </select> */}
         <Multiselect
             options={skillsList} // Options to display in the dropdown
             selectedValues={skills} // Preselected value to persist in dropdown
@@ -414,7 +417,7 @@ class Register extends React.Component{
         <label for="email">Profession</label><span class="asterisk">*</span>
         <select class="form-control" value={profession} name="profession" onChange={(e) => this.updateField(e)}>
             <option>Select Profession</option>
-            {professionList.map(profession => (<option>{profession}</option>))}
+            {professionList && professionList.map(profession => (<option value={profession.professionid}>{profession.professionname}</option>))}
         </select>
         <p class="error">{professionError}</p>
       </div>

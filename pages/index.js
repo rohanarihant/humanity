@@ -7,7 +7,7 @@ import HomePage from '../components/HomePage';
 import Profile from '../components/Profile';
 import Escalation from '../components/Escalation';
 import Team from '../components/Team';
-import Sewa from '../components/Sewa';
+import Sewa from '../components/addSewa';
 import MyHazri from '../components/MyHazri';
 import Info from '../components/Info';
 import Events from '../components/Events';

@@ -84,6 +84,7 @@ const SewaResults = () => {
         }
         .result-container{
             margin-top: 70px;
+            padding: 10px;
         }
         .states-heading{
             text-align: center;
