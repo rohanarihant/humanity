@@ -7,7 +7,7 @@ import AccountContext from '../contexts/accountContext';
 const IssueDetail = () => {
     const [comment, setComment] = useState('');
     const { account: { selectedIssue, setRoute } } = useContext(AccountContext);
-
+    const userid = localStorage.getItem('userId');
 
     const closeIssue = async (issueid) => {
         const userid = localStorage.getItem('userId');
@@ -29,6 +29,7 @@ const IssueDetail = () => {
         <div>
             <NavBar />
             {selectedIssue && selectedIssue.map((issue, index) => {
+                    console.log(issue,'issue')
                 if (issue.issuetype === "issue") {
                     mainIssue = issue;
                     return (
@@ -44,7 +45,7 @@ const IssueDetail = () => {
                             </div>
                             <div className="issue-close">
                                 <p>{issue.issuedate}</p>
-                                <a onClick={() => closeIssue(issue.issueid)}>Close</a>
+                                {issue.issueby === userid && <a onClick={() => closeIssue(issue.issueid)}>Close</a>}
                             </div>
                             {/* <div className="issue-footer">
                             <input type="text" className="comment-text" value={comment} onChange={(e) => setComment(e.target.value)} />

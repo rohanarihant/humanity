@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar({setEnableSearch, enableSearch}) {
   const router = useRouter();
   const classes = useStyles();
-  const {account: { setRoute, route, updateSelectedScreen, screen }} = useContext(AccountContext);
+  const {account: { setRoute, route, updateSelectedScreen, screen, ItwingRank }} = useContext(AccountContext);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -125,6 +125,13 @@ export default function Navbar({setEnableSearch, enableSearch}) {
       </List>
     </div>
   );
+  const showAddIssueButton = () => {
+    if(["District Member", "Team Member", "Block Member"].includes(ItwingRank) && screen === 'Issues'){
+      return(
+        <button className="add-issue-button" onClick={() => openAddIssue()}>Add Issue</button>
+      )
+    }
+  }
   return (
 	  <div className={classes.root}>
       <AppBar position="fixed">
@@ -135,7 +142,7 @@ export default function Navbar({setEnableSearch, enableSearch}) {
           <Typography variant="h6" className={classes.title}>
             {screen}
           </Typography>
-          {screen === 'Issues' && <button className="add-issue-button" onClick={() => openAddIssue()}>Add Issue</button>}
+          {showAddIssueButton()}
           {screen === 'myHazri' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
         </Toolbar>
       </AppBar>
