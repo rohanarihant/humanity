@@ -54,7 +54,7 @@ function LinkTab(props) {
     };
   }
 const AddHazri = () => {
-    const {account: { getProfileDetails}} = useContext(AccountContext);
+    const {account: { getProfileDetails, toggleShowLoader, setRoute}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
     const [sewaDate, setSewaDate] = useState('');
     const [sewaDateError, setSewaDateError] = useState('');
@@ -85,14 +85,17 @@ const AddHazri = () => {
         }
         if(sewaDate !== '' && sewaDateError === '' && ashramLocation !== ''
         && ashramLocationError === '' && sewaNoDays !== '' && sewaNoDaysError === ''){
+            toggleShowLoader(true);
             const userId = localStorage.getItem('userId');
             const auth = localStorage.getItem('authpassword');
             const response = await user.addHazri(userId, auth, ashramLocation, sewaType, sewaDate, sewaNoDays);
-            if(response.message === "OK"){
+            if(response.success){
                 toast.success('Hazri added successfully');
+                setRoute('myHazri');
             }else{
                 toast.error('Error while adding Hazri');
             }
+            toggleShowLoader(false);
         }
     }
     const saveBloodSewa = async(sewaType) => {
@@ -102,14 +105,17 @@ const AddHazri = () => {
             setSewaDateError('');
         }
         if(sewaDate !== '' && sewaDateError === ''){
+          toggleShowLoader(true);
             const userId = localStorage.getItem('userId');
             const auth = localStorage.getItem('authpassword');
             const response = await user.addHazri(userId, auth, ashramLocation, sewaType, sewaDate, sewaNoDays);
-            if(response.message === "OK"){
+            if(response.success){
                 toast.success('Hazri added successfully');
+                setRoute('myHazri');
             }else{
                 toast.error('Error while adding Hazri');
             }
+            toggleShowLoader(false);
         }
     }
     const saveParmarthSewa = async(sewaType) => {
@@ -119,14 +125,17 @@ const AddHazri = () => {
             setSewaDateError('');
         }
         if(sewaDate !== '' && sewaDateError === ''){
+          toggleShowLoader(true);
             const userId = localStorage.getItem('userId');
             const auth = localStorage.getItem('authpassword');
             const response = await user.addHazri(userId, auth, ashramLocation, sewaType, sewaDate, sewaNoDays);
-            if(response.message === "OK"){
+            if(response.success){
                 toast.success('Hazri added successfully');
+                setRoute('myHazri');
             }else{
                 toast.error('Error while adding Hazri');
             }
+            toggleShowLoader(false);
         }
     }
     useEffect(() => {
@@ -160,7 +169,7 @@ const AddHazri = () => {
       </AppBar>
       <TabPanel value={value} index={0}>
           <div class="add-hazri-input">
-            <input type="date" class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
+            <input type="date" placeholder="Select the Date" class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
             <p className="error">{sewaDateError}</p>
             <select class="form-control" value={ashramLocation} onChange={(e) => setAshramLocation(e.target.value)}>
                 <option>Select Sewa Location</option>
@@ -171,19 +180,19 @@ const AddHazri = () => {
             {ashramLocation !== "Select Sewa Location"
             && (<><input type="text" class="form-control" placeholder="Sewa No of Days" style={{margin: '20px 0px'}} value={sewaNoDays} onChange={(e) => setSewaNoDays(e.target.value)}/>
             <p className="error">{sewaNoDaysError}</p></>)}
-            <button class="iconSwitch" style={{width: 200}} onClick={() => saveSewa('SMG Sewa')}>Save</button>
+            <button class="iconSwitch" style={{width: 200}} onClick={() => saveSewa(ashramLocation)}>Save</button>
           </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
           <div class="add-hazri-input">
-            <input type="date" class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
+            <input type="date" placeholder="Select the Date" class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
             <p className="error">{sewaDateError}</p>
             <button class="iconSwitch" style={{width: 200}} onClick={() => saveBloodSewa('Blood Donation')}>Save</button>
           </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
           <div class="add-hazri-input">
-            <input type="date" class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
+            <input type="date" placeholder="Select the Date" class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
             <p className="error">{sewaDateError}</p>
             <input type="text" class="form-control" placeholder="Sewa No of Days" style={{margin: '20px 0px'}} value={sewaNoDays} onChange={(e) => setSewaNoDays(e.target.value)}/>
             <p className="error">{sewaNoDaysError}</p>

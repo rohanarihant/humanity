@@ -26,6 +26,7 @@
 		"react-axe": "^3.4.1",
 		"react-bootstrap": "^1.3.0",
 		"react-dom": "^16.13.1",
+		"react-excel-workbook": "0.0.4",
 		"react-json-excel": "^1.1.0",
 		"react-search-select": "^1.1.3",
 		"react-select-search": "^2.0.6",

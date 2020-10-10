@@ -107,7 +107,7 @@ export default function Escalation() {
     (!managementMem && !!localStorage.getItem('userId')) && getMyTeam();
     getMyTeam();
   }, []);
-
+  console.log(stateMem,'stateMem')
   return (
     <div className={classes.root}>
       <NavBar />
@@ -127,7 +127,7 @@ export default function Escalation() {
         <List className={classes.listRoot}>
           {stateMem && stateMem.map((mem) => (
             <div className="team-container">
-              <img src="/static/img/head.png" className="profile-image" />
+              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
                 <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
@@ -144,10 +144,10 @@ export default function Escalation() {
         <List className={classes.listRoot}>
           {nationalMem && nationalMem.map((mem) => (
             <div className="team-container">
-              <img src="/static/img/head.png" className="profile-image" />
+              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
-                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
+                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrid}</a>
               </div>
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.statename}</p>
@@ -161,7 +161,7 @@ export default function Escalation() {
         <List className={classes.listRoot}>
           {managementMem && managementMem.map((mem) => (
             <div className="team-container">
-              <img src="/static/img/head.png" className="profile-image" />
+              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
                 <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
@@ -181,7 +181,9 @@ export default function Escalation() {
         }
         .profile-image{
           height: 90px;
-          width: 80px;
+          width: 56px;
+          border-radius: 20px;
+          margin: 4px;
         }
         .team-user-details{
           padding: 10px;

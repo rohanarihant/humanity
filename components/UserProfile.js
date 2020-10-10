@@ -5,14 +5,16 @@ import AccountContext from '../contexts/accountContext';
 import { accountApproval } from '../utils/apis';
 import { toast } from 'react-toastify';
 
-const Profile = () => {
+const UserProfile = () => {
     const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
-    const selectedUserData = screen === 'Delete Member' ? selectedUser : userProfileData;
+    const selectedUserData =  selectedUser;
     const educationObj = educationList && educationList.find(edu => edu.qualificationid === userProfileData[0].usreduid);
     const educationName = educationObj && educationObj.qualificationname;
+    //  || (selectedUserData && selectedUserData[0].usreduid); .qualificationname;
     const professionObj = professionList && professionList.find(pro => pro.professionid === userProfileData[0].usrprofessionid);
     const professionName = professionObj && professionObj.professionname;
+    //  || (selectedUserData && selectedUserData[0].usrprofessionid);;
     useEffect(() => {
         setUserProfileData(JSON.parse(localStorage.getItem('MemberDetaildet')));
         async function getProfile() {
@@ -22,7 +24,7 @@ const Profile = () => {
                 setUserProfileData(response.MemberDetaildet);
                 setItwingRank(response.categoryname);
                 localStorage.setItem('MemberDetaildet', JSON.stringify(response.MemberDetaildet));
-                localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname) || "Team Member");
+                localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname));
                 localStorage.setItem('samiti', JSON.stringify(response.samiti));
             }
             toggleShowLoader(false);
@@ -135,10 +137,9 @@ const Profile = () => {
                 </MDBContainer>
             </div>
         </div>))}
-        {screen !== 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => setRoute('editProfile')}>Edit Profile</p>}
         {screen === 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => deleteMember()}>Delete Profile</p>}
     </>
     )
 };
 
-export default Profile;
+export default UserProfile;

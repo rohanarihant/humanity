@@ -40,7 +40,7 @@ export default function SearchMember() {
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
     const [searchKeyword, updateSearchKeyword] = React.useState('');
     const [listSearchedUser, updateListSearchedUser] = React.useState([]);
-    const {account: { setRoute, title, setChangeRoleUser, screen, setSelectedUser }} = useContext(AccountContext);
+    const {account: { setRoute, toggleShowLoader, setChangeRoleUser, screen, setSelectedUser }} = useContext(AccountContext);
 
     const handleClick = () => {
     };
@@ -103,11 +103,12 @@ export default function SearchMember() {
         if(response.success){
             setSelectedUser(response.MemberDetaildet);
         }
-        setRoute(screen === 'Delete Member' ? 'profile' : 'changeRole');
+        setRoute((screen === 'Delete Profile' || screen === 'Search Members') ? 'userProfile' : 'changeRole');
     }
     const searcForUsers = async(e) => {
         const key = e.keyCode || e.charCode;
         if(key === 13){
+            toggleShowLoader(true);
             const userId = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
             const power = localStorage.getItem('power');
@@ -117,19 +118,19 @@ export default function SearchMember() {
             if(response.success){
                 updateListSearchedUser(response.MemberDetaildet);
             }
+            toggleShowLoader(false);
         }
-
-
     }
+    
     return (
         <div className="official-info">
             <NavBar />
             <div className="issues-container">
             <div>
-                <input type="text" name="search" className="search-input" placeholder="Search user and enter" value={searchKeyword} onChange={(e) => updateSearchKeyword(e.target.value)} onKeyPress={(e) => searcForUsers(e)} />
+                <input type="text" name="search" autocomplete="off" className="search-input" placeholder="Search user and enter" value={searchKeyword} onChange={(e) => updateSearchKeyword(e.target.value)} onKeyPress={(e) => searcForUsers(e)} />
             </div>
                 {
-                    listSearchedUser && listSearchedUser.map((user, index) => {
+                    listSearchedUser && listSearchedUser.map((user) => {
                             return (
                                 <div style={{ marginTop: 20, border: '1px solid #ddd', fontSize: 18, width: '108vw' }} onClick={(e) => onMemberClick(e.target.value,user)}>
                                     <div className="memberList">

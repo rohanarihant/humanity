@@ -40,7 +40,8 @@ export default function Sewa() {
     const [socialMediaDetail, setSocialMediaDetail] = React.useState(['Select']);
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
     const [pointsList, updatePointsList] = React.useState({ pointlist : [] });
-    const {account: { setRoute }} = useContext(AccountContext);
+    const [enableButton, updateEnableButton] = React.useState(false);
+    const {account: { setRoute, toggleShowLoader }} = useContext(AccountContext);
 
     const handleClick = () => {
     };
@@ -81,6 +82,7 @@ export default function Sewa() {
     }, []);
 
     const addSewa = async() => {
+        toggleShowLoader(true);
         const userId = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
         const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'))[0];
@@ -93,6 +95,7 @@ export default function Sewa() {
         const res = await user.addSewa(userId, authpassword, gender, JSON.stringify(pointsList), countryid, stateid, distidd, blockid, postdate);
         res.success && toast.success('Sewa added successfully');
         res.success && setRoute('home')
+        toggleShowLoader(false);
     }
 
     const updateField = (value, catId, catPoints) => {
@@ -113,6 +116,8 @@ export default function Sewa() {
             pointlist[index].point_point = catPoints;
             pointlist[index].point_entry = value;
         }
+        updatePointsList(pointsList);
+        updateEnableButton(true);
     }
 
     return (
@@ -188,7 +193,7 @@ export default function Sewa() {
                         }
                     })
                 }
-                {pointsList.pointlist.length > 0 && <p className="iconSwitch" style={{margin: "20px 10px 20px"}} onClick={() => addSewa()}>Add Sewa</p>}
+                {enableButton && <p className="iconSwitch" style={{margin: "20px 10px 20px"}} onClick={() => addSewa()}>Add Sewa</p>}
             </div>
             <style>
                 {`

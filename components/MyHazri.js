@@ -108,6 +108,15 @@ const MyHazri = () => {
             getMyHazri();
         }
     }
+    const deleteHazri = async(sewaid) => {
+      const userid = localStorage.getItem('userId');
+      const authpassword = localStorage.getItem('authpassword');
+      const power = localStorage.getItem('power');
+      const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
+      const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
+      const res = await user.deleteHazri(userid, authpassword, power, gender, sewaid);
+    }
+    console.log(userHazri,'userHazri')
     return (
         <>
         <NavBar setEnableSearch={setEnableSearch} enableSearch={enableSearch} />
@@ -139,7 +148,7 @@ const MyHazri = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {userHazri && userHazri.map((row, index) => {
+                    {userHazri && userHazri.length > 0 && userHazri.map((row, index) => {
                     return (
                         <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                             <TableCell key={index} padding="default">
@@ -153,6 +162,7 @@ const MyHazri = () => {
                             </TableCell>
                             <TableCell key={index} padding="none">
                                 {row.sewatime}
+                                <img src="./static/img/delete.svg" style={{height: 20}} onClick={() => deleteHazri(row.sewaid)} />
                             </TableCell>
                         </TableRow>
                     );

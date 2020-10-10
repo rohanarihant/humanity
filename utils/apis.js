@@ -147,6 +147,10 @@ async function fetchData({
           endpoint: 'api/add_mysewa/',
           data: { userid, authpassword, sewaat, sewadid, sewadate, hajri },
       }),
+      deleteHazri: async (userid, authpassword, power, gender, sewaid) => postData({
+          endpoint: 'api/delete_hazri',
+          data: { userid, authpassword, power, gender, sewaid },
+      }),
       getHazri: async (userid, authpassword, power, fromdate, todate, pagging) => postData({
           endpoint: 'api/download_sewareport/',
           data: { userid, authpassword, power, fromdate, todate, pagging},
@@ -200,6 +204,10 @@ async function fetchData({
     addCommentIssue: async (userid, authpassword, power, issue, sendto, issueby, type, issueids, senddate) => postData({
       endpoint: 'api/addissue_comment/',
       data: { userid, authpassword, power, issue, sendto, issueby, type, issueids, senddate },
+    }),
+    addIssue: async (userid, authpassword, power, issue, sendto, issueby, type, issueids, senddate, gender, image) => postData({
+      endpoint: 'api/addissue/',
+      data: { userid, authpassword, power, issue, sendto, issueby, type, issueids, senddate, gender, image },
     })
   };
   export const searchUsers = {

@@ -22,12 +22,15 @@ const IssueDetail = () => {
         const authpassword = localStorage.getItem('authpassword');
         const power = JSON.parse(localStorage.getItem('power'));
         const res = await issues.addCommentIssue(userid, authpassword, power, "comment", issueto, issueby, issuetype, issueid, new Date().toLocaleDateString());
+        console.log(res,'res')
     }
+    let mainIssue = '';
     return (
         <div>
             <NavBar />
             {selectedIssue && selectedIssue.map((issue, index) => {
                 if (issue.issuetype === "issue") {
+                    mainIssue = issue;
                     return (
                         <div className="issue-detail-container">
                             <p className="create-by">Created By:- {issue.usrname}</p>
@@ -47,10 +50,7 @@ const IssueDetail = () => {
                             <input type="text" className="comment-text" value={comment} onChange={(e) => setComment(e.target.value)} />
                             <img src="/static/img/send_message.png" onClick={() => sendComment(issue.replyissueid, issue.issueid, issue.issueby, issue.issuetype)} className="send-comment" />
                         </div> */}
-                            <div className="msger-inputarea issue-footer">
-                                <input type="text" className="msger-input" placeholder="Enter your comment" value={comment} onChange={(e) => setComment(e.target.value)} />
-                                <button className="msger-send-btn" onClick={() => sendComment(issue.replyissueid, issue.issueid, issue.issueby, issue.issuetype)}>Send</button>
-                            </div>
+    
                         </div>)
                 } else {
                     return (
@@ -62,7 +62,10 @@ const IssueDetail = () => {
                     )
                 }
             })}
-
+            <div className="msger-inputarea issue-footer">
+                <input type="text" className="msger-input" placeholder="Enter your comment" value={comment} onChange={(e) => setComment(e.target.value)} />
+                <button className="msger-send-btn" onClick={() => sendComment(mainIssue.replyissueid, mainIssue.issueid, mainIssue.issueby, mainIssue.issuetype)}>Send</button>
+            </div>
             <style jsx>
                 {`
             .issue-detail-container{
@@ -96,6 +99,10 @@ const IssueDetail = () => {
                 position: absolute;
                 bottom: 0px;
                 width: 100%;
+                display: flex;
+                padding: 10px;
+                border-top: 2px solid #ddd;;
+                background: #eee;
             }
             .comment-text{
                 font-size: 15px;
@@ -118,10 +125,7 @@ const IssueDetail = () => {
                 height: auto;
             }
             .msger-inputarea {
-                display: flex;
-                padding: 10px;
-                border-top: 2px solid #ddd;;
-                background: #eee;
+
               }
               .msger-inputarea * {
                 padding: 10px;

@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import Router, { withRouter } from 'next/router'
-import AccountContext from '../contexts/accountContext';
+import { withAccount } from '../contexts/accountContext';
 import { unstable_createMuiStrictModeTheme } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import {auth, user} from '../utils/apis';
@@ -34,7 +34,7 @@ const bloodGroupList = ['A+','A-','B+','B-','AB+','AB-','O+','O-']
 class Register extends React.Component{
   constructor(props){
     super(props);
-    const {account: { educationList, professionList}} = useContext(AccountContext);
+    const {account: { educationList, professionList }} = props;
         this.state = {
             pageNo: 0,
             email: '',
@@ -102,7 +102,9 @@ class Register extends React.Component{
     }
 
     async componentDidMount(){
-      console.log(localStorage.getItem('userId'),'123')
+      console.log(JSON.parse(localStorage.getItem('educationList')),'123123123')
+      this.setState({educationList : JSON.parse(localStorage.getItem('educationList'))});
+      this.setState({professionList : JSON.parse(localStorage.getItem('professionList'))});
         // if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
         //   Router.push({
         //     pathname: '/',
@@ -291,6 +293,7 @@ class Register extends React.Component{
             confirmPassword, confirmPasswordError, mobileNo, mobileNoError, telegramMobileNo, telegramMobileNoError,
             twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, educationList, professionList, twitterHandleError,
             profession, educationError, block, blockError, blocksList, alternateEmailError, professionError } = this.state;
+            console.log(educationList, professionList,'educationList, professionList')
     return(
         <div class="container" id="myApp">
   <section class="section login" v-class="flip : signup">
@@ -463,5 +466,5 @@ class Register extends React.Component{
 }
 }
 
-export default withRouter(Register);
+export default withAccount(withRouter(Register));
 

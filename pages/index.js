@@ -24,6 +24,8 @@ import ChangeMyPassword from '../components/changePassword';
 import SewaResults from '../components/sewaResults';
 import EditProfile from '../components/editProfile';
 import Howtowork from '../components/howtowork';
+import UserProfile from '../components/UserProfile';
+import AddIssue from '../components/addIssue';
 
 const Index = () => {
 	const { account : { route, showLoader }} = useContext(AccountContext);
@@ -71,6 +73,10 @@ const Index = () => {
 			return <EditProfile />;
 			case 'howtowork':
 			return <Howtowork />;
+			case 'userProfile':
+			return <UserProfile />;
+			case 'addIssue':
+			return <AddIssue />;
 			default:
 			return <HomePage />;
 		}

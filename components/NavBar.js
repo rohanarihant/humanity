@@ -32,6 +32,7 @@ import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
 import { toast } from 'react-toastify';
+import selectNavBarForUser from '../constants/navBars';
 
 // const useStyles = makeStyles({
 // root: {
@@ -70,25 +71,8 @@ export default function TemporaryDrawer() {
   });
   const [open, setOpen] = React.useState(false);
   const [loginStatus, updateLoginStatus] = React.useState(false);
-  const categories = [
-	  {title: 'My Profile', icon: <Person />, route: 'profile'},
-	  {title: 'Escalation', icon: <AcUnit />, route: 'escalation'},
-	  {title: 'My District Team', icon: <Group />, route: 'team'},
-	  {title: 'Add Sewa', icon: <PostAdd />, route: 'sewa'},
-	  {title: 'My Hazri Details', icon: <LibraryAdd />, route: 'myHazri'},
-	  {title: 'Useful Information', icon: <Info />, route: 'info'},
-	  {title: 'Events', icon: <EventAvailable />, route: 'events'},
-	  {title: 'Issues', icon: <BugReport />, route: 'issues'},
-	  {title: 'Delete Member', icon: <PeopleOutline />, route: 'searchMember'},
-	  {title: 'Change Role', icon: <Accessibility />, route: 'searchMember'},
-	  {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
-	  {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
-	  {title: 'Download', icon: <Person />, route: 'download'},
-	  {title: 'Broadcast', icon: <LiveTv />, route: 'broadcast'},
-	  {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
-	  {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
-  ];
-  const {account: {isSignedIn, setRoute, setTitle, title, updateSelectedScreen}} = useContext(AccountContext);
+  const {account: {isSignedIn, setRoute, setTitle, title, updateSelectedScreen, ItwingRank, setItwingRank, userPermissions}} = useContext(AccountContext);
+  const categories = selectNavBarForUser(ItwingRank, userPermissions);
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -115,7 +99,7 @@ export default function TemporaryDrawer() {
     localStorage.removeItem('authpassword')
     await localStorage.clear();
     updateLoginStatus(false);
-    
+    setItwingRank('');
     router.push('/login');
   }
   
@@ -158,7 +142,8 @@ export default function TemporaryDrawer() {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          	<Notifications className={classes.notification} onClick={() => router.push('/notifications')}/>
+          	<Notifications className={classes.notification} />
+            {/* onClick={() => router.push('/notifications')} */}
           	{!loginStatus &&
 			      <SettingsPower className={classes.logout }onClick={() => onLogout()} />}
         </Toolbar>

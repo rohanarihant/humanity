@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar({setEnableSearch, enableSearch}) {
   const router = useRouter();
   const classes = useStyles();
-  const {account: { setRoute, route, title, screen }} = useContext(AccountContext);
+  const {account: { setRoute, route, updateSelectedScreen, screen }} = useContext(AccountContext);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -102,6 +102,10 @@ export default function Navbar({setEnableSearch, enableSearch}) {
     updateLoginStatus(false);
     rsetRoute('login');
   }
+  const openAddIssue = () => {
+    updateSelectedScreen('Add Issue');
+    setRoute('addIssue')
+  }
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -131,7 +135,8 @@ export default function Navbar({setEnableSearch, enableSearch}) {
           <Typography variant="h6" className={classes.title}>
             {screen}
           </Typography>
-          {router.pathname === '/myHazri' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
+          {screen === 'Issues' && <button onClick={() => openAddIssue()}>Add Issue</button>}
+          {screen === 'myHazri' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
         </Toolbar>
       </AppBar>
     </div>

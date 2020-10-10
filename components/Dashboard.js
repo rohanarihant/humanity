@@ -10,6 +10,7 @@ import AddCircle from '@material-ui/icons/AddCircle';
 import Link from '@material-ui/core/Link';
 import AccountContext from '../contexts/accountContext';
 import {auth} from '../utils/apis';
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 function FormRow() {
     const classes = useStyles();
     const { account: { setRoute } } = useContext(AccountContext);
-
     const openRoute = (route) => {
         setRoute(`${route}`);
     }
@@ -90,11 +90,15 @@ function FormRowSecond() {
 
 export default function SimplePaper() {
     const classes = useStyles();
-    const { account: { getProfileDetails } } = useContext(AccountContext);
+    const { account: { getProfileDetails, setPermissions, setItwingRank } } = useContext(AccountContext);
+    const router = useRouter();
+    const ItwingRank = JSON.parse(localStorage.getItem('ItwingRank'));
+    const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
     useEffect(() => {
         async function getProfile() {
             const response = await getProfileDetails();
             if (response.success) {
+                setItwingRank(response.categoryname);
                 localStorage.setItem('MemberDetaildet', JSON.stringify(response.MemberDetaildet));
                 localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname));
                 localStorage.setItem('samiti', JSON.stringify(response.samiti));
@@ -104,18 +108,22 @@ export default function SimplePaper() {
             const userId = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
             const response = await auth.checkLoginStatus(userId, authpassword);
-            // Number(response.success) && console.log(response,'response')
-            // !Number(response.success) && console.log('response not working')
+            if(!Number(response.success)){
+                localStorage.clear();
+                router.push('/login');
+            }else{
+                setPermissions(response);
+            }
         }
         getProfile();
         checkLoginStatus();
     }, []);
-
+    console.log(MemberDetaildet,'MemberDetaildet')
     return (
         <div style={{ marginTop: 20 }}>
             <div className="user-detail-dashboard">
-                <p>Dummy MM</p>
-                <p>Management Member</p>
+                <p>{MemberDetaildet && MemberDetaildet[0] && MemberDetaildet[0].usrname}</p>
+                <p>{ItwingRank}</p>
             </div>
             <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
                 <Grid container item xs={12} spacing={3}>

@@ -584,3 +584,10 @@
     height: 100px;
     width: 100px;
   }
+  .text-center{
+    margin-top: 0px !important;
+    margin-left: 25px;
+  }
+  .btn-primary{
+    padding: 5px 120px;
+  }

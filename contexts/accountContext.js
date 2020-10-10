@@ -29,6 +29,7 @@ export class AccountProvider extends React.Component {
       selectedUser: {},
       educationList: [],
       professionList: [],
+      userPermissions: {},
     };
     this.state = this.defaultState;
 
@@ -47,16 +48,25 @@ export class AccountProvider extends React.Component {
       toggleShowLoader: this.toggleShowLoader.bind(this),
       setSelectedIssue: this.setSelectedIssue.bind(this),
       setSelectedUser: this.setSelectedUser.bind(this),
+      getEduProList: this.getEduProList.bind(this),
+      setPermissions: this.setPermissions.bind(this),
+      setItwingRank: this.setItwingRank.bind(this),
     };
   }
   async componentDidMount(){
     this.setState({
       userProfileData : JSON.parse(localStorage.getItem('MemberDetaildet')) || [{}],
-      ItwingRank: localStorage.getItem('ItwingRank') || '',
+      ItwingRank: JSON.parse(localStorage.getItem('ItwingRank')) || '',
       samiti: localStorage.getItem('samiti') || '',
     });
+    await this.getEduProList();
+  }
+  async getEduProList(){
     const eduList = await user.getEducationList();
     const proList = await user.getProfessionList();
+    console.log(eduList,'eduList')
+    localStorage.setItem('educationList', JSON.stringify(eduList.educations));
+    localStorage.setItem('professionList', JSON.stringify(proList.profession));
     this.setState({educationList : eduList.educations });
     this.setState({professionList : proList.profession });
   }
@@ -104,6 +114,12 @@ export class AccountProvider extends React.Component {
   }
   async setSelectedUser(selectedUser){
     this.setState({selectedUser});
+  }
+  async setPermissions(userPermissions){
+    this.setState({userPermissions});
+  }
+  async setItwingRank(ItwingRank){
+    this.setState({ItwingRank});
   }
 
   render() {
