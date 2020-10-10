@@ -96,7 +96,7 @@ const IssueDetail = () => {
                 font-size: 15px;
             }
             .issue-footer{
-                position: absolute;
+                position: sticky;
                 bottom: 0px;
                 width: 100%;
                 display: flex;

@@ -135,10 +135,21 @@ export default function Navbar({setEnableSearch, enableSearch}) {
           <Typography variant="h6" className={classes.title}>
             {screen}
           </Typography>
-          {screen === 'Issues' && <button onClick={() => openAddIssue()}>Add Issue</button>}
+          {screen === 'Issues' && <button className="add-issue-button" onClick={() => openAddIssue()}>Add Issue</button>}
           {screen === 'myHazri' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
         </Toolbar>
       </AppBar>
+      <style>
+        {`
+        .add-issue-button{
+          padding: 5px;
+          border-radius: 10px;
+          font-size: 15px;
+          font-weight: 500;
+          border: 1px solid #fff;
+        }
+        `}
+      </style>
     </div>
   );
 }

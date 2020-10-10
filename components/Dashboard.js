@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -92,8 +92,9 @@ export default function SimplePaper() {
     const classes = useStyles();
     const { account: { getProfileDetails, setPermissions, setItwingRank } } = useContext(AccountContext);
     const router = useRouter();
-    const ItwingRank = JSON.parse(localStorage.getItem('ItwingRank'));
-    const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
+    const [ItwingRank,updateItwingRank] = useState('');
+    const [MemberDetaildet,setMemberDetaildet] = useState('');
+
     useEffect(() => {
         async function getProfile() {
             const response = await getProfileDetails();
@@ -115,10 +116,11 @@ export default function SimplePaper() {
                 setPermissions(response);
             }
         }
+        updateItwingRank(JSON.parse(localStorage.getItem('ItwingRank')));
+        setMemberDetaildet(JSON.parse(localStorage.getItem('MemberDetaildet')));
         getProfile();
         checkLoginStatus();
     }, []);
-    console.log(MemberDetaildet,'MemberDetaildet')
     return (
         <div style={{ marginTop: 20 }}>
             <div className="user-detail-dashboard">

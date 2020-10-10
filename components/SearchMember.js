@@ -132,21 +132,48 @@ export default function SearchMember() {
                 {
                     listSearchedUser && listSearchedUser.map((user) => {
                             return (
-                                <div style={{ marginTop: 20, border: '1px solid #ddd', fontSize: 18, width: '108vw' }} onClick={(e) => onMemberClick(e.target.value,user)}>
+                                <div className="search-user" onClick={(e) => onMemberClick(e.target.value,user)}>
                                     <div className="memberList">
                                         <span>{user.usrname}</span>
                                         <span>{user.blockname}</span>
                                     </div>
-                                    <div className="memberList">
-                                        <span>{user.wmobno}</span>
-                                        <span>{user.usrpriemail}</span>
-                                    </div>
+                                        <p className="mobile-number">{user.wmobno}</p>
+                                        <p className="mobile-number">{user.usrpriemail}</p>
                                 </div>
                             )
                     })
                 }
             </div>
-
+            <style>
+                {`
+                .search-input{
+                    border-radius: 10px;
+                    margin-top: 10px;
+                    font-size: 20px;
+                    border: 1px solid #673ab7;
+                    margin: 3vw 10px;
+                    width: 100%;
+                }
+                .search-user{
+                    margin-top: 20px;
+                    border: 1px solid #ddd;
+                    font-size: 18px;
+                    border-radius: 6px;
+                    padding: 10px;
+                    background-color: rgb(235, 224, 255);
+                    border: 1px solid #673ab7;
+                    width: 90%;
+                    font-weight: 500;
+                    left: 0%;
+                    margin: 10px 19px;
+                }
+                .mobile-number{
+                    text-align: center;
+                    margin: 5px;
+                    font-size: 20px;
+                }
+                `}
+            </style>
         </div>
     );
 }
