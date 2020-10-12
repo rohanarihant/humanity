@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   listRoot: {
-    width: '100%',
+    width: '122%',
     maxWidth: 360,
     padding: 0,
     overflowWrap: 'break-word',

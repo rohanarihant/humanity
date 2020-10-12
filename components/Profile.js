@@ -50,6 +50,9 @@ const Profile = () => {
         const res = auth.uploadImage(userid, authpassword, e.target.files[0], usrid)
         updateShowImageUpload(false);
     }
+    const addDefaultSrc = (ev) => {
+        ev.target.src = './static/img/head.png';
+    }
     return (
         <>
         <NavBar />
@@ -57,7 +60,7 @@ const Profile = () => {
         <div class="container" >
             <div class="profile-card">
                 <div class="card-header">
-                    <img class="profile-image" src={`http://humanity.rubrutech.com/profileimage/${user.usrid}.jpg`} alt="profile image" />
+                    <img class="profile-image" src={`http://humanity.rubrutech.com/profileimage/${user.usrid}.jpg`}  onError={(e) => addDefaultSrc(e)}  alt="profile image" />
                     <img className="profile-image-upload" src={`./static/img/upload-image.png`} alt="profile image" onClick={() => updateShowImageUpload(!showImageUpload)} />
                     {showImageUpload && <input type="file" className="form-control" id="img" name="img" accept="image/*" onChange={(e) => selectImage(user.usrid,e)}/>}
                     <div class="profile-name">{user.usrname}</div>
@@ -85,7 +88,7 @@ const Profile = () => {
                         </svg>
                     </div> */}
                 </div>
-                <MDBContainer style={{marginTop: 30, paddingTop: 0}}>
+                <MDBContainer style={{marginTop: 110, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -113,7 +116,7 @@ const Profile = () => {
                                 <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
                                 D. O. B
         </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.usrdob} className="form-control" />
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={new Date(user.usrdob).toLocaleDateString()} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
                                 Blessed with ITw Parashad
@@ -153,7 +156,7 @@ const Profile = () => {
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
-                <MDBContainer style={{marginTop: 30, paddingTop: 0}}>
+                <MDBContainer style={{marginTop: 200, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -181,8 +184,8 @@ const Profile = () => {
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
-                <hr />
-                <MDBContainer style={{marginTop: 30, paddingTop: 0}}>
+                
+                <MDBContainer style={{marginTop: 150, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -212,8 +215,8 @@ const Profile = () => {
                 </MDBContainer>
             </div>
         </div>))}
-        {screen !== 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => setRoute('editProfile')}>Edit Profile</p>}
-        {screen === 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => deleteMember()}>Delete Profile</p>}
+        {screen !== 'Delete Member' && <p className="iconSwitch" style={{marginTop:100, marginLeft:20, marginRight: 20}} onClick={() => setRoute('editProfile')}>Edit Profile</p>}
+        {screen === 'Delete Member' && <p className="iconSwitch" style={{marginTop:100, marginLeft:20, marginRight: 20}} onClick={() => deleteMember()}>Delete Profile</p>}
     </>
     )
 };

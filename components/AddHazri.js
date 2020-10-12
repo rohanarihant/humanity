@@ -180,7 +180,7 @@ const AddHazri = () => {
             {ashramLocation !== "Select Sewa Location"
             && (<><input type="text" class="form-control" placeholder="Sewa No of Days" style={{margin: '20px 0px'}} value={sewaNoDays} onChange={(e) => setSewaNoDays(e.target.value)}/>
             <p className="error">{sewaNoDaysError}</p></>)}
-            <button class="iconSwitch" style={{width: 200}} onClick={() => saveSewa(ashramLocation)}>Save</button>
+            <button class="iconSwitch" style={{width: 200}} onClick={() => saveSewa("SMG Sewa")}>Save</button>
           </div>
       </TabPanel>
       <TabPanel value={value} index={1}>

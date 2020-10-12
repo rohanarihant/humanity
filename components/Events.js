@@ -118,8 +118,8 @@ export default function Events() {
     // console.log(image,'image')
     return image;
   }
-  const onError = (e) => {
-    console.log(e.target.src,'dsaf')
+  const addDefaultSrc = (ev) => {
+    ev.target.src = './static/img/head.png';
   }
   return (
     <div className={classes.root}>
@@ -140,7 +140,7 @@ export default function Events() {
         if(new Date() - new Date(event.ToDate) < 0){
           return(<div className="event-container">
           <div className="event-title">
-            <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg` || "/static/img/head.png"} className="event-user-image" onError={onError} />
+            <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
               <p className="event-text">{event.Title}</p>
               <p className="event-schedule">{event.FromDate} - {event.ToDate}</p>
@@ -158,7 +158,7 @@ export default function Events() {
         if(new Date() - new Date(event.ToDate) > 0){
           return(<div className="event-container">
           <div className="event-title">
-            <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg` || "/static/img/head.png"} className="event-user-image" onError={onError} />
+            <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
               <p className="event-text">{event.Title}</p>
               <p className="event-schedule">From {event.FromDate} to {event.ToDate}</p>

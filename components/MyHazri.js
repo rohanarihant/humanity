@@ -96,7 +96,9 @@ const MyHazri = () => {
           setTotalHazri(response.hazri);
           toggleShowLoader(false);
         }else{
+          setUserHazri([]);
           setResponseMsg(response.message);
+          setTotalHazri(response.hazri);
           toggleShowLoader(false);
         }
     }
@@ -115,8 +117,8 @@ const MyHazri = () => {
       const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
       const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
       const res = await user.deleteHazri(userid, authpassword, power, gender, sewaid);
+      res.success && getMyHazri();
     }
-    console.log(userHazri,'userHazri')
     return (
         <>
         <NavBar setEnableSearch={setEnableSearch} enableSearch={enableSearch} />
@@ -131,6 +133,7 @@ const MyHazri = () => {
             <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addHazri')} />
         </div>
         <div>
+        {userHazri && userHazri.length > 0 &&
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
@@ -179,7 +182,7 @@ const MyHazri = () => {
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-        </Paper>
+        </Paper>}
         <div className="total-hazri">{responseMsg}</div>
         </div>
        
