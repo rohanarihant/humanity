@@ -26,6 +26,7 @@ import EditProfile from '../components/editProfile';
 import Howtowork from '../components/howtowork';
 import UserProfile from '../components/UserProfile';
 import AddIssue from '../components/addIssue';
+import PointList from '../components/addSewaPointList';
 
 const Index = () => {
 	const { account : { route, showLoader }} = useContext(AccountContext);
@@ -77,6 +78,8 @@ const Index = () => {
 			return <UserProfile />;
 			case 'addIssue':
 			return <AddIssue />;
+			case 'addSewaPointList':
+			return <PointList />;
 			default:
 			return <HomePage />;
 		}

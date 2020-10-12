@@ -30,6 +30,7 @@ export class AccountProvider extends React.Component {
       educationList: [],
       professionList: [],
       userPermissions: {},
+      sewaPointList: [],
     };
     this.state = this.defaultState;
 
@@ -51,6 +52,7 @@ export class AccountProvider extends React.Component {
       getEduProList: this.getEduProList.bind(this),
       setPermissions: this.setPermissions.bind(this),
       setItwingRank: this.setItwingRank.bind(this),
+      setSewaPointList: this.setSewaPointList.bind(this),
     };
   }
   async componentDidMount(){
@@ -120,6 +122,9 @@ export class AccountProvider extends React.Component {
   }
   async setItwingRank(ItwingRank){
     this.setState({ItwingRank});
+  }
+  async setSewaPointList(sewaPointList){
+    this.setState({sewaPointList});
   }
 
   render() {

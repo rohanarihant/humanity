@@ -174,7 +174,7 @@ const AddHazri = () => {
             <select class="form-control" value={ashramLocation} onChange={(e) => setAshramLocation(e.target.value)}>
                 <option>Select Sewa Location</option>
                 <option>Ashram</option>
-                <option>out of Ashram</option>
+                <option>At other Place</option>
             </select>
             <p className="error">{ashramLocationError}</p>
             {ashramLocation !== "Select Sewa Location"

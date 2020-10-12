@@ -41,7 +41,7 @@ export default function Sewa() {
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
     const [pointsList, updatePointsList] = React.useState({ pointlist : [] });
     const [enableButton, updateEnableButton] = React.useState(false);
-    const {account: { setRoute, toggleShowLoader }} = useContext(AccountContext);
+    const {account: { setRoute, toggleShowLoader, setSewaPointList }} = useContext(AccountContext);
 
     const handleClick = () => {
     };
@@ -76,6 +76,7 @@ export default function Sewa() {
                 }
             });
             setSocialMediaDetail(response);
+            setSewaPointList(response);
             setSocialMediaList(platformList);
         }
         getOfficialHandler();
@@ -83,6 +84,7 @@ export default function Sewa() {
 
     const addSewa = async() => {
         toggleShowLoader(true);
+        const { pointlist } = pointsList;
         const userId = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
         const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'))[0];
@@ -92,9 +94,14 @@ export default function Sewa() {
         const distidd = MemberDetaildet && MemberDetaildet.usrdstid;
         const blockid = MemberDetaildet && MemberDetaildet.usrblkid;
         const postdate = new Date().toLocaleDateString();
-        const res = await user.addSewa(userId, authpassword, gender, JSON.stringify(pointsList), countryid, stateid, distidd, blockid, postdate);
-        res.success && toast.success('Sewa added successfully');
-        res.success && setRoute('home')
+        // console.log(pointlist,'pointlist')
+        const totalPoints = pointlist.reduce((accc, obj) => { return accc + (Number(obj.point_entry) * Number(obj.point_point))}, 0);
+        var conf = confirm(`Confirm Total Sewa Points:- ${totalPoints}`);
+        if(conf){
+            const res = await user.addSewa(userId, authpassword, gender, JSON.stringify(pointsList), countryid, stateid, distidd, blockid, postdate);
+            res.success && toast.success('Sewa added successfully');
+            res.success && setRoute('home')
+        }
         toggleShowLoader(false);
     }
 
@@ -124,7 +131,7 @@ export default function Sewa() {
         <div className="official-info">
             <NavBar />
             <img src="http://humanitydemo.rubrutech.com/uploads/instruction.jpg" className="add-sewa-instruction" />
-            <p className="add-sewa-date">Date: {new Date().toLocaleDateString()}</p>
+            <p className="add-sewa-date">Date: {new Date().toLocaleDateString()}<p className="add-sewa-point-list" onClick={() => setRoute('addSewaPointList')}>Point List</p></p>
             <Grid container direction="column" alignItems="center" className={classes.root}>
                 <Grid item xs={12}>
                     <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
@@ -183,7 +190,7 @@ export default function Sewa() {
                                                 {detail.sewacategory_title}
                                             </div>
                                             <div className="sewa-category">
-                                                <p>{detail.sewacategory_point}</p>
+                                                {/* <p>{detail.sewacategory_point}</p> */}
                                                 <input type="text" style={{ width: 100 }} className="add-sewa-input" onChange={(e) => updateField(e.target.value,detail.sewacategory_id, detail.sewacategory_point)} />
                                             </div>
                                         </div>
@@ -205,11 +212,17 @@ export default function Sewa() {
                 .add-sewa-date{
                     color: rgb(72, 40, 128);
                     font-size: 17px;
-                    text-align: center;
+                    text-align: left;
                     font-weight: 600;
                 }
                 .iconSwitch{
                     margin:10px;
+                }
+                .add-sewa-point-list{
+                    text-align: right;
+                    margin-right: 10px;
+                    position: relative;
+                    bottom: 25px;
                 }
                 `}
             </style>

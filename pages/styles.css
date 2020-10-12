@@ -591,3 +591,8 @@
   .btn-primary{
     padding: 5px 120px;
   }
+  .profile-image-upload{
+    height: 40px;
+    margin-left: 0px;
+    margin-top: -20px;
+  }

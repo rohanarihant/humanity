@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
     overflowWrap: 'break-word',
     backgroundColor: theme.palette.background.paper,
   },
+  container: {
+    width: '123vw'
+  }
 }));
 
 export default function Escalation() {
@@ -107,11 +110,13 @@ export default function Escalation() {
     (!managementMem && !!localStorage.getItem('userId')) && getMyTeam();
     getMyTeam();
   }, []);
-  console.log(stateMem,'stateMem')
+  const addDefaultSrc = (ev) => {
+    ev.target.src = './static/img/head.png';
+  }
   return (
     <div className={classes.root}>
       <NavBar />
-      <AppBar position="static">
+      <AppBar position="static" className={classes.container}>
         <Tabs
           variant="fullWidth"
           value={value}
@@ -127,7 +132,7 @@ export default function Escalation() {
         <List className={classes.listRoot}>
           {stateMem && stateMem.map((mem) => (
             <div className="team-container">
-              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} className="profile-image" />
+              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
                 <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
@@ -144,7 +149,7 @@ export default function Escalation() {
         <List className={classes.listRoot}>
           {nationalMem && nationalMem.map((mem) => (
             <div className="team-container">
-              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} className="profile-image" />
+              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
                 <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrid}</a>
@@ -161,7 +166,7 @@ export default function Escalation() {
         <List className={classes.listRoot}>
           {managementMem && managementMem.map((mem) => (
             <div className="team-container">
-              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} className="profile-image" />
+              <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
                 <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
@@ -176,12 +181,15 @@ export default function Escalation() {
       </TabPanel>
       <style jsx>
         {`
+        .main-container{
+          width: 122vw;
+        }
         .team-container{
           display: flex;
         }
         .profile-image{
           height: 90px;
-          width: 56px;
+          width: 90px;
           border-radius: 20px;
           margin: 4px;
         }

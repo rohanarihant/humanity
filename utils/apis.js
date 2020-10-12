@@ -127,6 +127,10 @@ async function fetchData({
         endpoint: 'api/change_password/',
         data: { userid, authpassword, oldpwd, newpwd },
       }),
+      uploadImage: async (userid, authpassword, image, name) => postData({
+        endpoint: 'uploadprofile/upload/',
+        data: { userid, authpassword, image, name },
+      }),
   };
   export const commonMethods = {
       getAllStates: async (userid, authpassword, power, countryid, stateid) => postData({

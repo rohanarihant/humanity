@@ -176,6 +176,13 @@ export default function Escalation() {
             </ListItem>
         </List>
       </TabPanel>
+      <style jsx>
+        {`
+        .MuiAppBar-positionStatic{
+          width: 122vw;
+        }
+        `}
+      </style>
     </div>
   );
 }
