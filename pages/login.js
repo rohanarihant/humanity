@@ -9,7 +9,7 @@ const LoginRegister = () => {
   const [emailError, updateEmailError] = useState('');
   const [password, updatePassword] = useState('');
   const [errorPassword, updateErrorPassword] = useState('');
-  const { account: { getLogin, updateLoginStatus, saveUserDetailLogin } } = useContext(AccountContext);
+  const { account: { getLogin, updateLoginStatus, saveUserDetailLogin, toggleShowLoader, showLoader } } = useContext(AccountContext);
   const router = useRouter();
   const checkForm = async () => {
     if (!email) {
@@ -24,13 +24,16 @@ const LoginRegister = () => {
     }
     if (email !== '' && emailError === '' && password !== '' && errorPassword === '') {
       try {
+        toggleShowLoader(true);
         const response = await getLogin(email, password);
         if (response.success) {
-          toast.success("You are logged in successfully");
+          // toast.success("You are logged in successfully");
           updateLoginStatus(true);
           saveUserDetailLogin(response);
           router.push('/');
+          toggleShowLoader(false);
         } else {
+          toggleShowLoader(false);
           toast.error(response && response.message);
         }
       } catch (err) {
@@ -44,17 +47,17 @@ const LoginRegister = () => {
     }
   },[]);
   const moveToSignUp = () => {
-    console.log('dsfkjlahjkh')
     router.push('/signup');
   }
   return (
-    <div class="container" id="myApp">
-      <section class="section login" v-class="flip : signup">
-        <h2>Login</h2>
+    <div class="container-login" id="myApp">
+      {showLoader && <img className="loader" src="./static/img/loader.svg" />}
+      <section class="section login" v-class="flip : signup" style={{opacity : showLoader ? 0.2 : 1 }}>
+        <h2>Welcome To Humanity</h2>
         <form action="#">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" id="text" placeholder="Enter Email Address" value={email} onChange={(e) => updateEmail(e.target.value)} class="form-control" />
+            <input type="email" id="text" placeholder="Enter Email Address" value={email} onChange={(e) => updateEmail(e.target.value)} class="form-control" />
             <p class="error">{emailError}</p>
           </div>
 

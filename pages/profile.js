@@ -19,6 +19,9 @@ const Profile = () => {
         }
         (!userProfileData && !!localStorage.getItem('userId')) && getProfile();
     }, []);
+    const addDefaultSrc = (ev) => {
+        ev.target.src = './static/img/head.png';
+    }
     return (
         <>
         <NavBar />
@@ -26,7 +29,7 @@ const Profile = () => {
         <div class="container" >
             <div class="profile-card">
                 <div class="card-header">
-                    <img class="profile-image" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="profile image" />
+                    <img class="profile-image" src={`http://humanity.rubrutech.com/profileimage/${user.usrids}.jpg`} onError={(e) => addDefaultSrc(e)} alt="profile image" />
                     <div class="profile-name">{user.usrname}<span class="dob">({user.usrdob && user.usrdob.split(' ')[0]})</span></div>
                     <div class="profile-role">Team Member ({user.usrid})</div>
                     <div class="profile-location">

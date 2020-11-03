@@ -135,7 +135,7 @@ export default function Escalation() {
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
-                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
+                <span><img className="contact-phone" src="./static/img/phone1.png" /><a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a></span>
               </div>
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.statename}</p>
@@ -152,7 +152,7 @@ export default function Escalation() {
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
-                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrid}</a>
+                <span><img className="contact-phone" src="./static/img/phone1.png" /><a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrid}</a></span>
               </div>
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.statename}</p>
@@ -169,7 +169,7 @@ export default function Escalation() {
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
-                <a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a>
+                <span><img className="contact-phone" src="./static/img/phone1.png" /><a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a></span>
               </div>
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.statename}</p>
@@ -200,6 +200,10 @@ export default function Escalation() {
         }
         .team-user-detail{
           margin-bottom: 0.5rem;
+        }
+        .contact-phone{
+          height: 15px;
+          width: 15px;
         }
         `}
       </style>

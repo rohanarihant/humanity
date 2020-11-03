@@ -23,7 +23,7 @@ const skillsList = [
 // 'Businessman', 'Care Taker', 'Carpenter', 'Chartered Accountant', 'Chemist', 'Civil Engineer', 'Cloth Die (kapade di chappai)',
 // 'Cobbler', 'Combine Operator', 'Computer-Operator', 'Conductor', 'Construction', 'Contractor', 'Cook', 'D.J Sound', 'Dairy Farm',
 // 'Dentor', 'Driver', 'Electrician', 'Engineer', 'Ex-man'];
-const devices = [{name: 'Desktop', id: 1},{name: 'Laptop', id: 2},{name: 'Smart Phone', id: 3}]
+const devices = [{name: 'Laptop-Windows', id: 1},{name: 'Laptop-Mac Book', id: 2},{name: 'Mobile-Android', id: 3},{name: 'Mobile-iOS', id: 4},{name: 'Tablet-Android', id: 5},{name: 'Tablet-iOS', id: 6} ]
 // const educationList = ['Class 1st','Class 2nd','Class 3rd','Class 4th','Class 5th','Class 6th','Class 7th','Class 8th','Class 9th','Class 10th','Class 11th','Class 12th',
 // 'B.Arch - Bechelor of Architecure', 'B.A - Bechelore of Arts', 'BAMS - Bechelore of Ayurvedic Medicine & Surgery', 'B.B.A - Bechelore of Business Administration', 'B.Com - Bechelore of Commerce',
 // 'B.C.A - Bechelore of Computer Application', 'B.D.S - Bechelore of Dental Surgery', 'B.Des/B.D', 'B.Ed', 'B.E/B.Tech', 'BFA/BVA', 'B.F.Sc/B.Sc','B.H.M.S','L.L.B',
@@ -102,7 +102,6 @@ class Register extends React.Component{
     }
 
     async componentDidMount(){
-      console.log(JSON.parse(localStorage.getItem('educationList')),'123123123')
       this.setState({educationList : JSON.parse(localStorage.getItem('educationList'))});
       this.setState({professionList : JSON.parse(localStorage.getItem('professionList'))});
         // if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
@@ -293,14 +292,13 @@ class Register extends React.Component{
             confirmPassword, confirmPasswordError, mobileNo, mobileNoError, telegramMobileNo, telegramMobileNoError,
             twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, educationList, professionList, twitterHandleError,
             profession, educationError, block, blockError, blocksList, alternateEmailError, professionError } = this.state;
-            console.log(educationList, professionList,'educationList, professionList')
     return(
         <div class="container" id="myApp">
   <section class="section login" v-class="flip : signup">
       {pageNo !== 0 && <img src="./static/img/back.png" class="back-button" onClick={this.moveBack} />}
     <h2>SignUp</h2>
     <form action="#">
-      {pageNo === 0 &&
+      {pageNo === 1 &&
       <>
       <div class="form-group">
       <label for="text">Name</label><span class="asterisk">*</span>
@@ -308,7 +306,7 @@ class Register extends React.Component{
       <p class="error">{nameError}</p>
     </div>
     <div class="form-group">
-      <label for="text">Father Name</label>
+      <label for="text">Father's Name</label>
       <input type="text" id="text" name="fatherName" placeholder="First Name" value={fatherName} onChange={(e) => this.updateField(e)} class="form-control" />
       <p class="error">{fatherNameError}</p>
     </div>
@@ -346,7 +344,7 @@ class Register extends React.Component{
       <p class="error">{dateofBirthError}</p>
     </div>
     </>}
-    {pageNo === 1 &&
+    {pageNo === 2 &&
     <>
       <div class="form-group">
         <label for="email">Email</label><span class="asterisk">*</span>
@@ -432,7 +430,7 @@ class Register extends React.Component{
         </select>
       </div>
       <div class="form-group">
-        <label for="email">Device you can use for Sewa?</label>
+        <label for="email">Devices you can use for Sewa?</label>
         {/* <select class="form-control" value={device} onChange={(e) => this.updateField(e)}>
           <option>Yes</option>
           <option>No</option>

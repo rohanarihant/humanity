@@ -41,9 +41,10 @@ const useStyles = makeStyles((theme) => ({
 
 function FormRow() {
     const classes = useStyles();
-    const { account: { setRoute } } = useContext(AccountContext);
+    const { account: { setRoute, updateSelectedScreen } } = useContext(AccountContext);
     const openRoute = (route) => {
         setRoute(`${route}`);
+        updateSelectedScreen(`${route === 'sewaResults' ? 'Sewa Results' : 'My Hazri'}`);
     }
 
     return (
@@ -65,10 +66,11 @@ function FormRow() {
 }
 function FormRowSecond() {
     const classes = useStyles();
-    const { account: { setRoute } } = useContext(AccountContext);
+    const { account: { setRoute, updateSelectedScreen } } = useContext(AccountContext);
 
     const openRoute = (route) => {
         setRoute(`${route}`);
+        updateSelectedScreen(`${route === 'sewa' ? 'Sewa' : 'Events'}`);
     }
     return (
         <React.Fragment>

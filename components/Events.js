@@ -121,6 +121,7 @@ export default function Events() {
   const addDefaultSrc = (ev) => {
     ev.target.src = './static/img/head.png';
   }
+  console.log(eventsList,'eventsList')
   return (
     <div className={classes.root}>
       <NavBar />

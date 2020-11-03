@@ -84,7 +84,6 @@ const Index = () => {
 			return <HomePage />;
 		}
 	}
-
 	return(
 	<React.Fragment>
 		{showLoader && <img className="loader" src="./static/img/loader.svg" />}

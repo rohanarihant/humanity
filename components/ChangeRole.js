@@ -37,6 +37,9 @@ const Profile = () => {
         }
         getUserRoles();
     },[]);
+    const addDefaultSrc = (ev) => {
+        ev.target.src = './static/img/head.png';
+    }
     return (
         <>
         <NavBar />
@@ -44,7 +47,7 @@ const Profile = () => {
         <div class="container" >
             <div class="profile-card">
                 <div class="card-header">
-                    <img class="profile-image" src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="profile image" />
+                    <img class="profile-image" src={`http://humanity.rubrutech.com/profileimage/${user.usrid}.jpg`} onError={(e) => addDefaultSrc(e)}    alt="profile image" />
                     <div class="profile-name">{user.usrname}</div>
                     <div class="profile-role">{user.categoryname}</div>
                     <div class="profile-role">{user.usrpriemail}</div>

@@ -64,9 +64,9 @@ export class AccountProvider extends React.Component {
     await this.getEduProList();
   }
   async getEduProList(){
+    console.log('getEduProList')
     const eduList = await user.getEducationList();
     const proList = await user.getProfessionList();
-    console.log(eduList,'eduList')
     localStorage.setItem('educationList', JSON.stringify(eduList.educations));
     localStorage.setItem('professionList', JSON.stringify(proList.profession));
     this.setState({educationList : eduList.educations });

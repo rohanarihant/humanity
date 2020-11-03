@@ -66,10 +66,10 @@ const Profile = () => {
                     <div class="profile-name">{user.usrname}</div>
                     <div class="profile-role">{ItwingRank} ({user.usrid})</div>
                     <div class="profile-location">
-                       Insan No :- {user.usrinsnum}
+                        Primary Email : {user.usrpriemail}
                     </div>
                     <div class="profile-location">
-                       Devices :- {user.usrown}
+                        Mobile No. : {user.usrmob}
                     </div>
                     {/* <div class="profile-location">
                         <svg class="icon white" viewBox="0 0 20 20">
@@ -161,20 +161,15 @@ const Profile = () => {
                         <MDBCol md="6">
                             <form>
                                 <p className="h4 text-center">Contact Information</p>
-                                <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
-                                Mobile No.
-        </label>
-                                <input type="text" id="defaultFormRegisterNameEx" value={user.usrmob} className="form-control" />
-                                <br />
                                 <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
                                 Telegram No.
         </label>
                                 <input type="email" id="defaultFormRegisterEmailEx" value={user.wmobno} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
-                                Primary Email Address
+                                Insan No :-
         </label>
-                                <input type="email" id="defaultFormRegisterConfirmEx" value={user.usrpriemail} className="form-control" />
+                                <input type="email" id="defaultFormRegisterConfirmEx" value={user.usrinsnum} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
                                 Twitter Handle
@@ -205,10 +200,6 @@ const Profile = () => {
         </label>
                                 <input type="email" id="defaultFormRegisterConfirmEx" value={user.skillother} className="form-control" />
                                 <br />
-                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                                    Role in IT Wing
-        </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value="Team Member" className="form-control" />
                             </form>
                         </MDBCol>
                     </MDBRow>

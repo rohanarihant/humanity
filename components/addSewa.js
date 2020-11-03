@@ -126,12 +126,15 @@ export default function Sewa() {
         updatePointsList(pointsList);
         updateEnableButton(true);
     }
-
+    const showPoint = (e) => {
+        e.stopPropagation();
+        setRoute('addSewaPointList')
+    }
     return (
         <div className="official-info">
             <NavBar />
             <img src="http://humanitydemo.rubrutech.com/uploads/instruction.jpg" className="add-sewa-instruction" />
-            <p className="add-sewa-date">Date: {new Date().toLocaleDateString()}<p className="add-sewa-point-list" onClick={() => setRoute('addSewaPointList')}>Point List</p></p>
+            <p className="add-sewa-date">Date: {new Date().toLocaleDateString()}<p className="add-sewa-point-list" onClick={(e) => showPoint(e)}>Point List</p></p>
             <Grid container direction="column" alignItems="center" className={classes.root}>
                 <Grid item xs={12}>
                     <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
