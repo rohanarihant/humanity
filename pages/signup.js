@@ -134,7 +134,7 @@ class Register extends React.Component{
         const pageNo0 = ['name', 'fatherName', 'gender', 'address', 'insanNo', 'dateofBirth']
         const pageNo1 = ['email', 'alternateEmail', 'password', 'confirmPassword', 'mobileNo', 'telegramMobileNo', 'twitterHandle']
         const pageNo2 = ['itWingPrashad', 'education', 'profession', 'sewaSamiti']
-        const selectedPage = pageNo === 0 ? pageNo0 : pageNo === 1 ? pageNo1 : pageNo === 2 ? pageNo2 : null;
+        const selectedPage = pageNo === 0 ? pageNo1 : pageNo === 1 ? pageNo0 : pageNo === 2 ? pageNo2 : null;
         const selectedCheck = (page) => pageNo === 0 ? (page !== 'gender' && page !== 'insanNo') : pageNo === 1 ?
         (page !== 'alternateEmail' && page !== 'bloodGroup') : pageNo === 2 ? (page !== 'device' && page !== 'skills') : null;
         if(pageNo <= 2 && selectedPage){
@@ -340,11 +340,11 @@ class Register extends React.Component{
     </div>
     <div class="form-group">
       <label for="text">Date of Birth</label><span class="asterisk">*</span>
-      <input type="date" id="text" placeholder="Date Of Birth" name="dateofBirth" value={dateofBirth} onChange={(e) => this.updateField(e)} class="form-control" />
+      <input type="date" id="text" max="2003-10-11" placeholder="Date Of Birth" name="dateofBirth" value={dateofBirth} onChange={(e) => this.updateField(e)} class="form-control" />
       <p class="error">{dateofBirthError}</p>
     </div>
     </>}
-    {pageNo === 2 &&
+    {pageNo === 0 &&
     <>
       <div class="form-group">
         <label for="email">Email</label><span class="asterisk">*</span>

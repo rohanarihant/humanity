@@ -134,7 +134,8 @@ export default function Sewa() {
         <div className="official-info">
             <NavBar />
             <img src="http://humanitydemo.rubrutech.com/uploads/instruction.jpg" className="add-sewa-instruction" />
-            <p className="add-sewa-date">Date: {new Date().toLocaleDateString()}<p className="add-sewa-point-list" onClick={(e) => showPoint(e)}>Point List</p></p>
+            <div className="sewa-anchor"><p className="add-sewa-date">Date: {new Date().toLocaleDateString()}</p>
+            <p className="add-sewa-point-list" onClick={(e) => showPoint(e)}>Point List</p></div>
             <Grid container direction="column" alignItems="center" className={classes.root}>
                 <Grid item xs={12}>
                     <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
@@ -203,7 +204,8 @@ export default function Sewa() {
                         }
                     })
                 }
-                {enableButton && <p className="iconSwitch" style={{margin: "20px 10px 20px"}} onClick={() => addSewa()}>Add Sewa</p>}
+                {enableButton && <p className="review-note">Review बटन दबाने के बाद आपको pop-up स्क्रीन पर आपको टोटल पॉइंट्स दिखायी देंगे. उस pop-up स्क्रीन पर Submit का बटन दबाने पर ही आपका डाटा सबमिट होगा जी.</p>}
+                {enableButton && <p className="iconSwitch" style={{margin: "20px 10px 20px"}} onClick={() => addSewa()}>Review</p>}
             </div>
             <style>
                 {`
@@ -222,10 +224,18 @@ export default function Sewa() {
                     margin:10px;
                 }
                 .add-sewa-point-list{
-                    text-align: right;
-                    margin-right: 10px;
-                    position: relative;
-                    bottom: 25px;
+                    font-size: 17px;
+                    font-weight: 600;
+                }
+                .review-note{
+                    font-size: 17px;
+                    padding: 0px 15px;
+                    font-weight: 500;
+                }
+                .sewa-anchor{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0px 15px;
                 }
                 `}
             </style>

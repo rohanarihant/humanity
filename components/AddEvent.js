@@ -62,7 +62,8 @@ const AddMyEvent = () => {
   const [districtMembers, updateDistrictMembers] = useState(false);
   const [blockMembers, updateBlockMembers] = useState(false);
   const [teamMembers, updateTeamMembers] = useState(false);
-
+  const MinDate = new Date().toISOString().slice(0,10)
+  
   const { account: { getLogin, updateLoginStatus, saveUserDetailLogin, setRoute } } = useContext(AccountContext);
   const router = useRouter();
 
@@ -107,12 +108,12 @@ const AddMyEvent = () => {
         </div>
         <div class="form-group">
             <label>Start Date</label>
-            <input type="date" id="text" placeholder="Start Date" value={startDate} onChange={(e) => updateStartDate(e.target.value)} class="form-control-event" />
+            <input type="date" id="text" placeholder="Start Date" min={MinDate} value={startDate} onChange={(e) => updateStartDate(e.target.value)} class="form-control-event" />
             {/* <p class="error">{startDateError}</p> */}
         </div>
         <div class="form-group">
             <label>End Date</label>
-            <input type="date" id="text" placeholder="End Date" value={endDate} onChange={(e) => updateEndDate(e.target.value)} class="form-control-event" />
+            <input type="date" id="text" placeholder="End Date" min={MinDate} value={endDate} onChange={(e) => updateEndDate(e.target.value)} class="form-control-event" />
             {/* <p class="error">{startDateError}</p> */}
         </div>
         <div class="form-group">
