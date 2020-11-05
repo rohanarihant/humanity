@@ -7,6 +7,8 @@ import Assessment from '@material-ui/icons/Assessment';
 import DateRange from '@material-ui/icons/DateRange';
 import EventNote from '@material-ui/icons/EventNote';
 import AddCircle from '@material-ui/icons/AddCircle';
+import Search from '@material-ui/icons/Search';
+import Book from '@material-ui/icons/Book';
 import Link from '@material-ui/core/Link';
 import AccountContext from '../contexts/accountContext';
 import {auth} from '../utils/apis';
@@ -89,6 +91,31 @@ function FormRowSecond() {
         </React.Fragment>
     );
 }
+function FormRowThird() {
+    const classes = useStyles();
+    const { account: { setRoute, updateSelectedScreen } } = useContext(AccountContext);
+
+    const openRoute = (route) => {
+        setRoute(`${route}`);
+        updateSelectedScreen(`${route === 'escalation' ? 'escalation' : 'searchMember'}`);
+    }
+    return (
+        <React.Fragment>
+            <Grid item xs={6}>
+                <Paper className={classes.paper}>
+                    <Search className={classes.icons} />
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => openRoute('searchMember')}>Search Member</Typography>
+                </Paper>
+            </Grid>
+            <Grid item xs={6}>
+                <Paper className={classes.paper}>
+                    <Book className={classes.icons} />
+                    <Typography component="h3" variant="h5" align="center" className={classes.text} onClick={() => openRoute('escalation')}>Escalation Matrix</Typography>
+                </Paper>
+            </Grid>
+        </React.Fragment>
+    );
+}
 
 export default function SimplePaper() {
     const classes = useStyles();
@@ -136,9 +163,9 @@ export default function SimplePaper() {
                 <Grid container item xs={12} spacing={3}>
                     <FormRowSecond />
                 </Grid>
-                {/* <Grid container item xs={12} spacing={3}>
-                    <FormRow />
-                </Grid> */}
+                <Grid container item xs={12} spacing={3}>
+                    <FormRowThird />
+                </Grid>
             </Grid>
             <Grid container justify="center">
                 <Link

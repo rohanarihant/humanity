@@ -29,8 +29,6 @@ const PointList = () => {
             <div style={{ marginTop: 60 }}>
                 {
                     sewaPointList && sewaPointList.map((detail, index) => {
-                        console.log(detail.sewacategory_platform, 'detail.sewacategory_platform')
-                        // if (detail.sewacategory_platform === '') {
                         return (
                             <div style={{ marginTop: 20, backgroundImage: `${getGradientColor(detail.sewacategory_platform)}` }} id={`profile${index}`} class="profile">
                                 <div >
@@ -46,7 +44,6 @@ const PointList = () => {
                                 </div>
                             </div>
                         )
-                        // }
                     })
                 }
             </div>

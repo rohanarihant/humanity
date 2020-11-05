@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import NavBar from './NavBarBack';
 import dynamic from 'next/dynamic';
 import { toast } from 'react-toastify';
@@ -35,9 +35,10 @@ class EditProfile extends React.Component{
         const MemberDetaildet = localStorage.getItem('MemberDetaildet') && JSON.parse(localStorage.getItem('MemberDetaildet'))[0];
         const memberDevices = MemberDetaildet && MemberDetaildet.usrown.split(',');
         const memberSkills = MemberDetaildet && MemberDetaildet.skillother.split(',');
-        const {account : {educationList, professionList}} = this.props;
+        const {account : {educationList, professionList, toggleShowLoader}} = this.props;
         const selectedEdu = educationList && educationList.find(e => e.qualificationid === MemberDetaildet.usreduid);
         const selectedPro = professionList && professionList.find(e => e.professionid === MemberDetaildet.usrprofessionid);
+
         this.state = {
             mobileNumber: MemberDetaildet.usrmob || '',
             skills: skillsLists.filter(d => memberSkills.includes(d.name)),
@@ -46,13 +47,14 @@ class EditProfile extends React.Component{
             devicesList:'',
             telegramNumber: MemberDetaildet.wmobno || '',
             otherEmail:'',
+            facebookLink: MemberDetaildet.facebook || '',
+            instagramLink: MemberDetaildet.instagram || '',
             twitterHandle: MemberDetaildet.twhandle,
             education: (selectedEdu && selectedEdu.qualificationid) || 0,
             profession: (selectedPro && selectedPro.professionid) || 0,
         }
     }
     onSelectSkill(selectedList) {
-        console.log(selectedList,'selectedList')
         this.setState({skillsList : selectedList});
     }
     
@@ -60,7 +62,6 @@ class EditProfile extends React.Component{
         this.setState({skillsList : selectedList});
     }
     onSelectDevice(selectedList) {
-        console.log(selectedList,'selectedList')
         this.setState({devicesList : selectedList});
     }
     
@@ -74,7 +75,10 @@ class EditProfile extends React.Component{
     }
     async updateProfile(){
         const {mobileNumber, telegramNumber, otherEmail, twitterHandle, education, profession, skillsLists, devices,
-        mobileNumberError, telegramNumberError, twitterHandleError, educationError, professionError, skills, devicesList} = this.state;
+        mobileNumberError, telegramNumberError, twitterHandleError, educationError, professionError, skills,
+        devicesList, facebookLink, instagramLink} = this.state;
+        const {account : {toggleShowLoader}} = this.props;
+
         const {account : {setRoute}} = this.props;
         const fileds = ['mobileNumber', 'telegramNumber', 'twitterHandle', 'education', 'profession', 'skillsLists', 'devices'];
         fileds.map((field) => {
@@ -99,19 +103,30 @@ class EditProfile extends React.Component{
         if(mobileNumber !== '' && telegramNumber !== '' && twitterHandle !== '' && education !== '' && profession !== ''
             && mobileNumberError  === '' && telegramNumberError === '' && twitterHandleError === ''
             && educationError === '' && professionError === ''){
+                toggleShowLoader(true);
                 const userid = localStorage.getItem('userId');
                 const authpassword = localStorage.getItem('authpassword');
                 const res = await auth.updateUser(userid, authpassword, mobileNumber, telegramNumber,
                     otherEmail, twitterHandle, education, profession, skills && skills.map(({name}) => name).join(','), devices && devices.map(({name}) => name).join(','), '');
                 res.success && toast.success('User Profile updated successfully!');
                 res.success && setRoute('home');
+                toggleShowLoader(false);
         }
+        if(facebookLink !== '' && instagramLink !== '' ){
+            toggleShowLoader(true);
+            const userid = localStorage.getItem('userId');
+            const authpassword = localStorage.getItem('authpassword');
+            const res = await auth.uploadSocialMedia(userid, authpassword, facebookLink, instagramLink, twitterHandle);
+            res.success && toast.success('User Profile updated successfully!');
+            res.success && setRoute('home');
+            toggleShowLoader(false);
+    }
         }
     render(){
         const {mobileNumber, telegramNumber, otherEmail, twitterHandle, education, profession, skills, device,
-            mobileNumberError, telegramNumberError, otherEmailError, twitterHandleError, educationError, professionError} = this.state;
+            mobileNumberError, telegramNumberError, otherEmailError, twitterHandleError, educationError,
+            professionError, facebookLink, instagramLink} = this.state;
         const {account : { educationList, professionList}} = this.props;
-        console.log(this.state.devicesList,'device');
     return (
         <div>
             <NavBar />
@@ -175,6 +190,14 @@ class EditProfile extends React.Component{
                                     onRemove={() => this.onRemoveDevice()} // Function will trigger on remove event
                                     displayValue="name" // Property name to display in the dropdown options
                                 />
+                            </div>
+                            <div class="form-group">
+                                <label for="text">Facebook Link</label>
+                                <input type="text" id="text" name="facebookLink" placeholder="Facebook Link" value={facebookLink} onChange={(e) => this.updateField(e)} class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="text">Instagram Link</label>
+                                <input type="text" id="text" name="instagramLink" placeholder="Twitter Handle" value={instagramLink} onChange={(e) => this.updateField(e)} class="form-control" />
                             </div>
                             <p class="iconSwitch" onClick={() => this.updateProfile()}>Update Profile</p>
                         </>

@@ -133,10 +133,10 @@ export default function Sewa() {
     return (
         <div className="official-info">
             <NavBar />
-            <img src="http://humanitydemo.rubrutech.com/uploads/instruction.jpg" className="add-sewa-instruction" />
+            <img src="./static/img/add-sewa-instruction.jpg" className="add-sewa-instruction" />
             <div className="sewa-anchor"><p className="add-sewa-date">Date: {new Date().toLocaleDateString()}</p>
             <p className="add-sewa-point-list" onClick={(e) => showPoint(e)}>Point List</p></div>
-            <Grid container direction="column" alignItems="center" className={classes.root}>
+            {/* <Grid container direction="column" alignItems="center" className={classes.root}>
                 <Grid item xs={12}>
                     <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
                         <Button onClick={handleClick}>{selectedIndex}</Button>
@@ -180,11 +180,11 @@ export default function Sewa() {
                         )}
                     </Popper>
                 </Grid>
-            </Grid>
+            </Grid> */}
             <div>
                 {
                     socialMediaDetail && socialMediaDetail.map((detail, index) => {
-                        if (detail.sewacategory_platform === selectedIndex) {
+                        // if (detail.sewacategory_platform === selectedIndex) {
                             return (
                                 <div style={{ marginTop: 20 }} id={`profile${index}`} class="profile">
                                     <div >
@@ -201,7 +201,7 @@ export default function Sewa() {
                                     </div>
                                 </div>
                             )
-                        }
+                        // }
                     })
                 }
                 {enableButton && <p className="review-note">Review बटन दबाने के बाद आपको pop-up स्क्रीन पर आपको टोटल पॉइंट्स दिखायी देंगे. उस pop-up स्क्रीन पर Submit का बटन दबाने पर ही आपका डाटा सबमिट होगा जी.</p>}

@@ -157,7 +157,7 @@
     border-bottom: 1px solid #333;
   }
   .section h2 {
-    margin: 0 auto 50px auto;
+    margin: 0 auto 25px auto;
     text-align: center;
   }
   
@@ -602,4 +602,11 @@
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+  }
+  .logo-img{
+    height: 100px;
+    width: 100px;
+    left: 60px;
+    position: relative;
+    bottom:10px;
   }

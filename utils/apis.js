@@ -131,6 +131,10 @@ async function fetchData({
         endpoint: 'uploadprofile/upload/',
         data: { userid, authpassword, image, name },
       }),
+      uploadSocialMedia: async (userid, authpassword, facebook, instagram, twitter) => postData({
+        endpoint: 'api/socialmedia_update/',
+        data: { userid, authpassword, facebook, instagram, twitter },
+      }),
   };
   export const commonMethods = {
       getAllStates: async (userid, authpassword, power, countryid, stateid) => postData({

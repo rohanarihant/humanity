@@ -137,7 +137,9 @@ export default function SearchMember() {
                                         <span>{user.usrname}</span>
                                         <span>{user.blockname}</span>
                                     </div>
-                                        <p className="mobile-number">{user.wmobno}</p>
+                                    <div className="mem-contact" ><img className="contact-phone" src="./static/img/phone1.png" /><a href={`tel:${user.wmobno}`} className="team-user-detail">{user.wmobno}</a></div>
+
+                                        {/* <p className="mobile-number">{}</p> */}
                                         <p className="mobile-number">{user.usrpriemail}</p>
                                 </div>
                             )
@@ -171,6 +173,15 @@ export default function SearchMember() {
                     text-align: center;
                     margin: 5px;
                     font-size: 20px;
+                }
+                .contact-phone{
+                    height: 24px;
+                    width: 20px;
+                    margin-right: 5px;
+                  }
+                .mem-contact{
+                    display: flex;
+                    justify-content: center;
                 }
                 `}
             </style>
