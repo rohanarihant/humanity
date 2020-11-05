@@ -93,7 +93,7 @@ export default function SplitButton() {
             toggleShowLoader(false);
         }
         getOfficialHandler();
-    },[])
+    },[]);
     return (
         <div className="official-info">
             <NavBar />
@@ -143,9 +143,27 @@ export default function SplitButton() {
                 </Grid>
             </Grid>
             <div>
-                <iframe src={officialHandlerDetail && officialHandlerDetail[selectedIndex-1] && officialHandlerDetail[selectedIndex-1].handler_url} className="iframe-class" />
+                {selectedIndex === 0 && <p className="selection-option">Please select any option</p>}
             </div>
 
+            {selectedIndex > 0 &&  <div>
+                <iframe src={officialHandlerDetail && officialHandlerDetail[selectedIndex-1] && officialHandlerDetail[selectedIndex-1].handler_url} className="iframe-class" />
+            </div>}
+        <style jsx>
+        {`
+        .iframe-class{
+            background:url(./static/img/loader.svg);
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 60;
+        }
+        .selection-option{
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        `}
+        </style>
         </div>
     );
 }

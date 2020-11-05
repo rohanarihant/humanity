@@ -38,10 +38,8 @@ class EditProfile extends React.Component{
         const {account : {educationList, professionList}} = this.props;
         const selectedEdu = educationList && educationList.find(e => e.qualificationid === MemberDetaildet.usreduid);
         const selectedPro = professionList && professionList.find(e => e.professionid === MemberDetaildet.usrprofessionid);
-        console.log(selectedPro,'selectedPro')
-        console.log(selectedEdu,'selectedEdu')
         this.state = {
-            mobileNumber: MemberDetaildet.mobno || '',
+            mobileNumber: MemberDetaildet.usrmob || '',
             skills: skillsLists.filter(d => memberSkills.includes(d.name)),
             device: devices.filter(d => memberDevices.includes(d.name)),
             skillsList: '',
@@ -54,6 +52,7 @@ class EditProfile extends React.Component{
         }
     }
     onSelectSkill(selectedList) {
+        console.log(selectedList,'selectedList')
         this.setState({skillsList : selectedList});
     }
     
@@ -77,8 +76,6 @@ class EditProfile extends React.Component{
         const {mobileNumber, telegramNumber, otherEmail, twitterHandle, education, profession, skillsLists, devices,
         mobileNumberError, telegramNumberError, twitterHandleError, educationError, professionError, skills, devicesList} = this.state;
         const {account : {setRoute}} = this.props;
-        console.log(devicesList,'devicesList')
-        console.log(devices,'devices')
         const fileds = ['mobileNumber', 'telegramNumber', 'twitterHandle', 'education', 'profession', 'skillsLists', 'devices'];
         fileds.map((field) => {
             if(this.state[field] === ''){
@@ -114,8 +111,7 @@ class EditProfile extends React.Component{
         const {mobileNumber, telegramNumber, otherEmail, twitterHandle, education, profession, skills, device,
             mobileNumberError, telegramNumberError, otherEmailError, twitterHandleError, educationError, professionError} = this.state;
         const {account : { educationList, professionList}} = this.props;
-
-    console.log(education,'educationList')
+        console.log(this.state.devicesList,'device');
     return (
         <div>
             <NavBar />

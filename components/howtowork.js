@@ -8,6 +8,18 @@ const Howtowork = () => {
     <div style={{marginTop: 0}}>
         <NavBarBack />
         <iframe src={`${API_URLS}/howtowork/${power}.html`} className="iframe-class" />
+    <style jsx>
+        {`
+            .iframe-class{
+                background:url(./static/img/loader.svg);
+                background-repeat: no-repeat;
+                position: absolute;
+                z-index: 60;
+                margin-top:100px;
+                text-align:center;
+            }
+        `}
+    </style>
     </div>
 )}
 export default Howtowork;

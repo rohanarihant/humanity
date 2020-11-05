@@ -48,6 +48,7 @@ export default class MyApp extends App {
 			<>
 				<Head>
 					<title>Todo App</title>
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 				</Head>
 				<AccountProvider>
 				<ThemeProvider theme={theme}>

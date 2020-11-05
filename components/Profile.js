@@ -6,9 +6,14 @@ import { accountApproval, auth } from '../utils/apis';
 import { toast } from 'react-toastify';
 
 const Profile = () => {
+    const scanMemberObject = obj => {
+        Object.keys(obj).map(o => obj[o] === "undefined" ? obj[o] = "" : obj[o]);
+        return obj;
+    }
     const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
-    const selectedUserData = screen === 'Delete Member' ? selectedUser : userProfileData;
+    const selectedUserDt = screen === 'Delete Member' ? selectedUser : userProfileData;
+    const selectedUserData = [scanMemberObject(selectedUserDt[0])];
     const educationObj = educationList && educationList.find(edu => edu.qualificationid === userProfileData[0].usreduid);
     const educationName = educationObj && educationObj.qualificationname;
     const professionObj = professionList && professionList.find(pro => pro.professionid === userProfileData[0].usrprofessionid);
@@ -17,7 +22,8 @@ const Profile = () => {
     const [showImageUpload,updateShowImageUpload] = useState(false);
 
     useEffect(() => {
-        setUserProfileData(JSON.parse(localStorage.getItem('MemberDetaildet')));
+        const memberDetailObj = JSON.parse(localStorage.getItem('MemberDetaildet'))[0];
+        setUserProfileData([scanMemberObject(memberDetailObj)]);
         async function getProfile() {
             toggleShowLoader(true);
             const response = await getProfileDetails();
