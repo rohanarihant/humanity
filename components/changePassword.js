@@ -71,7 +71,7 @@ const ChangeMyPassword = () => {
   }
   return (
     <div>
-      <NavBar />
+      <NavBar prevRoute="home" />
       <div class="container" id="myApp">
         <section class="section login" v-class="flip : signup">
           <h2>Change Password</h2>

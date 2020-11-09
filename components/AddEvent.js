@@ -99,7 +99,7 @@ const AddMyEvent = () => {
 
   return (
     <div>
-        <NavBar />
+        <NavBar prevRoute="events" />
         <div className="create-event-container">
         <div class="form-group">
             <label>Event Name</label>

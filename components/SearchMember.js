@@ -124,7 +124,7 @@ export default function SearchMember() {
     
     return (
         <div className="official-info">
-            <NavBar />
+            <NavBar prevRoute="home" />
             <div className="issues-container">
             <div>
                 <input type="text" name="search" autocomplete="off" className="search-input" placeholder="Search user and enter" value={searchKeyword} onChange={(e) => updateSearchKeyword(e.target.value)} onKeyPress={(e) => searcForUsers(e)} />

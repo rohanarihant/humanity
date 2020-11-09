@@ -6,7 +6,7 @@ const EventDetail = () => {
 
     return(
         <>
-        <Navbar />
+        <Navbar prevRoute="events" />
         <div className="event-container" style={{marginTop: 70}}>
           <div className="event-title">
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />

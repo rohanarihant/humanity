@@ -43,7 +43,7 @@ const Profile = () => {
     }
     return (
         <>
-        <NavBar />
+        <NavBar prevRoute="searchMember" />
         {changeRoleUser && changeRoleUser.map(user => (
         <div class="container" >
             <div class="profile-card">

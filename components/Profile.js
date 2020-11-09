@@ -61,7 +61,7 @@ const Profile = () => {
     }
     return (
         <>
-        <NavBar />
+        <NavBar prevRoute="home"/>
         {selectedUserData && selectedUserData.map(user => (
         <div class="container" >
             <div class="profile-card">

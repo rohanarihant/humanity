@@ -47,7 +47,7 @@ const UserProfile = () => {
     }
     return (
         <>
-        <NavBar />
+        <NavBar prevRoute="searchMember"/>
         {selectedUserData && selectedUserData.map(user => (
         <div class="container" >
             <div class="profile-card">

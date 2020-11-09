@@ -96,7 +96,7 @@ export default function SplitButton() {
     },[]);
     return (
         <div className="official-info">
-            <NavBar />
+            <NavBar prevRoute="home"/>
              <Grid container direction="column" alignItems="center" className={classes.root}>
                 <Grid item xs={12}>
                     <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">

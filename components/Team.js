@@ -115,7 +115,7 @@ export default function Escalation() {
   }
   return (
     <div className={classes.root}>
-      <NavBar />
+      <NavBar prevRoute="home"/>
       <AppBar position="static" className={classes.container}>
         <Tabs
           variant="fullWidth"

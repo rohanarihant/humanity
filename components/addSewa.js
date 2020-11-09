@@ -131,7 +131,7 @@ export default function Sewa() {
     }
     return (
         <div className="official-info">
-            <NavBar />
+            <NavBar prevRoute="home" />
             <img src="./static/img/add-sewa-instruction.jpg" className="add-sewa-instruction" />
             <div className="sewa-anchor"><p className="add-sewa-date">Date: {new Date().toLocaleDateString()}</p>
             <p className="add-sewa-point-list" onClick={(e) => showPoint(e)}>Point List</p></div>

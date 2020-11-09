@@ -269,9 +269,9 @@ async function fetchData({
       endpoint: `api/get_point_result/`,
       data: {userid, authpassword, power, countryid, state_id, dist_id, block_id, gender}
     }),
-    getDistrictPointResults: async (userid, authpassword, power, countryid, state_id, dist_id, block_id, gender) => postData({
+    getDistrictPointResults: async (userid, authpassword, power, countryid, state_id, dist_id, block_id, gender, stateid) => postData({
       endpoint: `api/get_point_result_dist/`,
-      data: {userid, authpassword, power, countryid, state_id, dist_id, block_id, gender}
+      data: {userid, authpassword, power, countryid, state_id, dist_id, block_id, gender, stateid}
     }),
     getBlockPointResults: async (userid, authpassword, power, countryid, state_id, dist_id, block_id, gender, distid) => postData({
       endpoint: `api/get_point_result_block/`,

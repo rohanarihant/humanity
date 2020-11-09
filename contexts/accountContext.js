@@ -33,6 +33,8 @@ export class AccountProvider extends React.Component {
       sewaPointList: [],
       selectedEventDetail: {},
       selectedState: '',
+      selectedDestrict: '',
+      prevRoute: '',
     };
     this.state = this.defaultState;
 
@@ -57,6 +59,8 @@ export class AccountProvider extends React.Component {
       setSewaPointList: this.setSewaPointList.bind(this),
       saveSelectedEvent: this.saveSelectedEvent.bind(this),
       setSelectedState: this.setSelectedState.bind(this),
+      setSelectedDestrict: this.setSelectedDestrict.bind(this),
+      setPreviousRoute: this.setPreviousRoute.bind(this),
     };
   }
   async componentDidMount(){
@@ -99,6 +103,9 @@ export class AccountProvider extends React.Component {
   async setRoute(route){
     this.setState({route});
   }
+  async setPreviousRoute(prevRoute){
+    this.setState({prevRoute});
+  }
   async setTitle(title){
     this.setState({title});
   }
@@ -135,8 +142,11 @@ export class AccountProvider extends React.Component {
   async setSelectedState(selectedState){
     this.setState({selectedState});
   }
-
+  async setSelectedDestrict(selectedDestrict){
+    this.setState({selectedDestrict});
+  }
   render() {
+    console.log(this.state.route);
     const context = {
       ...this.state,
       ...this.actions,

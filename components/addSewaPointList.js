@@ -25,7 +25,7 @@ const PointList = () => {
     }
     return (
         <div>
-            <NavBar />
+            <NavBar prevRoute="sewa" />
             <div style={{ marginTop: 60 }}>
                 {
                     sewaPointList && sewaPointList.map((detail, index) => {

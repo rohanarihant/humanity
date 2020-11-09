@@ -105,7 +105,7 @@ const MyHazri = () => {
 
     return (
         <>
-        <NavBar setEnableSearch={setEnableSearch} enableSearch={enableSearch} />
+        <NavBar setEnableSearch={setEnableSearch} enableSearch={enableSearch} prevRoute="home" />
         <div>
             {enableSearch && <div>
                 <input type="date" className="search-date-input" value={searchFrom} onChange={(e) => setSearchFrom(e.target.value)}  />

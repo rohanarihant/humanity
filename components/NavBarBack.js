@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 	}
   }));
 
-export default function Navbar({setEnableSearch, enableSearch}) {
+export default function Navbar({setEnableSearch, enableSearch, prevRoute}) {
   const router = useRouter();
   const classes = useStyles();
   const {account: { setRoute, route, updateSelectedScreen, screen, ItwingRank }} = useContext(AccountContext);
@@ -137,7 +137,7 @@ export default function Navbar({setEnableSearch, enableSearch}) {
       <AppBar position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} onClick={handleDrawerOpen} color="inherit" aria-label="menu">
-            <ArrowBack onClick={() => setRoute('home')} />
+            <ArrowBack onClick={() => setRoute(prevRoute)} />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             {screen}

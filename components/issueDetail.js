@@ -26,7 +26,7 @@ const IssueDetail = () => {
     let mainIssue = '';
     return (
         <div>
-            <NavBar />
+            <NavBar prevRoute="issues" />
             {selectedIssue && selectedIssue.map((issue, index) => {
                 if (issue.issuetype === "issue") {
                     mainIssue = issue;

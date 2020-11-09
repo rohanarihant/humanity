@@ -125,7 +125,7 @@ export default function Events() {
   }
   return (
     <div className={classes.root}>
-      <NavBar />
+      <NavBar prevRoute="home"/>
       <AppBar position="static">
         <Tabs
           variant="fullWidth"

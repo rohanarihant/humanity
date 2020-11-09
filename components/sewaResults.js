@@ -40,7 +40,7 @@ const SewaResults = () => {
     } 
     return (
         <div className="result-container">
-            <NavBar />
+            <NavBar prevRoute="home"/>
             <h2 className="result-date">{resultDate}</h2>
             <table>
                 <tr>

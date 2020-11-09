@@ -129,7 +129,7 @@ class EditProfile extends React.Component{
         const {account : { educationList, professionList}} = this.props;
     return (
         <div>
-            <NavBar />
+            <NavBar prevRoute="profile" />
             <div class="container" id="myApp" >
                 <section class="section login" v-class="flip : signup">
                     <h2>Update Profile</h2>

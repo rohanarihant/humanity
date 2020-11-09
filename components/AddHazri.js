@@ -154,7 +154,7 @@ const AddHazri = () => {
     }, []);
     return (
         <>
-        <NavBar />
+        <NavBar prevRoute="myHazri" />
         <div style={{marginTop: 25}}>
       <AppBar position="static">
         <Tabs
