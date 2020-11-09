@@ -54,7 +54,7 @@ const LoginRegister = () => {
       {showLoader && <img className="loader" src="./static/img/loader.svg" />}
       <section class="section login" v-class="flip : signup" style={{opacity : showLoader ? 0.2 : 1 }}>
         <img className="logo-img" src="./static/img/ic_launcher_round.png" />
-        <h2>Welcome To Humanity</h2>
+        <h2>HUManITy</h2>
         <form action="#">
           <div class="form-group">
             <label for="email">Email</label>

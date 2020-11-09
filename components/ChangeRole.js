@@ -18,6 +18,7 @@ const Profile = () => {
     const updateRole = async(user) => {
         const userid = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
+        const power = localStorage.getItem('power');
         const res = await searchUsers.updateUserRole(userid, authpassword, user.usrid, role, userid);
     }
     const updateUserPermission = async(user) => {

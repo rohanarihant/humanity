@@ -22,14 +22,12 @@ const IssueDetail = () => {
         const authpassword = localStorage.getItem('authpassword');
         const power = JSON.parse(localStorage.getItem('power'));
         const res = await issues.addCommentIssue(userid, authpassword, power, "comment", issueto, issueby, issuetype, issueid, new Date().toLocaleDateString());
-        console.log(res,'res')
     }
     let mainIssue = '';
     return (
         <div>
             <NavBar />
             {selectedIssue && selectedIssue.map((issue, index) => {
-                    console.log(issue,'issue')
                 if (issue.issuetype === "issue") {
                     mainIssue = issue;
                     return (

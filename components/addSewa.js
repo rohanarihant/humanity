@@ -94,7 +94,6 @@ export default function Sewa() {
         const distidd = MemberDetaildet && MemberDetaildet.usrdstid;
         const blockid = MemberDetaildet && MemberDetaildet.usrblkid;
         const postdate = new Date().toLocaleDateString();
-        // console.log(pointlist,'pointlist')
         const totalPoints = pointlist.reduce((accc, obj) => { return accc + (Number(obj.point_entry) * Number(obj.point_point))}, 0);
         var conf = confirm(`Confirm Total Sewa Points:- ${totalPoints}`);
         if(conf){

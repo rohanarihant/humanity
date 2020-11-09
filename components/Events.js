@@ -20,7 +20,6 @@ import { events } from '../utils/apis';
 import { useRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -88,7 +87,7 @@ export default function Events() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { account: { getProfileDetails, setRoute, toggleShowLoader } } = useContext(AccountContext);
+  const { account: { getProfileDetails, setRoute, toggleShowLoader, saveSelectedEvent } } = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
@@ -115,13 +114,15 @@ export default function Events() {
   }, []);
   const getImage = (userId) => {
     const image = `http://humanity.rubrutech.com/profileimage/${userId}.jpg`;
-    // console.log(image,'image')
     return image;
   }
   const addDefaultSrc = (ev) => {
     ev.target.src = './static/img/head.png';
   }
-  console.log(eventsList,'eventsList')
+  const getEventDetail = (event) => {
+    saveSelectedEvent(event);
+    setRoute('eventDetail');
+  }
   return (
     <div className={classes.root}>
       <NavBar />
@@ -139,16 +140,16 @@ export default function Events() {
       <TabPanel value={value} index={0}>
       {eventsList && eventsList.map(event => {
         if(new Date() - new Date(event.ToDate) < 0){
-          return(<div className="event-container">
+          return(<div className="event-container" onClick={() => setRoute('eventDetail')}>
           <div className="event-title">
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
-              <p className="event-text">{event.Title}</p>
+              <p className="event-text">{event.usrname}</p>
               <p className="event-schedule">{event.FromDate} - {event.ToDate}</p>
             </div>
           </div>
-          <p className="event-description event-text">{event.Caption}</p>
-          <p className="event-user event-text">{event.test}</p>
+          <p className="event-description event-text">{event.Title}</p>
+          {/* <p className="event-user event-text">{event.test}</p> */}
           <p className="event-date event-text">{event.CreateON}</p>
 
         </div>)}
@@ -157,16 +158,16 @@ export default function Events() {
       <TabPanel value={value} index={1}>
       {eventsList && eventsList.map(event => {
         if(new Date() - new Date(event.ToDate) > 0){
-          return(<div className="event-container">
+          return(<div className="event-container" onClick={() => getEventDetail(event)}>
           <div className="event-title">
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
-              <p className="event-text">{event.Title}</p>
+              <p className="event-text">{event.usrname}</p>
               <p className="event-schedule">From {event.FromDate} to {event.ToDate}</p>
             </div>
           </div>
-          <p className="event-description event-text">{event.Caption}</p>
-          <p className="event-user event-text">{event.test}</p>
+          <p className="event-description event-text">{event.Title}</p>
+          {/* <p className="event-user event-text">{event.test}</p> */}
           <p className="event-date event-text">{event.CreateON}</p>
 
         </div>)}

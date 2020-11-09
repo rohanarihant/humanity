@@ -223,9 +223,9 @@ async function fetchData({
       endpoint: 'api/search_member/',
       data: { userid, authpassword, gender, searchmymem, power },
     }),
-    updateUserRole: async (userid, authpassword, gender, searchmymem, power) => postData({
+    updateUserRole: async (userid, authpassword, updaterole, role, rolechangeby) => postData({
       endpoint: 'api/updaterole/',
-      data: { userid, authpassword, gender, searchmymem, power },
+      data: { userid, authpassword, updaterole, role, rolechangeby },
     }),
     getUserRoles: async (fetchroles) => postData({
       endpoint: 'api/select_role/',

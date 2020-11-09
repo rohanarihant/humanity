@@ -152,7 +152,6 @@ const AddHazri = () => {
         }
         (!userProfileData && !!localStorage.getItem('userId')) && getProfile();
     }, []);
-    console.log(ashramLocation,'ashramLocation')
     return (
         <>
         <NavBar />

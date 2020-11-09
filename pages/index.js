@@ -27,6 +27,8 @@ import Howtowork from '../components/howtowork';
 import UserProfile from '../components/UserProfile';
 import AddIssue from '../components/addIssue';
 import PointList from '../components/addSewaPointList';
+import EventDetail from '../components/eventDetail';
+import SewaResultsDestrict from '../components/resultDestrict';
 
 const Index = () => {
 	const { account : { route, showLoader }} = useContext(AccountContext);
@@ -80,6 +82,10 @@ const Index = () => {
 			return <AddIssue />;
 			case 'addSewaPointList':
 			return <PointList />;
+			case 'eventDetail':
+			return <EventDetail />;
+			case 'sewaResultsDestrict':
+			return <SewaResultsDestrict />;
 			default:
 			return <HomePage />;
 		}

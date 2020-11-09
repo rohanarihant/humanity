@@ -31,6 +31,8 @@ export class AccountProvider extends React.Component {
       professionList: [],
       userPermissions: {},
       sewaPointList: [],
+      selectedEventDetail: {},
+      selectedState: '',
     };
     this.state = this.defaultState;
 
@@ -53,6 +55,8 @@ export class AccountProvider extends React.Component {
       setPermissions: this.setPermissions.bind(this),
       setItwingRank: this.setItwingRank.bind(this),
       setSewaPointList: this.setSewaPointList.bind(this),
+      saveSelectedEvent: this.saveSelectedEvent.bind(this),
+      setSelectedState: this.setSelectedState.bind(this),
     };
   }
   async componentDidMount(){
@@ -64,7 +68,6 @@ export class AccountProvider extends React.Component {
     await this.getEduProList();
   }
   async getEduProList(){
-    console.log('getEduProList')
     const eduList = await user.getEducationList();
     const proList = await user.getProfessionList();
     localStorage.setItem('educationList', JSON.stringify(eduList.educations));
@@ -125,6 +128,12 @@ export class AccountProvider extends React.Component {
   }
   async setSewaPointList(sewaPointList){
     this.setState({sewaPointList});
+  }
+  async saveSelectedEvent(selectedEventDetail){
+    this.setState({selectedEventDetail});
+  }
+  async setSelectedState(selectedState){
+    this.setState({selectedState});
   }
 
   render() {

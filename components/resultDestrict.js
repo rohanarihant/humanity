@@ -4,11 +4,11 @@ import { results } from '../utils/apis';
 import AccountContext from '../contexts/accountContext';
 
 
-const SewaResults = () => {
+const SewaResultsDestrict = () => {
     const [stateResult, setStateResult] = useState([]);
     const [categoryListResult, setCategoryListResult] = useState([]);
     const [resultDate, setResultDate] = useState('');
-    const {account: { toggleShowLoader, setRoute, setSelectedState }} = useContext(AccountContext);
+    const {account: { toggleShowLoader, selectedState }} = useContext(AccountContext);
     const cateArray = [];
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const SewaResults = () => {
             const distId = MemberDetaildet && MemberDetaildet[0].usrdstid;
             const blockId = MemberDetaildet && MemberDetaildet[0].usrblkid;
             const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
-            const res = await results.getPointResults(userid, authpassword, power, countryId, stateId, distId, blockId, gender);
+            const res = await results.getDistrictPointResults(userid, authpassword, power, countryId, stateId, distId, blockId, gender, selectedState);
             if (res.success) {
                 setStateResult(res.state_result);
                 setCategoryListResult(res.catedata);
@@ -34,10 +34,11 @@ const SewaResults = () => {
         getResultPoints();
     }, []);
 
-    const openStateResult = (state) => {
-        setSelectedState(state.result_state_id);
-        setRoute('sewaResultsDestrict');
+    const openDestrictResult = (state) => {
+        // setSelectedDestrict(state.result_state_id);
+        // setRoute('sewaResultsDestrict');
     } 
+
     return (
         <div className="result-container">
             <NavBar />
@@ -51,7 +52,7 @@ const SewaResults = () => {
                     <th>Total Points</th>
                     <th>Members</th>
                 </tr>
-                {stateResult && stateResult.map(state => (<tr onClick={() => openStateResult(state)}>
+                {stateResult && stateResult.map(state => (<tr onClick={() => openDestrictResult(state)}>
                     <td>{state.state_name}</td>
                     <td>{state.result_total}</td>
                     <td>{state.total_member}</td>
@@ -134,4 +135,4 @@ const SewaResults = () => {
     )
 }
 
-export default SewaResults;
+export default SewaResultsDestrict;

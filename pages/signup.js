@@ -131,17 +131,15 @@ class Register extends React.Component{
     }
     checkForm = async() => {
         const {pageNo} = this.state;
-        const pageNo0 = ['name', 'fatherName', 'gender', 'address', 'insanNo', 'dateofBirth']
-        const pageNo1 = ['email', 'alternateEmail', 'password', 'confirmPassword', 'mobileNo', 'telegramMobileNo', 'twitterHandle']
-        const pageNo2 = ['itWingPrashad', 'education', 'profession', 'sewaSamiti']
-        const selectedPage = pageNo === 0 ? pageNo1 : pageNo === 1 ? pageNo0 : pageNo === 2 ? pageNo2 : null;
+        const pageNo0 = ['name', 'fatherName', 'gender', 'address', 'insanNo', 'dateofBirth', 'email' , 'password', 'confirmPassword', 'mobileNo', 'telegramMobileNo', 'twitterHandle', 'itWingPrashad', 'education', 'profession', 'sewaSamiti']
+        // const selectedPage = pageNo === 0 ? pageNo1 : pageNo === 1 ? pageNo0 : pageNo === 2 ? pageNo2 : null;
         const selectedCheck = (page) => pageNo === 0 ? (page !== 'gender' && page !== 'insanNo') : pageNo === 1 ?
         (page !== 'alternateEmail' && page !== 'bloodGroup') : pageNo === 2 ? (page !== 'device' && page !== 'skills') : null;
-        if(pageNo <= 2 && selectedPage){
-            {selectedPage.map( page => {
+        if(pageNo <= 2 && pageNo0){
+            {pageNo0.map( page => {
                 if(selectedCheck(page)){
                     if(this.state[page+'Error'] === ''){
-                        if(!this.state[page] || this.state[page].length < 3){
+                        if(!this.state[page] || (page !== "education" && page !== "profession" && this.state[page].length < 3)){
                             this.setState({[page+'Error']: `Enter ${page}`});
                         }else{
                             this.setState({[page+'Error']: ''});
@@ -160,11 +158,12 @@ class Register extends React.Component{
         // }else{
         //     this.setState({[name+'Error']: ''});
         // }
-        if(this.validateField(selectedPage, pageNo)){
+        if(this.validateField(pageNo0, pageNo)){
             const { email, password, fatherName, name, statecountryid, stateid, districtid, blockId, address,
                 insanNo, mobileNo, telegramMobileNo, dateofBirth, alternateEmail, twitterHandle, education, profession,
                 skillsList, deviceList, gender, bloodGroup } = this.state;
-            if(pageNo === 2){
+            // if(pageNo === 2){
+
                 try{
                     let payload = {
                         registeremail: email,
@@ -201,9 +200,9 @@ class Register extends React.Component{
                 }catch(error){
                     toast.error(error && error.message);
                 }
-            }else{
-                this.setState({pageNo: pageNo <= 2 && pageNo+1});
-            }
+            // }else{
+            //     this.setState({pageNo: pageNo <= 2 && pageNo+1});
+            // }
         }
         }
     }
@@ -211,7 +210,7 @@ class Register extends React.Component{
     updateField = (e) => {
         const { name, value } = e.target;
         if(name === "email" || name === "alternateEmail"){
-            if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(value) || value.length === 0) {
+            if (/^[a-zA-Z.0-9]+@[a-zA-Z.0-9]+\.[A-Za-z]+$/.test(value) || value.length === 0) {
                 this.setState({[name]: value});
                 this.setState({[name+'Error']: ''});
             }else{
@@ -285,7 +284,6 @@ class Register extends React.Component{
         }
       });
     }
-    
     render(){
         const {pageNo, name, fatherName, gender, address, insanNo, nameError, fatherNameError, insanNoError,
             addressError, dateofBirth, dateofBirthError, email, emailError, alternateEmail, password, passwordError,
@@ -298,8 +296,24 @@ class Register extends React.Component{
       {pageNo !== 0 && <img src="./static/img/back.png" class="back-button" onClick={this.moveBack} />}
     <h2>SignUp</h2>
     <form action="#">
-      {pageNo === 1 &&
-      <>
+      {/* {pageNo === 1 &&
+      <> */}
+      <div class="form-group">
+        <label for="email">Email</label><span class="asterisk">*</span>
+        <input type="email" id="text" name="email" value={email} onChange={(e) => this.updateField(e)} class="form-control" />
+        <p class="error">{emailError}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label><span class="asterisk">*</span>
+        <input type="password" id="password" name="password" value={password} onChange={(e) => this.updatePassword(e)} class="form-control" />
+        <p class="error">{passwordError}</p>
+      </div>
+      <div class="form-group" v-show="signup">
+        <label for="confirm-password">Confirm Password</label><span class="asterisk">*</span>
+        <input type="password" id="confirm-password" name="confirmPassword" value={confirmPassword} onChange={(e) => this.updateConfirmPassword(e)} class="form-control" />
+        <p class="error">{confirmPasswordError}</p>
+      </div>
       <div class="form-group">
       <label for="text">Name</label><span class="asterisk">*</span>
       <input type="text" id="text" name="name" placeholder="Name" value={name} onChange={(e) => this.updateField(e)} class="form-control" />
@@ -319,11 +333,6 @@ class Register extends React.Component{
       </select>
     </div>
     <div class="form-group">
-      <label for="text">Address</label><span class="asterisk">*</span>
-      <input type="text" name="address" id="text" placeholder="Address" value={address} onChange={(e) => this.updateField(e)} class="form-control" />
-      <p class="error">{addressError}</p>
-    </div>
-    <div class="form-group">
       <label for="text">Block</label><span class="asterisk">*</span>
       <input type="text" name="block" id="text" placeholder="block" value={block} onChange={(e) => this.searchBlock(e)} class="form-control" />
         {/* {blocksList &&  */}
@@ -334,6 +343,12 @@ class Register extends React.Component{
       <p class="error">{blockError}</p>
     </div>
     <div class="form-group">
+      <label for="text">Address</label><span class="asterisk">*</span>
+      <input type="text" name="address" id="text" placeholder="Address" value={address} onChange={(e) => this.updateField(e)} class="form-control" />
+      <p class="error">{addressError}</p>
+    </div>
+
+    <div class="form-group">
       <label for="text">Insan No</label>
       <input type="number" maxLength="7" name="insanNo" id="text" placeholder="Insan No"  value={insanNo} onChange={(e) => this.updateField(e)} class="form-control" />
       <p class="error">{insanNoError}</p>
@@ -343,31 +358,6 @@ class Register extends React.Component{
       <input type="date" id="text" max="2003-10-11" placeholder="Date Of Birth" name="dateofBirth" value={dateofBirth} onChange={(e) => this.updateField(e)} class="form-control" />
       <p class="error">{dateofBirthError}</p>
     </div>
-    </>}
-    {pageNo === 0 &&
-    <>
-      <div class="form-group">
-        <label for="email">Email</label><span class="asterisk">*</span>
-        <input type="email" id="text" name="email" value={email} onChange={(e) => this.updateField(e)} class="form-control" />
-        <p class="error">{emailError}</p>
-      </div>
-      <div class="form-group">
-        <label for="email">Alternete Email ID</label>
-        <input type="text" id="text" name="alternateEmail" value={alternateEmail} onChange={(e) => this.updateField(e)} class="form-control" />
-        <p class="error">{alternateEmailError}</p>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label><span class="asterisk">*</span>
-        <input type="password" id="password" name="password" value={password} onChange={(e) => this.updatePassword(e)} class="form-control" />
-        <p class="error">{passwordError}</p>
-      </div>
-      
-      <div class="form-group" v-show="signup">
-        <label for="confirm-password">Confirm Password</label><span class="asterisk">*</span>
-        <input type="password" id="confirm-password" name="confirmPassword" value={confirmPassword} onChange={(e) => this.updateConfirmPassword(e)} class="form-control" />
-        <p class="error">{confirmPasswordError}</p>
-      </div>
 
       <div class="form-group">
         <label for="email">Mobile No.</label><span class="asterisk">*</span>
@@ -380,15 +370,26 @@ class Register extends React.Component{
         <p class="error">{telegramMobileNoError}</p>
       </div>
       <div class="form-group">
+        <label for="email">Alternate Email ID</label>
+        <input type="email" id="text" name="alternateEmail" value={alternateEmail} onChange={(e) => this.updateField(e)} class="form-control" />
+        <p class="error">{alternateEmailError}</p>
+      </div>
+      <div class="form-group">
         <label for="email">Twitter Handle</label><span class="asterisk">*</span>
         <input type="text" id="text" name="twitterHandle" value={twitterHandle} onChange={(e) => this.updateField(e)} class="form-control" />
         <p class="error">{twitterHandleError}</p>
       </div>
-    </>
+
+
+
+    {/* </>} */}
+    {/* {pageNo === 0 &&
+    <> */}
+    {/* </>
     }
     { pageNo === 2
     && 
-    <>
+    <> */}
       <div class="form-group">
         <label for="email">IT Wing Prashad Taken?</label><span class="asterisk">*</span>
         <select class="form-control" value={itWingPrashad} name="itWingPrashad" onChange={(e) => this.updateField(e)}>
@@ -404,6 +405,15 @@ class Register extends React.Component{
         </select>
         <p class="error">{educationError}</p>
       </div>
+
+      <div class="form-group">
+        <label for="email">Profession</label><span class="asterisk">*</span>
+        <select class="form-control" value={profession} name="profession" onChange={(e) => this.updateField(e)}>
+            <option>Select Profession</option>
+            {professionList && professionList.map(profession => (<option value={profession.professionid}>{profession.professionname}</option>))}
+        </select>
+        <p class="error">{professionError}</p>
+      </div>
       <div class="form-group">
         <label for="email">Skills</label>
         <Multiselect
@@ -413,14 +423,6 @@ class Register extends React.Component{
             onRemove={this.onRemoveSkill} // Function will trigger on remove event
             displayValue="name" // Property name to display in the dropdown options
         />
-      </div>
-      <div class="form-group">
-        <label for="email">Profession</label><span class="asterisk">*</span>
-        <select class="form-control" value={profession} name="profession" onChange={(e) => this.updateField(e)}>
-            <option>Select Profession</option>
-            {professionList && professionList.map(profession => (<option value={profession.professionid}>{profession.professionname}</option>))}
-        </select>
-        <p class="error">{professionError}</p>
       </div>
       <div class="form-group">
         <label for="email">Blood Group</label>
@@ -453,8 +455,8 @@ class Register extends React.Component{
         <input type="checkbox" id="confirm-password"/>
         <a href="#" class="eula">I have read, and agree to the terms of uses.</a>
       </div> */}
-    </>
-    }
+    {/* </>
+    } */}
       <p class="iconSwitch" onClick={() => this.checkForm()}>SignUp</p>
       <p><a href="javascript:;" class="create-account" onClick={() => Router.push({ pathname: '/login' })}>Login</a></p>
     </form>
