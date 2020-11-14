@@ -197,7 +197,7 @@ const UserProfile = () => {
                 </MDBContainer>
             </div>
         </div>))}
-        {screen === 'Delete Member' && <p class="iconSwitch" style={{marginTop:100}} onClick={() => deleteMember()}>Delete Profile</p>}
+        {screen === 'Delete Profile' && <p class="iconSwitch" style={{marginTop:"100px 10px 20px 10px"}} onClick={() => deleteMember()}>Delete Profile</p>}
     </>
     )
 };

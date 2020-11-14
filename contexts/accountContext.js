@@ -146,7 +146,6 @@ export class AccountProvider extends React.Component {
     this.setState({selectedDestrict});
   }
   render() {
-    console.log(this.state.route);
     const context = {
       ...this.state,
       ...this.actions,

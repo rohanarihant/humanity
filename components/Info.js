@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, { useEffect, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -34,10 +34,11 @@ export default function SplitButton() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    // const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [officialHandlerList, setofficialHandlerList] = React.useState(['Select']);
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
-    const {account: { toggleShowLoader }} = useContext(AccountContext);
+    const [selectedIndex, setSelectedValue] = React.useState(0);
+    const { account: { toggleShowLoader } } = useContext(AccountContext);
 
     const officialHandles = [
         {
@@ -65,6 +66,7 @@ export default function SplitButton() {
     };
 
     const handleMenuItemClick = (event, index) => {
+        console.log(index, 'index')
         setSelectedIndex(index);
         setOpen(false);
     };
@@ -81,7 +83,7 @@ export default function SplitButton() {
         setOpen(false);
     };
     useEffect(() => {
-        async function getOfficialHandler(){
+        async function getOfficialHandler() {
             toggleShowLoader(true);
             const userId = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
@@ -93,11 +95,12 @@ export default function SplitButton() {
             toggleShowLoader(false);
         }
         getOfficialHandler();
-    },[]);
+    }, []);
+
     return (
         <div className="official-info">
-            <NavBar prevRoute="home"/>
-             <Grid container direction="column" alignItems="center" className={classes.root}>
+            <NavBar prevRoute="home" />
+            {/* <Grid container direction="column" alignItems="center" className={classes.root}>
                 <Grid item xs={12}>
                     <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
                         <Button onClick={handleClick}>{officialHandlerList[selectedIndex]}</Button>
@@ -141,16 +144,19 @@ export default function SplitButton() {
                         )}
                     </Popper>
                 </Grid>
-            </Grid>
+            </Grid> */}
+            <select className="form-control" style={{marginTop: 100, marginLeft: 20, width: '90%'}} name="bloodGroup" value={selectedIndex} onChange={(e) => setSelectedValue(e.target.value)}>
+                {officialHandlerList.map((oh,index) => (<option value={index}>{oh}</option>))}
+            </select>
             <div>
                 {selectedIndex === 0 && <p className="selection-option">Please select any option</p>}
             </div>
 
-            {selectedIndex > 0 &&  <div>
-                <iframe src={officialHandlerDetail && officialHandlerDetail[selectedIndex-1] && officialHandlerDetail[selectedIndex-1].handler_url} className="iframe-class" />
+            {selectedIndex > 0 && <div>
+                <iframe src={officialHandlerDetail && officialHandlerDetail[selectedIndex - 1] && officialHandlerDetail[selectedIndex - 1].handler_url} className="iframe-class" />
             </div>}
-        <style jsx>
-        {`
+            <style jsx>
+                {`
         .iframe-class{
             background:url(./static/img/loader.svg);
             background-repeat: no-repeat;
@@ -163,7 +169,7 @@ export default function SplitButton() {
             font-size: 20px;
         }
         `}
-        </style>
+            </style>
         </div>
     );
 }

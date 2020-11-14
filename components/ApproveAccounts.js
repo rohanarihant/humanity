@@ -5,7 +5,7 @@ import { accountApproval } from '../utils/apis';
 
 const ApproveAccounts = () => {
     
-    const {account: { setRoute, updateMemberid }} = useContext(AccountContext);
+    const {account: { setRoute, updateMemberid, toggleShowLoader }} = useContext(AccountContext);
     const [pendingAccounts, setPendingAccounts] = useState([]);
     const openMemberDetail = (usrId) => {
         updateMemberid(usrId);
@@ -13,6 +13,7 @@ const ApproveAccounts = () => {
     }
     useEffect(() => {
         async function getAllAccounts(){
+        toggleShowLoader(true);
         const userid = localStorage.getItem('userId')
         const authpassword = localStorage.getItem('authpassword')
         const power = localStorage.getItem('power')
@@ -21,6 +22,7 @@ const ApproveAccounts = () => {
         const stateid = MemberDetaildet && MemberDetaildet[0].usrstaid;
         const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
         const res = await accountApproval.fetchPendingAccounts(userid, authpassword, power, countryid, stateid, gender);
+        toggleShowLoader(false);
         setPendingAccounts(res.pendingaccounts);
         }
         getAllAccounts();

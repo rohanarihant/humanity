@@ -8,7 +8,7 @@ const SewaResults = () => {
     const [stateResult, setStateResult] = useState([]);
     const [categoryListResult, setCategoryListResult] = useState([]);
     const [resultDate, setResultDate] = useState('');
-    const {account: { toggleShowLoader, setRoute, setSelectedState }} = useContext(AccountContext);
+    const {account: { toggleShowLoader, setRoute, setSelectedState, updateSelectedScreen }} = useContext(AccountContext);
     const cateArray = [];
 
     useEffect(() => {

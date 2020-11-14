@@ -289,7 +289,6 @@
     position: relative;
     background: #ededed;
     border-radius: 12px;
-    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
   }
   .profile img {
     border-radius: 12px;
@@ -313,29 +312,7 @@
     color: rgba(255, 255, 255, 0.65);
     padding-top: 5px;
   }
-  #profile0 {
-    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
-  }
-  #profile1 {
-    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
-  }
-  #profile2 {
-  background-image: linear-gradient(315deg, #fad0c4 0%, #f1a7f1 74%);
-  }
-  #profile3 {
-  background-image: linear-gradient(315deg, #aff6cf 0%, #9f98e8 74%);
-  }
-  #profile4 {
-    background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
-  }
-  #profile5 {
-    background-color: #f907fc;
-    background-image: linear-gradient(315deg, #f907fc 0%, #05d6d9 74%);
-  }
-  #profile5 {
-    background-color: #f907fc;
-    background-image: linear-gradient(315deg, #f907fc 0%, #05d6d9 74%);
-  }
+
 
 
 
@@ -609,4 +586,7 @@
     left: 60px;
     position: relative;
     bottom:10px;
+  }
+  #selectDate {
+    content: attr(placeholder);
   }

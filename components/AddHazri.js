@@ -170,7 +170,7 @@ const AddHazri = () => {
       </AppBar>
       <TabPanel value={value} index={0}>
           <div class="add-hazri-input">
-            <input type="date" placeholder="MM/DD/YYYY" max={MaxDate} class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
+            <input type="date" placeholder="MM/DD/YYYY" id="selectDate" max={MaxDate} class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
             <p className="error">{sewaDateError}</p>
             <select class="form-control" value={ashramLocation} onChange={(e) => setAshramLocation(e.target.value)}>
                 <option>Select Sewa Location</option>
@@ -179,21 +179,21 @@ const AddHazri = () => {
             </select>
             <p className="error">{ashramLocationError}</p>
             {ashramLocation !== "Select Sewa Location"
-            && (<><input type="text" class="form-control" placeholder={`Sewa No of${ashramLocation === 'At other Place' ? " Hours" : " Days"}`} style={{margin: '20px 0px'}} value={sewaNoDays} onChange={(e) => setSewaNoDays(e.target.value)}/>
+            && (<><input type="text" class="form-control" id="selectDate" placeholder={`Sewa No of${ashramLocation === 'At other Place' ? " Hours" : " Days"}`} style={{margin: '20px 0px'}} value={sewaNoDays} onChange={(e) => setSewaNoDays(e.target.value)}/>
             <p className="error">{sewaNoDaysError}</p></>)}
             <button class="iconSwitch" style={{width: 200}} onClick={() => saveSewa("SMG Sewa")}>Save</button>
           </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
           <div class="add-hazri-input">
-            <input type="date" placeholder="MM/DD/YYYY" max={MaxDate} class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
+            <input type="date" placeholder="MM/DD/YYYY" id="selectDate" max={MaxDate} class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
             <p className="error">{sewaDateError}</p>
             <button class="iconSwitch" style={{width: 200}} onClick={() => saveBloodSewa('Blood Donation')}>Save</button>
           </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
           <div class="add-hazri-input">
-            <input type="date" placeholder="MM/DD/YYYY" max={MaxDate} class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
+            <input type="date" placeholder="MM/DD/YYYY" id="selectDate" max={MaxDate} class="form-control" value={sewaDate} onChange={(e) => setSewaDate(e.target.value)} />
             <p className="error">{sewaDateError}</p>
             <input type="text" class="form-control" placeholder="Parmarth Amount" style={{margin: '20px 0px'}} value={sewaNoDays} onChange={(e) => setSewaNoDays(e.target.value)}/>
             <p className="error">{sewaNoDaysError}</p>

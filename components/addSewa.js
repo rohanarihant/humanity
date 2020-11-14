@@ -185,7 +185,7 @@ export default function Sewa() {
                     socialMediaDetail && socialMediaDetail.map((detail, index) => {
                         // if (detail.sewacategory_platform === selectedIndex) {
                             return (
-                                <div style={{ marginTop: 20 }} id={`profile${index}`} class="profile">
+                                <div style={{ marginTop: 20, backgroundColor: detail.sewacategory_color }} id={`profile${index}`} class="profile">
                                     <div >
                                         <div class="profile-info-wrapper">
                                             <p class="profile-name-label" style={{ marginBottom: 0 }}>{detail.sewacategory_platform}</p>
