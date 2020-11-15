@@ -72,7 +72,7 @@ const Profile = () => {
                     <div class="profile-name">{user.usrname}</div>
                     <div class="profile-role">{ItwingRank} ({user.usrid})</div>
                     <div class="profile-location">
-                        Primary Email : {user.usrpriemail}
+                        Email : {user.usrpriemail}
                     </div>
                     <div class="profile-location">
                         Mobile No. : {user.usrmob}
@@ -94,7 +94,7 @@ const Profile = () => {
                         </svg>
                     </div> */}
                 </div>
-                <MDBContainer style={{marginTop: 110, paddingTop: 0}}>
+                <MDBContainer style={{marginTop: 150, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -162,7 +162,7 @@ const Profile = () => {
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
-                <MDBContainer style={{marginTop: 200, paddingTop: 0}}>
+                <MDBContainer style={{marginTop: 100, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -186,7 +186,7 @@ const Profile = () => {
                     </MDBRow>
                 </MDBContainer>
                 
-                <MDBContainer style={{marginTop: 150, paddingTop: 0}}>
+                <MDBContainer style={{marginTop: 0, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -206,6 +206,29 @@ const Profile = () => {
         </label>
                                 <input type="email" id="defaultFormRegisterConfirmEx" value={user.skillother} className="form-control" />
                                 <br />
+                            </form>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+                <MDBContainer style={{marginTop: 0, paddingTop: 0}}>
+                    <MDBRow width>
+                        <MDBCol md="6">
+                            <form>
+                                <p className="h4 text-center">Social Media</p>
+                                <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
+                                Facebook
+        </label>
+                                <input type="email" id="defaultFormRegisterEmailEx" value={user.facebook} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
+                                Instagram
+        </label>
+                                <input type="email" id="defaultFormRegisterConfirmEx" value={user.instagram} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                Twitter Handle
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.twhandle} className="form-control" />
                             </form>
                         </MDBCol>
                     </MDBRow>

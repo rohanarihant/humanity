@@ -24,7 +24,7 @@ const ChangeMyPassword = () => {
           const authpassword = localStorage.getItem('authpassword');
           const response = await auth.changePassword(userid, authpassword, oldPassword, newPassword);
           if (response.success) {
-            toast.info("Your Password has been changesd");
+            toast.info("Your Password has been changed");
             setRoute('login');
           } else {
             toast.error(response && response.message);

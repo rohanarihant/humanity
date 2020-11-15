@@ -8,7 +8,7 @@ const SewaResultsBlock = () => {
     const [stateResult, setStateResult] = useState([]);
     const [categoryListResult, setCategoryListResult] = useState([]);
     const [resultDate, setResultDate] = useState('');
-    const {account: { toggleShowLoader, selectedState, selectedDestrict }} = useContext(AccountContext);
+    const {account: { toggleShowLoader, selectedDestrict, selectedDestrictName }} = useContext(AccountContext);
     const cateArray = [];
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const SewaResultsBlock = () => {
             <h2 className="result-date">{resultDate}</h2>
             <table>
                 <tr>
-                    <th colspan="3" className="states-heading">Top 5 States</th>
+                    <th colspan="3" className="states-heading">{selectedDestrictName} District</th>
                 </tr>
                 <tr>
                     <th>State</th>

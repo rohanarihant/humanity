@@ -143,7 +143,7 @@ export default function Navbar({setEnableSearch, enableSearch, prevRoute}) {
             {screen}
           </Typography>
           {showAddIssueButton()}
-          {screen === 'myHazri' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
+          {screen === 'My Hazri Details' && <Search className={classes.notification} onClick={() => setEnableSearch(!enableSearch)} />}
         </Toolbar>
       </AppBar>
       <style>

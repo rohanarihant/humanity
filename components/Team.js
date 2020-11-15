@@ -38,6 +38,7 @@ TabPanel.propTypes = {
 };
 
 function a11yProps(index) {
+
   return {
     id: `nav-tab-${index}`,
     'aria-controls': `nav-tabpanel-${index}`,
@@ -113,6 +114,7 @@ export default function Escalation() {
   const addDefaultSrc = (ev) => {
     ev.target.src = './static/img/head.png';
   }
+  console.log(value,'value value')
   return (
     <div className={classes.root}>
       <NavBar prevRoute="home"/>
@@ -128,8 +130,9 @@ export default function Escalation() {
           <LinkTab label="Managemanet Members" href="/spam" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <List className={classes.listRoot}>
+      {/* <TabPanel value={value} index={0}>
+        <List className={classes.listRoot}> */}
+        <div>
           {stateMem && stateMem.map((mem) => (
             <div className="team-container">
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
@@ -143,8 +146,9 @@ export default function Escalation() {
               </div>
             </div>
           ))}
-        </List>
-      </TabPanel>
+        </div>
+        {/* </List>
+      </TabPanel> */}
       <TabPanel value={value} index={1}>
         <List className={classes.listRoot}>
           {nationalMem && nationalMem.map((mem) => (
@@ -152,7 +156,7 @@ export default function Escalation() {
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
-                <span><img className="contact-phone" src="./static/img/phone1.png" /><a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrid}</a></span>
+                <span><img className="contact-phone" src="./static/img/phone1.png" /><a href={`tel:${mem.usrmob}`} className="team-user-detail">{mem.usrmob}</a></span>
               </div>
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.statename}</p>

@@ -8,7 +8,7 @@ const SewaResults = () => {
     const [stateResult, setStateResult] = useState([]);
     const [categoryListResult, setCategoryListResult] = useState([]);
     const [resultDate, setResultDate] = useState('');
-    const {account: { toggleShowLoader, setRoute, setSelectedState, updateSelectedScreen }} = useContext(AccountContext);
+    const {account: { toggleShowLoader, setRoute, setSelectedState, setSelectedStateName }} = useContext(AccountContext);
     const cateArray = [];
 
     useEffect(() => {
@@ -35,16 +35,17 @@ const SewaResults = () => {
     }, []);
 
     const openStateResult = (state) => {
+        setSelectedStateName(state.state_name);
         setSelectedState(state.result_state_id);
         setRoute('sewaResultsDestrict');
-    } 
+    }
     return (
         <div className="result-container">
             <NavBar prevRoute="home"/>
             <h2 className="result-date">{resultDate}</h2>
             <table>
                 <tr>
-                    <th colspan="3" className="states-heading">Top 5 States</th>
+                    <th colspan="3" className="states-heading">Top States</th>
                 </tr>
                 <tr>
                     <th>State</th>

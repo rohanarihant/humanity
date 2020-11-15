@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#673ab7',
         boxShadow: '10px 10px 5px #aaaaaa',
     },
+    note: {
+        marginTop: '20px',
+        fontSize: '18px',
+        textAlign: 'center',
+    },
     link: {
         marginTop: '20px',
         fontSize: '20px'
@@ -123,12 +128,15 @@ export default function SimplePaper() {
     const router = useRouter();
     const [ItwingRank,updateItwingRank] = useState('');
     const [MemberDetaildet,setMemberDetaildet] = useState('');
+    const [userID,setUserID] = useState('');
 
     useEffect(() => {
         async function getProfile() {
             const response = await getProfileDetails();
             if (response.success) {
                 setItwingRank(response.categoryname);
+                updateItwingRank(response.categoryname);
+                setMemberDetaildet(response.MemberDetaildet);
                 localStorage.setItem('MemberDetaildet', JSON.stringify(response.MemberDetaildet));
                 localStorage.setItem('ItwingRank', JSON.stringify(response.categoryname));
                 localStorage.setItem('samiti', JSON.stringify(response.samiti));
@@ -145,16 +153,23 @@ export default function SimplePaper() {
                 setPermissions(response);
             }
         }
+        setUserID(localStorage.getItem('userId'));
         updateItwingRank(JSON.parse(localStorage.getItem('ItwingRank')));
         setMemberDetaildet(JSON.parse(localStorage.getItem('MemberDetaildet')));
         getProfile();
         checkLoginStatus();
     }, []);
+    const addDefaultSrc = (ev) => {
+        ev.target.src = './static/img/head.png';
+    }
     return (
         <div style={{ marginTop: 20 }}>
             <div className="user-detail-dashboard">
-                <p>{MemberDetaildet && MemberDetaildet[0] && MemberDetaildet[0].usrname}</p>
-                <p>{ItwingRank}</p>
+                <img class="profile-image" style={{height: 85, width: 90, borderRadius: "50%"}} src={`http://humanity.rubrutech.com/profileimage/${userID}.jpg`}  onError={(e) => addDefaultSrc(e)}  alt="profile image" />
+                <div>
+                    <p>{MemberDetaildet && MemberDetaildet[0] && MemberDetaildet[0].usrname}</p>
+                    <p>{ItwingRank}</p>
+                </div>
             </div>
             <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
                 <Grid container item xs={12} spacing={3}>
@@ -166,6 +181,9 @@ export default function SimplePaper() {
                 <Grid container item xs={12} spacing={3}>
                     <FormRowThird />
                 </Grid>
+            </Grid>
+            <Grid container justify="center" className={classes.note}>
+                If you are facing any problem with this app then please send us an email
             </Grid>
             <Grid container justify="center">
                 <Link

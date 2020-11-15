@@ -15,6 +15,7 @@ import Info from '@material-ui/icons/Info';
 import LiveTv from '@material-ui/icons/LiveTv';
 import LockOpen from '@material-ui/icons/LockOpen';
 import Notifications from '@material-ui/icons/Notifications';
+import Search from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SettingsPower from '@material-ui/icons/SettingsPower';
 import PeopleOutline from '@material-ui/icons/PeopleOutline';
@@ -95,12 +96,19 @@ export default function TemporaryDrawer() {
     !localStorage.getItem('userId') && router.push('/login');
   },[]);
   const onLogout = async() => {
-    localStorage.removeItem('userId')
-    localStorage.removeItem('authpassword')
-    await localStorage.clear();
-    updateLoginStatus(false);
-    setItwingRank('');
-    router.push('/login');
+    var conf = confirm(`Are you sure you want to logout?`);
+    if(conf){
+      localStorage.removeItem('userId')
+      localStorage.removeItem('authpassword')
+      await localStorage.clear();
+      updateLoginStatus(false);
+      setItwingRank('');
+      router.push('/login');
+    }
+  }
+  const onSearch = () => {
+    updateSelectedScreen('Search Member');
+    setRoute('searchMember');
   }
   
   const list = (anchor) => (
@@ -142,6 +150,7 @@ export default function TemporaryDrawer() {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
+          	<Search className={classes.notification} onClick={() => onSearch()} />
           	<Notifications className={classes.notification} />
             {/* onClick={() => router.push('/notifications')} */}
           	{!loginStatus &&

@@ -33,7 +33,9 @@ export class AccountProvider extends React.Component {
       sewaPointList: [],
       selectedEventDetail: {},
       selectedState: '',
+      selectedStateName: '',
       selectedDestrict: '',
+      selectedDestrictName: '',
       prevRoute: '',
     };
     this.state = this.defaultState;
@@ -61,6 +63,8 @@ export class AccountProvider extends React.Component {
       setSelectedState: this.setSelectedState.bind(this),
       setSelectedDestrict: this.setSelectedDestrict.bind(this),
       setPreviousRoute: this.setPreviousRoute.bind(this),
+      setSelectedStateName: this.setSelectedStateName.bind(this),
+      setSelectedDestrictName: this.setSelectedDestrictName.bind(this),
     };
   }
   async componentDidMount(){
@@ -141,6 +145,12 @@ export class AccountProvider extends React.Component {
   }
   async setSelectedState(selectedState){
     this.setState({selectedState});
+  }
+  async setSelectedStateName(selectedStateName){
+    this.setState({selectedStateName});
+  }
+  async setSelectedDestrictName(selectedDestrictName){
+    this.setState({selectedDestrictName});
   }
   async setSelectedDestrict(selectedDestrict){
     this.setState({selectedDestrict});

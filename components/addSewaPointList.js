@@ -30,7 +30,7 @@ const PointList = () => {
                 {
                     sewaPointList && sewaPointList.map((detail, index) => {
                         return (
-                            <div style={{ marginTop: 20, backgroundImage: `${getGradientColor(detail.sewacategory_platform)}` }} id={`profile${index}`} class="profile">
+                            <div style={{ marginTop: 20, backgroundColor: detail.sewacategory_color }} id={`profile${index}`} class="profile">
                                 <div >
                                     <div class="profile-info-wrapper">
                                         <p class="profile-name-label" style={{ marginBottom: 0 }}>{detail.sewacategory_platform}</p>

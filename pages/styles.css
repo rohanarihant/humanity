@@ -41,7 +41,7 @@
   }
   .profile-card .card-header .profile-name {
     margin-top: 0.5rem;
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: 700;
   }
   .profile-card .card-header .profile-role {
@@ -49,8 +49,9 @@
     color: #ddd;
   }
   .profile-card .card-header .profile-location {
-
+    width: 70vw;
     font-size: 15px;
+    text-align: center;
   }
   .profile-card .card-header .divider {
     position: absolute;
@@ -552,6 +553,9 @@
     font-size: 20px;
     color: #673ab7;
     font-weight: 700;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 8px;
   }
   .loader{
     position: absolute;
@@ -589,4 +593,7 @@
   }
   #selectDate {
     content: attr(placeholder);
+  }
+  .row {
+    width: 100%;
   }

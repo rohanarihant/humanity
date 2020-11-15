@@ -8,7 +8,7 @@ const SewaResultsDestrict = () => {
     const [stateResult, setStateResult] = useState([]);
     const [categoryListResult, setCategoryListResult] = useState([]);
     const [resultDate, setResultDate] = useState('');
-    const {account: { toggleShowLoader, selectedState, setSelectedDestrict, setRoute }} = useContext(AccountContext);
+    const {account: { toggleShowLoader, selectedState, setSelectedDestrict, setRoute, selectedStateName, setSelectedDestrictName }} = useContext(AccountContext);
     const cateArray = [];
 
     useEffect(() => {
@@ -35,17 +35,17 @@ const SewaResultsDestrict = () => {
     }, []);
 
     const openDestrictResult = (state) => {
+        setSelectedDestrictName(state.state_name);
         setSelectedDestrict(state.result_state_id);
         setRoute('sewaResultsBlock');
     } 
-
     return (
         <div className="result-container">
             <NavBar prevRoute="sewaResults" />
             <h2 className="result-date">{resultDate}</h2>
             <table>
                 <tr>
-                    <th colspan="3" className="states-heading">Top 5 States</th>
+                    <th colspan="3" className="states-heading">{selectedStateName} State</th>
                 </tr>
                 <tr>
                     <th>State</th>
