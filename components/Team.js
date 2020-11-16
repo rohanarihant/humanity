@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   listRoot: {
-    width: '122%',
+    width: '100%',
     maxWidth: 360,
     padding: 0,
     overflowWrap: 'break-word',
@@ -118,7 +118,7 @@ export default function Escalation() {
   return (
     <div className={classes.root}>
       <NavBar prevRoute="home"/>
-      <AppBar position="static" className={classes.container}>
+      <AppBar position="static" >
         <Tabs
           variant="fullWidth"
           value={value}
@@ -130,11 +130,11 @@ export default function Escalation() {
           <LinkTab label="Managemanet Members" href="/spam" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      {/* <TabPanel value={value} index={0}>
-        <List className={classes.listRoot}> */}
-        <div>
+      <TabPanel value={value} index={0}>
+        {/* <List className={classes.listRoot}> */}
+        {/* <div> */}
           {stateMem && stateMem.map((mem) => (
-            <div className="team-container">
+            <div className="team-container" >
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
@@ -146,9 +146,9 @@ export default function Escalation() {
               </div>
             </div>
           ))}
-        </div>
-        {/* </List>
-      </TabPanel> */}
+        {/* </div> */}
+        {/* </List> */}
+      </TabPanel>
       <TabPanel value={value} index={1}>
         <List className={classes.listRoot}>
           {nationalMem && nationalMem.map((mem) => (
@@ -185,21 +185,21 @@ export default function Escalation() {
       </TabPanel>
       <style jsx>
         {`
-        .main-container{
-          width: 122vw;
-        }
+
         .team-container{
-          display: flex;
+          display: grid;
+          grid-template-columns: 70px 100px auto;
+          gap: 10px;
         }
         .profile-image{
-          height: 90px;
-          width: 90px;
+          height: 70px;
+          width: 70px;
           border-radius: 20px;
           margin: 4px;
         }
         .team-user-details{
           padding: 10px;
-          font-size: 12px;
+          font-size: 9px;
           font-weight: 600;
         }
         .team-user-detail{
