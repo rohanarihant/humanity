@@ -199,7 +199,7 @@ export default function Escalation() {
         }
         .team-user-details{
           padding: 10px;
-          font-size: 9px;
+          font-size: 10px;
           font-weight: 600;
         }
         .team-user-detail{
