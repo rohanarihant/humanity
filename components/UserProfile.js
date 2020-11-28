@@ -6,7 +6,7 @@ import { accountApproval } from '../utils/apis';
 import { toast } from 'react-toastify';
 
 const UserProfile = () => {
-    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank}} = useContext(AccountContext);
+    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank, searchMemberBackState}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
     const selectedUserData =  selectedUser;
     const educationObj = educationList && educationList.find(edu => edu.qualificationid === userProfileData[0].usreduid);
@@ -45,9 +45,10 @@ const UserProfile = () => {
     const addDefaultSrc = (ev) => {
         ev.target.src = './static/img/head.png';
     }
+    console.log(searchMemberBackState,'searchMemberBackState')
     return (
         <>
-        <NavBar prevRoute="searchMember"/>
+        <NavBar prevRoute={searchMemberBackState} />
         {selectedUserData && selectedUserData.map(user => (
         <div class="container" >
             <div class="profile-card">
@@ -82,12 +83,12 @@ const UserProfile = () => {
                 <MDBContainer style={{marginTop: 110, paddingTop: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
-                            <form>
+                        <form>
                                 <p className="h4 text-center">Personal Information</p>
                                 <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
                                 ITW-ID
         </label>
-                                <input type="text" id="defaultFormRegisterNameEx" value={user.usrid} className="form-control" />
+                                <input type="text" id="defaultFormRegisterNameEx" value={user.stateshortname+'-'+user.usrid} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
                                 Father Name
@@ -98,6 +99,31 @@ const UserProfile = () => {
                                 Gender
         </label>
                                 <input type="email" id="defaultFormRegisterConfirmEx" value={user.usrgen} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                Country
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.countryname} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                State
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.statename} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                District
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.districtname} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                Block
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.blockname} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                Address
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.usradd} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
                                 Insan No
@@ -115,34 +141,14 @@ const UserProfile = () => {
                                 <input type="text" id="defaultFormRegisterPasswordEx" value={user.parshadtaken === '0' ? 'Yes' : 'No'} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                Blood Group
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.bloodgrp} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
                                 Devices
         </label>
                                 <input type="text" id="defaultFormRegisterPasswordEx" value={user.usrown} className="form-control" />
-                                <br />
-                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                                Address
-        </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.usradd} className="form-control" />
-                                <br />
-                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                                Block
-        </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.blockname} className="form-control" />
-                                <br />
-                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                                District
-        </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.districtname} className="form-control" />
-                                <br />
-                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                                State
-        </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.statename} className="form-control" />
-                                <br />
-                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                                Country
-        </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.countryname} className="form-control" />
                             </form>
                         </MDBCol>
                     </MDBRow>
@@ -153,25 +159,58 @@ const UserProfile = () => {
                             <form>
                                 <p className="h4 text-center">Contact Information</p>
                                 <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
+                                Mobile No.
+        </label>
+                                <input type="email" id="defaultFormRegisterEmailEx" value={user.usrmob} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
                                 Telegram No.
         </label>
                                 <input type="email" id="defaultFormRegisterEmailEx" value={user.wmobno} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
-                                Insan No :-
+                                Primary Email Id
         </label>
-                                <input type="email" id="defaultFormRegisterConfirmEx" value={user.usrinsnum} className="form-control" />
+                                <input type="email" id="defaultFormRegisterConfirmEx" value={user.usrpriemail} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                                Twitter Handle
+                                Other Email Id
         </label>
-                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.twhandle} className="form-control" />
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.usremailother} className="form-control" />
                             </form>
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
                 
                 <MDBContainer style={{marginTop: 150, paddingTop: 0}}>
+                    <MDBRow>
+                        <MDBCol md="6">
+                        <form>
+                                <p className="h4 text-center">Social Media</p>
+                                <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
+                                Facebook
+        </label>
+                                <input type="email" id="defaultFormRegisterEmailEx" value={user.facebook} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
+                                Instagram
+        </label>
+                                <input type="email" id="defaultFormRegisterConfirmEx" value={user.instagram} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                Twitter Handle
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.twhandle} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
+                                Other Twitter Handle
+        </label>
+                                <input type="text" id="defaultFormRegisterPasswordEx" value={user.othertwitterhandle} className="form-control" />
+                            </form>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+                <MDBContainer style={{marginTop: 70, paddingTop: 0, marginBottom: 0}}>
                     <MDBRow>
                         <MDBCol md="6">
                             <form>
@@ -184,12 +223,22 @@ const UserProfile = () => {
                                 <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
                                     Professional
         </label>
-                                <input type="email" id="defaultFormRegisterEmailEx" value={professionName} className="form-control" />
+                                <input type="text" id="defaultFormRegisterEmailEx" value={professionName} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
                                     Skills
         </label>
-                                <input type="email" id="defaultFormRegisterConfirmEx" value={user.skillother} className="form-control" />
+                                <input type="text" id="defaultFormRegisterConfirmEx" value={user.skillother} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
+                                    Role in Humanity
+        </label>
+                                <input type="text" id="defaultFormRegisterConfirmEx" value={localStorage.getItem('ItwingRank')} className="form-control" />
+                                <br />
+                                <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
+                                    Samiti
+        </label>
+                                <input type="text" id="defaultFormRegisterConfirmEx" value={localStorage.getItem('samiti')} className="form-control" />
                                 <br />
                             </form>
                         </MDBCol>

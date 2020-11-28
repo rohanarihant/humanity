@@ -113,7 +113,7 @@ const AddMyEvent = () => {
         </div>
         <div class="form-group">
             <label>End Date</label>
-            <input type="date" id="text" placeholder="End Date" min={MinDate} value={endDate} onChange={(e) => updateEndDate(e.target.value)} class="form-control-event" />
+            <input type="date" id="text" placeholder="End Date" min={startDate || MinDate} value={endDate} onChange={(e) => updateEndDate(e.target.value)} class="form-control-event" />
             {/* <p class="error">{startDateError}</p> */}
         </div>
         <div class="form-group">

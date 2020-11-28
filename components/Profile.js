@@ -103,7 +103,7 @@ const Profile = () => {
                                 <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
                                 ITW-ID
         </label>
-                                <input type="text" id="defaultFormRegisterNameEx" value={user.usrid} className="form-control" />
+                                <input type="text" id="defaultFormRegisterNameEx" value={user.stateshortname+'-'+user.usrid} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
                                 Father Name
@@ -164,11 +164,6 @@ const Profile = () => {
                                 Devices
         </label>
                                 <input type="text" id="defaultFormRegisterPasswordEx" value={user.usrown} className="form-control" />
-
-
-
-
-
                             </form>
                         </MDBCol>
                     </MDBRow>

@@ -38,7 +38,6 @@ class EditProfile extends React.Component{
         const {account : {educationList, professionList, toggleShowLoader}} = this.props;
         const selectedEdu = educationList && educationList.find(e => e.qualificationid === MemberDetaildet.usreduid);
         const selectedPro = professionList && professionList.find(e => e.professionid === MemberDetaildet.usrprofessionid);
-
         this.state = {
             mobileNumber: MemberDetaildet.usrmob || '',
             skills: skillsLists.filter(d => memberSkills.includes(d.name)),
@@ -52,6 +51,7 @@ class EditProfile extends React.Component{
             twitterHandle: MemberDetaildet.twhandle,
             education: (selectedEdu && selectedEdu.qualificationid) || 0,
             profession: (selectedPro && selectedPro.professionid) || 0,
+            othertwitter: MemberDetaildet.othertwitterhandle,
         }
     }
     onSelectSkill(selectedList) {
@@ -76,11 +76,11 @@ class EditProfile extends React.Component{
     async updateProfile(){
         const {mobileNumber, telegramNumber, otherEmail, twitterHandle, education, profession, skillsLists, devices,
         mobileNumberError, telegramNumberError, twitterHandleError, educationError, professionError, skills,
-        devicesList, facebookLink, instagramLink} = this.state;
+        devicesList, facebookLink, instagramLink, othertwitter} = this.state;
         const {account : {toggleShowLoader}} = this.props;
 
         const {account : {setRoute}} = this.props;
-        const fileds = ['mobileNumber', 'telegramNumber', 'twitterHandle', 'education', 'profession', 'skillsLists', 'devices'];
+        const fileds = ['mobileNumber', 'telegramNumber', 'twitterHandle', 'education', 'profession', 'skillsLists', 'devices', 'othertwitter'];
         fileds.map((field) => {
             if(this.state[field] === ''){
                 this.setState({field});
@@ -100,19 +100,20 @@ class EditProfile extends React.Component{
         }else{
             this.setState({['telegramNumberError']:``});
         }
+
         if(mobileNumber !== '' && telegramNumber !== '' && twitterHandle !== '' && education !== '' && profession !== ''
-            && mobileNumberError  === '' && telegramNumberError === '' && twitterHandleError === ''
-            && educationError === '' && professionError === ''){
+            && !mobileNumberError && !telegramNumberError && !twitterHandleError
+            && !educationError && !professionError && othertwitter !== ''){
                 toggleShowLoader(true);
                 const userid = localStorage.getItem('userId');
                 const authpassword = localStorage.getItem('authpassword');
                 const res = await auth.updateUser(userid, authpassword, mobileNumber, telegramNumber,
-                    otherEmail, twitterHandle, education, profession, skills && skills.map(({name}) => name).join(','), devices && devices.map(({name}) => name).join(','), '');
-                res.success && toast.success('User Profile updated successfully!');
+                    otherEmail, twitterHandle, education, profession, skills && skills.map(({name}) => name).join(','), devices && devices.map(({name}) => name).join(','), othertwitter);
+                // res.success && toast.success('User Profile updated successfully!');
                 res.success && setRoute('home');
                 toggleShowLoader(false);
         }
-        if(facebookLink !== '' && instagramLink !== '' ){
+        if(facebookLink !== '' && instagramLink !== ''){
             toggleShowLoader(true);
             const userid = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
@@ -125,7 +126,7 @@ class EditProfile extends React.Component{
     render(){
         const {mobileNumber, telegramNumber, otherEmail, twitterHandle, education, profession, skills, device,
             mobileNumberError, telegramNumberError, otherEmailError, twitterHandleError, educationError,
-            professionError, facebookLink, instagramLink} = this.state;
+            professionError, facebookLink, instagramLink, othertwitter, othertwitterError} = this.state;
         const {account : { educationList, professionList}} = this.props;
     return (
         <div>
@@ -198,6 +199,11 @@ class EditProfile extends React.Component{
                             <div class="form-group">
                                 <label for="text">Instagram Link</label>
                                 <input type="text" id="text" name="instagramLink" placeholder="Twitter Handle" value={instagramLink} onChange={(e) => this.updateField(e)} class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="text">Other Twitter Handles</label>
+                                <input type="text" id="text" name="othertwitter" placeholder="Other Twitter Handles" value={othertwitter} onChange={(e) => this.updateField(e)} class="form-control" />
+                                <p class="error">{othertwitterError}</p>
                             </div>
                             <p class="iconSwitch" onClick={() => this.updateProfile()}>Update Profile</p>
                         </>

@@ -40,7 +40,7 @@ export default function SearchMember() {
     const [officialHandlerDetail, setofficialHandlerDetail] = React.useState(['Select']);
     const [searchKeyword, updateSearchKeyword] = React.useState('');
     const [listSearchedUser, updateListSearchedUser] = React.useState([]);
-    const {account: { setRoute, toggleShowLoader, setChangeRoleUser, screen, setSelectedUser }} = useContext(AccountContext);
+    const { account: { setRoute, toggleShowLoader, setChangeRoleUser, screen, setSelectedUser } } = useContext(AccountContext);
 
     const handleClick = () => {
     };
@@ -94,20 +94,20 @@ export default function SearchMember() {
     //     }
     //     getSearchUserList();
     // },[searchKeyword]);
-    const onMemberClick = async(e, user) => {
+    const onMemberClick = async (e, user) => {
         setChangeRoleUser([user]);
         const userId = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
         const usrid = user.usrid;
         const response = await searchUsers.getUserDetail(userId, authpassword, usrid);
-        if(response.success){
+        if (response.success) {
             setSelectedUser(response.MemberDetaildet);
         }
         setRoute((screen === 'Delete Profile' || screen === 'Search Members') ? 'userProfile' : 'changeRole');
     }
-    const searcForUsers = async(e) => {
+    const searcForUsers = async (e) => {
         const key = e.keyCode || e.charCode;
-        if(key === 13){
+        if (key === 13) {
             toggleShowLoader(true);
             const userId = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
@@ -115,34 +115,39 @@ export default function SearchMember() {
             const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
             const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
             const response = await searchUsers.listUserSearch(userId, authpassword, gender, searchKeyword, power);
-            if(response.success){
+            if (response.success) {
                 updateListSearchedUser(response.MemberDetaildet);
             }
             toggleShowLoader(false);
         }
     }
-    
+    const addDefaultSrc = (ev) => {
+     ev.target.src = './static/img/head.png';
+    }
     return (
         <div className="official-info">
             <NavBar prevRoute="home" />
             <div className="issues-container">
-            <div>
-                <input type="text" name="search" autocomplete="off" className="search-input" placeholder="Search user and enter" value={searchKeyword} onChange={(e) => updateSearchKeyword(e.target.value)} onKeyPress={(e) => searcForUsers(e)} />
-            </div>
+                <div>
+                    <input type="text" name="search" autocomplete="off" className="search-input" placeholder="Search user and enter" value={searchKeyword} onChange={(e) => updateSearchKeyword(e.target.value)} onKeyPress={(e) => searcForUsers(e)} />
+                </div>
                 {
                     listSearchedUser && listSearchedUser.map((user) => {
-                            return (
-                                <div className="search-user" onClick={(e) => onMemberClick(e.target.value,user)}>
+                        return (
+                            <div>
+                                <div className="search-user" onClick={(e) => onMemberClick(e.target.value, user)}>
+                                <img src={`http://humanity.rubrutech.com/profileimage/${user.usrid}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
                                     <div className="memberList">
                                         <span>{user.usrname}</span>
-                                        <span>{user.blockname}</span>
+                                        <span>{user.categoryname}</span>
                                     </div>
                                     <div className="mem-contact" ><img className="contact-phone" src="./static/img/phone1.png" /><a href={`tel:${user.wmobno}`} className="team-user-detail">{user.wmobno}</a></div>
 
-                                        {/* <p className="mobile-number">{}</p> */}
-                                        <p className="mobile-number">{user.usrpriemail}</p>
+                                    {/* <p className="mobile-number">{}</p> */}
+                                    <p className="mobile-number">{user.usrpriemail}</p>
                                 </div>
-                            )
+                            </div>
+                        )
                     })
                 }
             </div>
@@ -156,6 +161,9 @@ export default function SearchMember() {
                     margin: 3vw 10px;
                     width: 100%;
                 }
+                .memberList{
+                    margin-left: 55px;
+                }
                 .search-user{
                     margin-top: 20px;
                     border: 1px solid #ddd;
@@ -164,7 +172,7 @@ export default function SearchMember() {
                     padding: 10px;
                     background-color: rgb(235, 224, 255);
                     border: 1px solid #673ab7;
-                    width: 90%;
+                    width: 95%;
                     font-weight: 500;
                     left: 0%;
                     margin: 10px 19px;
@@ -173,6 +181,7 @@ export default function SearchMember() {
                     text-align: center;
                     margin: 5px;
                     font-size: 20px;
+                    margin-left: 40px;
                 }
                 .contact-phone{
                     height: 24px;
@@ -182,7 +191,14 @@ export default function SearchMember() {
                 .mem-contact{
                     display: flex;
                     justify-content: center;
+                    margin-left: 40px;
                 }
+                .event-user-image{
+                    height: 70px;
+                    border-radius: 50%;
+                    position: absolute;
+                    left: 25px;
+                  }
                 `}
             </style>
         </div>

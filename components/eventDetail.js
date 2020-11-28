@@ -1,8 +1,12 @@
 import React, { useContext } from 'react';
 import AccountContext from '../contexts/accountContext';
 import Navbar from './NavBarBack';
+const getEventCreatedBy = (userRoles, event) => {
+  const match = userRoles.map((role) => role.categoryid === event.CreateBy);
+  return match && match.categoryid;
+}
 const EventDetail = () => {
-    const { account: { selectedEventDetail: event } } = useContext(AccountContext);
+    const { account: { selectedEventDetail: event , userRoles} } = useContext(AccountContext);
 
     return(
         <>
@@ -12,12 +16,13 @@ const EventDetail = () => {
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
               <p className="event-text">{event.Title}</p>
-              <p className="event-schedule">From {event.FromDate} to {event.ToDate}</p>
+              <p className="event-schedule">From: {event.FromDate} to {event.ToDate}</p>
+              <p className="event-schedule">Created By: {event.usrname}{getEventCreatedBy(userRoles, event)}</p>
             </div>
           </div>
           <p className="event-description event-text">{event.Caption}</p>
           <p className="event-user event-text">{event.test}</p>
-          <p className="event-date event-text">{event.CreateON}</p>
+          <p className="event-date event-text">Created On: {event.CreateON}</p>
           <style jsx>
         {`
       .event-container{
@@ -40,6 +45,7 @@ const EventDetail = () => {
       }
       .event-schedule{
         font-size: 15px;
+        margin-bottom: 0px;
       }
       .event-user-image{
         height: 70px;

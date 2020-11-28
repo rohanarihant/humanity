@@ -69,7 +69,7 @@ const MyHazri = () => {
       setPage(0);
     };
     async function getMyHazri() {
-        toggleShowLoader(true);
+        // toggleShowLoader(true);
         const userid = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
         const power = localStorage.getItem('power');
@@ -77,14 +77,13 @@ const MyHazri = () => {
         if (response.success) {
           setUserHazri(response.sewalist);
           setTotalHazri(response.hazri);
-          toggleShowLoader(false);
         }else{
           setUserHazri([]);
           setResponseMsg(response.message);
           setTotalHazri(response.hazri);
-          toggleShowLoader(false);
         }
-    }
+        // toggleShowLoader(false);
+      }
     useEffect(() => {
         getMyHazri();
     }, []);

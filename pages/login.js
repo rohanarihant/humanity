@@ -58,7 +58,7 @@ const LoginRegister = () => {
         <form action="#">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="text" placeholder="Enter Email Address" value={email} onChange={(e) => updateEmail(e.target.value)} class="form-control" />
+            <input type="email" id="text" autocomplete="off" placeholder="Enter Email Address" value={email} onChange={(e) => updateEmail(e.target.value)} class="form-control" />
             <p class="error">{emailError}</p>
           </div>
 

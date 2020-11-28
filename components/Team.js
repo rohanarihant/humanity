@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import NavBar from './NavBarBack';
 import List from '@material-ui/core/List';
-import { user } from '../utils/apis';
+import { user, searchUsers } from '../utils/apis';
 import AccountContext from '../contexts/accountContext';
 
 function TabPanel(props) {
@@ -82,7 +82,7 @@ export default function Escalation() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { account: { toggleShowLoader } } = useContext(AccountContext);
+  const { account: { toggleShowLoader, screen, setSelectedUser, setRoute, setSearchMemberBackState } } = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
@@ -114,7 +114,20 @@ export default function Escalation() {
   const addDefaultSrc = (ev) => {
     ev.target.src = './static/img/head.png';
   }
-  console.log(value,'value value')
+  const onMemberClick = async (user) => {
+    const ItwingRank = JSON.parse(localStorage.getItem('ItwingRank'));
+    if(["Management Member","National Member","State Member"].includes(ItwingRank)){
+      const userId = localStorage.getItem('userId');
+      const authpassword = localStorage.getItem('authpassword');
+      const usrid = user.usrid;
+      const response = await searchUsers.getUserDetail(userId, authpassword, usrid);
+      if (response.success) {
+          setSelectedUser(response.MemberDetaildet);
+      }
+      setRoute('userProfile');
+      setSearchMemberBackState('team');
+    }
+}
   return (
     <div className={classes.root}>
       <NavBar prevRoute="home"/>
@@ -134,7 +147,7 @@ export default function Escalation() {
         {/* <List className={classes.listRoot}> */}
         {/* <div> */}
           {stateMem && stateMem.map((mem) => (
-            <div className="team-container" >
+            <div className="team-container" onClick={() => onMemberClick(mem)}>
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
@@ -152,7 +165,7 @@ export default function Escalation() {
       <TabPanel value={value} index={1}>
         <List className={classes.listRoot}>
           {nationalMem && nationalMem.map((mem) => (
-            <div className="team-container">
+            <div className="team-container" onClick={() => onMemberClick(mem)}>
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>
@@ -169,7 +182,7 @@ export default function Escalation() {
       <TabPanel value={value} index={2}>
         <List className={classes.listRoot}>
           {managementMem && managementMem.map((mem) => (
-            <div className="team-container">
+            <div className="team-container" onClick={() => onMemberClick(mem)}>
               <img src={`http://humanity.rubrutech.com/profileimage/${mem.usrid}.jpg`} onError={(e) => addDefaultSrc(e)} className="profile-image" />
               <div className="team-user-details">
                 <p className="team-user-detail">{mem.usrname}</p>

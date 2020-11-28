@@ -88,6 +88,10 @@ class Register extends React.Component{
             blocksList:[],
             educationList: educationList,
             professionList: professionList,
+            instagramProfile: '',
+            instagramProfileError: '',
+            facebookProfile: '',
+            facebookProfileError: '',
         }
         // const {account: {getLogin}} = useContext(AccountContext);
         this.checkForm = this.checkForm.bind(this);
@@ -190,6 +194,7 @@ class Register extends React.Component{
                     }
                     const response = await auth.register(payload);
                     if(response.success){
+                      // await auth.uploadSocialMedia(userid, authpassword, facebookLink, instagramLink, twitterHandle);
                     toast.success('Account Created Successfully');
                     Router.push({
                         pathname: '/login',
@@ -289,7 +294,8 @@ class Register extends React.Component{
             addressError, dateofBirth, dateofBirthError, email, emailError, alternateEmail, password, passwordError,
             confirmPassword, confirmPasswordError, mobileNo, mobileNoError, telegramMobileNo, telegramMobileNoError,
             twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, educationList, professionList, twitterHandleError,
-            profession, educationError, block, blockError, blocksList, alternateEmailError, professionError } = this.state;
+            profession, educationError, block, blockError, blocksList, alternateEmailError, professionError, instagramProfile,
+            instagramProfileError, facebookProfile, facebookProfileError } = this.state;
     return(
         <div class="container" id="myApp">
   <section class="section login" v-class="flip : signup">
@@ -300,7 +306,7 @@ class Register extends React.Component{
       <> */}
       <div class="form-group">
         <label for="email">Email</label><span class="asterisk">*</span>
-        <input type="email" id="text" name="email" value={email} onChange={(e) => this.updateField(e)} class="form-control" />
+        <input type="email" id="text" autocomplete="off" name="email" value={email} onChange={(e) => this.updateField(e)} class="form-control" />
         <p class="error">{emailError}</p>
       </div>
 
@@ -379,6 +385,16 @@ class Register extends React.Component{
         <input type="text" id="text" name="twitterHandle" value={twitterHandle} onChange={(e) => this.updateField(e)} class="form-control" />
         <p class="error">{twitterHandleError}</p>
       </div>
+      {/* <div class="form-group">
+        <label for="email">Your Facebook Profile Link</label><span class="asterisk">*</span>
+        <input type="text" id="text" name="facebookProfile" value={facebookProfile} onChange={(e) => this.updateField(e)} class="form-control" />
+        <p class="error">{facebookProfileError}</p>
+      </div>
+      <div class="form-group">
+        <label for="email">Your Instagram Profile Link</label><span class="asterisk">*</span>
+        <input type="text" id="text" name="instagramProfile" value={instagramProfile} onChange={(e) => this.updateField(e)} class="form-control" />
+        <p class="error">{instagramProfileError}</p>
+      </div> */}
 
 
 

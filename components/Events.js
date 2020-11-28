@@ -16,7 +16,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
-import { events } from '../utils/apis';
+import { events, searchUsers } from '../utils/apis';
 import { useRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
 
@@ -87,7 +87,7 @@ export default function Events() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { account: { getProfileDetails, setRoute, toggleShowLoader, saveSelectedEvent } } = useContext(AccountContext);
+  const { account: { getProfileDetails, setRoute, toggleShowLoader, saveSelectedEvent, setUserRoles, userRoles } } = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
@@ -108,6 +108,8 @@ export default function Events() {
       const blockid = MemberDetaildet && MemberDetaildet[0].usrblkid;
       const response = await events.getEvents(userid, authpassword, gender, power, countryid, stateid, blockid, new Date().toLocaleDateString());
       response.success && setEventsList(response.eventslist);
+      const res = await searchUsers.getUserRoles();
+      res.success && setUserRoles(res.myrole);
       toggleShowLoader(false);
     }
     getMyEvents();
@@ -122,6 +124,10 @@ export default function Events() {
   const getEventDetail = (event) => {
     saveSelectedEvent(event);
     setRoute('eventDetail');
+  }
+  const getEventCreatedBy = (userRoles, event) => {
+    const match = userRoles.map((role) => role.categoryid === event.CreateBy);
+    return match && match.categoryid;
   }
   return (
     <div className={classes.root}>
@@ -145,12 +151,13 @@ export default function Events() {
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
               <p className="event-text">{event.usrname}</p>
-              <p className="event-schedule">{event.FromDate} - {event.ToDate}</p>
+              <p className="event-schedule">From: {event.FromDate} - {event.ToDate}</p>
+              <p className="event-schedule">Created By: {event.usrname}{getEventCreatedBy(userRoles, event)}</p>
             </div>
           </div>
           <p className="event-description event-text">{event.Title}</p>
           {/* <p className="event-user event-text">{event.test}</p> */}
-          <p className="event-date event-text">{event.CreateON}</p>
+          <p className="event-date event-text">Created On: {event.CreateON}</p>
 
         </div>)}
       })}
@@ -163,12 +170,14 @@ export default function Events() {
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
               <p className="event-text">{event.usrname}</p>
-              <p className="event-schedule">From {event.FromDate} to {event.ToDate}</p>
+              <p className="event-schedule">From: {event.FromDate} to {event.ToDate}</p>
+              <p className="event-schedule">Created By: {event.usrname}{getEventCreatedBy(userRoles, event)}</p>
+
             </div>
           </div>
           <p className="event-description event-text">{event.Title}</p>
           {/* <p className="event-user event-text">{event.test}</p> */}
-          <p className="event-date event-text">{event.CreateON}</p>
+          <p className="event-date event-text">Created On: {event.CreateON}</p>
 
         </div>)}
       })}
@@ -186,7 +195,7 @@ export default function Events() {
       .event-title{
         font-size: 20px;
         display:flex;
-        font-weight: 600;
+        font-weight: 500;
       }
       .event-description{
         margin: 5px 0px;
@@ -196,6 +205,7 @@ export default function Events() {
       }
       .event-schedule{
         font-size: 15px;
+        margin-bottom:0px;
       }
       .event-user-image{
         height: 70px;

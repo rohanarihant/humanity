@@ -37,6 +37,8 @@ export class AccountProvider extends React.Component {
       selectedDestrict: '',
       selectedDestrictName: '',
       prevRoute: '',
+      userRoles: [],
+      searchMemberBackState: 'searchMember',
     };
     this.state = this.defaultState;
 
@@ -65,6 +67,8 @@ export class AccountProvider extends React.Component {
       setPreviousRoute: this.setPreviousRoute.bind(this),
       setSelectedStateName: this.setSelectedStateName.bind(this),
       setSelectedDestrictName: this.setSelectedDestrictName.bind(this),
+      setSearchMemberBackState: this.setSearchMemberBackState.bind(this),
+      setUserRoles: this.setUserRoles.bind(this),
     };
   }
   async componentDidMount(){
@@ -154,6 +158,12 @@ export class AccountProvider extends React.Component {
   }
   async setSelectedDestrict(selectedDestrict){
     this.setState({selectedDestrict});
+  }
+  async setUserRoles(userRoles){
+    this.setState({userRoles});
+  }
+  async setSearchMemberBackState(searchMemberBackState){
+    this.setState({searchMemberBackState});
   }
   render() {
     const context = {
