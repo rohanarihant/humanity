@@ -106,11 +106,13 @@ class Register extends React.Component{
     }
 
     async componentDidMount(){
-      console.log(this.props,'props props');
-      // toggleShowLoader(true);
-      await this.setState({educationList : JSON.parse(localStorage.getItem('educationList'))});
-      await this.setState({professionList : JSON.parse(localStorage.getItem('professionList'))});
-      // toggleShowLoader(false);
+      const {account: { toggleShowLoader }} = this.props;
+
+      toggleShowLoader(true);
+      const eduList = await user.getEducationList();
+      const proList = await user.getProfessionList();
+      this.setState({educationList : eduList.educations,professionList: proList.profession });
+      toggleShowLoader(false);
       }
 
     validateField(selectedPage, pageNo){
@@ -292,9 +294,12 @@ class Register extends React.Component{
             twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, educationList, professionList, twitterHandleError,
             profession, educationError, block, blockError, blocksList, alternateEmailError, professionError, instagramProfile,
             instagramProfileError, facebookProfile, facebookProfileError } = this.state;
+        const {account: { showLoader }} = this.props;
     return(
         <div class="container" id="myApp">
-  <section class="section login" v-class="flip : signup">
+          		{showLoader && <img className="loader" src="./static/img/loader.svg" />}
+
+  <section class="section login" v-class="flip : signup" style={{opacity : showLoader ? 0.2 : 1 }}>
       {pageNo !== 0 && <img src="./static/img/back.png" class="back-button" onClick={this.moveBack} />}
     <h2>SignUp</h2>
     <form action="#">

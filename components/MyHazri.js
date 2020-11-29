@@ -147,8 +147,8 @@ const MyHazri = () => {
                                 {row.sewaatplace}
                             </TableCell>
                             <TableCell key={index} padding="none">
-                                {row.sewatime}
-                                <img src="./static/img/delete.svg" style={{height: 20}} onClick={() => deleteHazri(row.sewaid)} />
+                                {Math.round(parseFloat(row.sewatime))}
+                                <img src="./static/img/delete.svg" style={{height: 20, marginLeft: 10}} onClick={() => deleteHazri(row.sewaid)} />
                             </TableCell>
                         </TableRow>
                     );

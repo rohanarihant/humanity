@@ -56,7 +56,7 @@ const UserProfile = () => {
                     <img class="profile-image" src={`http://humanity.rubrutech.com/profileimage/${user.usrid}.jpg`}  onError={(e) => addDefaultSrc(e)}  alt="profile image" />
                     <img className="profile-image-upload" src={`./static/img/upload-image.png`} alt="profile image" onClick={() => updateShowImageUpload(!showImageUpload)} />
                     <div class="profile-name">{user.usrname}</div>
-                    <div class="profile-role">{user.categoryname} ({user.usrid})</div>
+                    <div class="profile-role">{user.categoryname} ({user.stateshortname+'-'+user.usrid})</div>
                     <div class="profile-location">
                         Email : {user.usrpriemail}
                     </div>

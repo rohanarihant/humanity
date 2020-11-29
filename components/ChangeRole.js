@@ -6,7 +6,7 @@ import { searchUsers } from '../utils/apis';
 import { toast } from 'react-toastify';
 const roleList = ['National Member', 'State Member', 'District Member', 'Team Member', 'Block Member', 'Legal Member'];
 const Profile = () => {
-    const {account: { changeRoleUser, setRoute, screen, title}} = useContext(AccountContext);
+    const {account: { changeRoleUser, setRoute, screen, title, toggleShowLoader}} = useContext(AccountContext);
     const [role, setRole] = useState('');
     const [myrole, setMyrole] = useState([]);
     const [approveMember, updateApproveMember] = useState(false);
@@ -16,10 +16,14 @@ const Profile = () => {
     const [broadcast, updateBroadcast] = useState(false);
 
     const updateRole = async(user) => {
+        toggleShowLoader(true);
         const userid = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
         const power = localStorage.getItem('power');
         const res = await searchUsers.updateUserRole(userid, authpassword, user.usrid, role, userid);
+        res.success && toast.success('Role updated Successfully');
+        toggleShowLoader(false);
+        setRoute('searchMember');
     }
     const updateUserPermission = async(user) => {
         const userid = localStorage.getItem('userId');

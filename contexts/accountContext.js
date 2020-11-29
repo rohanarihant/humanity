@@ -77,7 +77,7 @@ export class AccountProvider extends React.Component {
       ItwingRank: JSON.parse(localStorage.getItem('ItwingRank')) || '',
       samiti: localStorage.getItem('samiti') || '',
     });
-    await this.getEduProList();
+    // await this.getEduProList();
   }
   async getEduProList(){
     const eduList = await user.getEducationList();

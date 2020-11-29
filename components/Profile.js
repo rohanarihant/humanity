@@ -71,7 +71,7 @@ const Profile = () => {
                     <img className="profile-image-upload" src={`./static/img/upload-image.png`} alt="profile image" onClick={() => updateShowImageUpload(!showImageUpload)} />
                     {showImageUpload && <input type="file" className="form-control" id="img" name="img" accept="image/*" onChange={(e) => selectImage(user.usrid,e)}/>}
                     <div class="profile-name">{user.usrname}</div>
-                    <div class="profile-role">{ItwingRank} ({user.usrid})</div>
+                    <div class="profile-role">{ItwingRank} ({user.stateshortname+'-'+user.usrid})</div>
                     <div class="profile-location">
                         Email : {user.usrpriemail}
                     </div>
