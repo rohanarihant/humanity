@@ -34,7 +34,7 @@ const bloodGroupList = ['A+','A-','B+','B-','AB+','AB-','O+','O-']
 class Register extends React.Component{
   constructor(props){
     super(props);
-    const {account: { educationList, professionList }} = props;
+    const {account: { educationList, professionList, toggleShowLoader }} = props;
         this.state = {
             pageNo: 0,
             email: '',
@@ -106,15 +106,11 @@ class Register extends React.Component{
     }
 
     async componentDidMount(){
-      this.setState({educationList : JSON.parse(localStorage.getItem('educationList'))});
-      this.setState({professionList : JSON.parse(localStorage.getItem('professionList'))});
-        // if(localStorage.getItem('userId') !== '' && localStorage.getItem('authpassword') !== ''){
-        //   Router.push({
-        //     pathname: '/',
-        // });
-        // }
-
-
+      console.log(this.props,'props props');
+      // toggleShowLoader(true);
+      await this.setState({educationList : JSON.parse(localStorage.getItem('educationList'))});
+      await this.setState({professionList : JSON.parse(localStorage.getItem('professionList'))});
+      // toggleShowLoader(false);
       }
 
     validateField(selectedPage, pageNo){
