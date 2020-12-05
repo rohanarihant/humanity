@@ -103,7 +103,7 @@ export default function SearchMember() {
         if (response.success) {
             setSelectedUser(response.MemberDetaildet);
         }
-        setRoute((screen === 'Delete Profile' || screen === 'Search Members') ? 'userProfile' : 'changeRole');
+        setRoute(((screen === 'Delete Profile') || (screen === 'Search Member')) ? 'userProfile' : 'changeRole');
     }
     const searcForUsers = async (e) => {
         const key = e.keyCode || e.charCode;
@@ -181,7 +181,7 @@ export default function SearchMember() {
                     text-align: center;
                     margin: 5px;
                     font-size: 20px;
-                    margin-left: 40px;
+                    margin-left: 50px;
                 }
                 .contact-phone{
                     height: 24px;

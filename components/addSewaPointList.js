@@ -35,7 +35,7 @@ const PointList = () => {
                                     <div class="profile-info-wrapper">
                                         <p class="profile-name-label" style={{ marginBottom: 0 }}>{detail.sewacategory_platform}</p>
                                         <div class='social-links'>
-                                            {detail.sewacategory_title}
+                                            {detail.sewacategory_detail}
                                         </div>
                                         <div className="sewa-category">
                                             <p>Points:- {detail.sewacategory_point}</p>

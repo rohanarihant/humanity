@@ -66,7 +66,6 @@ export default function SplitButton() {
     };
 
     const handleMenuItemClick = (event, index) => {
-        console.log(index, 'index')
         setSelectedIndex(index);
         setOpen(false);
     };

@@ -283,7 +283,7 @@
 
 
   .profile {
-    min-height: 200px;
+    min-height: 120px;
     width: calc(100% - 20px);
     margin: 0 auto;
     margin-bottom: 1em;

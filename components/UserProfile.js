@@ -45,7 +45,6 @@ const UserProfile = () => {
     const addDefaultSrc = (ev) => {
         ev.target.src = './static/img/head.png';
     }
-    console.log(searchMemberBackState,'searchMemberBackState')
     return (
         <>
         <NavBar prevRoute={searchMemberBackState} />

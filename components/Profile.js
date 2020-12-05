@@ -59,7 +59,6 @@ const Profile = () => {
     const addDefaultSrc = (ev) => {
         ev.target.src = './static/img/head.png';
     }
-    console.log(selectedUserData,'user user')
     return (
         <>
         <NavBar prevRoute="home"/>
