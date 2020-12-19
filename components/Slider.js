@@ -8,30 +8,17 @@ function ControlledCarousel() {
     const handleSelect = (selectedIndex, e) => {
       setIndex(selectedIndex);
     };
-  
+    const imagesList = ['slide_1.png','slide_2.jpg','slide_3.jpg','slide_5.jpg',]
     return (
       <Carousel activeIndex={index} interval={1000} pause={"hover"|false} onSelect={handleSelect}>
-        <Carousel.Item>
+        {imagesList.map(img => (<Carousel.Item>
           <img
-            className="d-block w-100 h-100"
-            src="static/slides/slide_1.png"
+            className="d-block w-100"
+            src={`static/slides/${img}`}
             alt="First slide"
+            style={{height: 200}}
           />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100 h-100"
-            src="static/slides/slide_2.jpg"
-            alt="Second slide"
-          />
-        </Carousel.Item>
-        {/* <Carousel.Item>
-          <img
-            className="d-block w-100 h-100"
-            src="static/slides/slide_3.jpg"
-            alt="Third slide"
-          />
-        </Carousel.Item> */}
+        </Carousel.Item>))}
       </Carousel>
     );
   }

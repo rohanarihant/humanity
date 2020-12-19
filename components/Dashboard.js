@@ -39,9 +39,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '20px',
         fontSize: '18px',
         textAlign: 'center',
+        color: '#673ab7',
     },
     link: {
-        marginTop: '20px',
+        margin: '20px',
         fontSize: '20px'
     }
 }));
