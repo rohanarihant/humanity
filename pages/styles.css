@@ -186,6 +186,8 @@
     border-radius: 8px;
     background-color: #f5f3f3;
     color: #fff;
+    z-index: 2;
+    position: relative;
   }
   
   .section {
