@@ -1,10 +1,9 @@
 import Workbook from 'react-excel-workbook'
  
-const example = (selectedStateData) => {
-  console.log(selectedStateData,'selectedStateData selectedStateData')
+const example = (selectedStateData) => {  
   return(
   <div className="row text-center" style={{marginTop: '100px'}}>
-    <Workbook filename="membersReport.xlsx" element={<button className="btn btn-lg btn-primary">Open</button>}>
+    <Workbook filename="membersPointsReport.xlsx" element={<button className="btn btn-lg btn-primary">Open</button>}>
       <Workbook.Sheet data={selectedStateData.selectedStateData} name="Sheet A">
         <Workbook.Column label="User Name" value="usrname"/>
         <Workbook.Column label="Father Name" value="usrfatnam"/>

@@ -24,12 +24,12 @@ export default function DownloadPoints() {
         }
         getALLStates();
     },[]);
-    async function parseDownloadPoints(stateRecord){
+    function parseDownloadPoints(stateRecord){
         stateRecord && stateRecord.map((rec) => {
             let totalPoints = 0;
             rec.point && rec.point.map(points => {
                 if(points.sewacategory_platform){
-                    rec[points.sewacategory_platform && points.sewacategory_platform.split(" ").join("")] = points.totpoint;
+                    rec[points.sewacategory_platform && points.sewacategory_platform.split(" ").join("")] = points.totpoint || 0;
                     totalPoints += points.totpoint && Number(points.totpoint);
                 }
             });
@@ -45,7 +45,7 @@ export default function DownloadPoints() {
         const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
         const stateRecord = await download.downloadMembersPoints(userid, authpassword, selectedState, gender);
         stateRecord.length > 0 && parseDownloadPoints(stateRecord);
-        stateRecord.length > 0 && updateSelectedStateData(parseDownloadPoints(stateRecord));
+        stateRecord.length > 0 && await updateSelectedStateData(parseDownloadPoints(stateRecord));
         stateRecord.length === 0 && updateError('No Record Found');
         toggleShowLoader(false);
     }
