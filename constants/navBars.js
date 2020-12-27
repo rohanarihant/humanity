@@ -68,6 +68,7 @@ const ManagementMembers = [
     {title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'},
     {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
     {title: 'Download', icon: <Person />, route: 'download'},
+    {title: 'Download Points', icon: <Person />, route: 'downloadPoints'},
     {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
     {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
 ];

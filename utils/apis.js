@@ -245,6 +245,10 @@ async function fetchData({
       endpoint: `downloadapi/download_selected_state_json/${userid}/${authpassword}/${countryid}/${gender}`,
       data: {}
     }),
+    downloadMembersPoints: async (userid, authpassword, countryid, gender) => postData({
+      endpoint: `downloadapi/download_selected_state_sewapoint_json/${userid}/${authpassword}/${countryid}/${gender}`,
+      data: {}
+    }),
   };
   export const accountApproval = {
     fetchPendingAccounts: async (userid, authpassword,power, countryid, stateid, gender) => postData({

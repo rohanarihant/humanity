@@ -129,6 +129,11 @@ export default function Events() {
     const match = userRoles.map((role) => role.categoryid === event.CreateBy);
     return match && match.categoryid;
   }
+  function checkDate(dateUntil){
+    const dUntil = new Date(dateUntil);
+    const currentDateTime = new Date();
+    return new Date(dUntil).setHours(0,0,0,0) >= new Date(currentDateTime).setHours(0,0,0,0);
+  }
   return (
     <div className={classes.root}>
       <NavBar prevRoute="home"/>
@@ -145,7 +150,7 @@ export default function Events() {
       </AppBar>
       <TabPanel value={value} index={0}>
       {eventsList && eventsList.map(event => {
-        if(new Date() - new Date(event.ToDate) < 0){
+        if(checkDate(event.ToDate)){
           return(<div className="event-container" onClick={() => setRoute('eventDetail')}>
           <div className="event-title">
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
@@ -164,7 +169,7 @@ export default function Events() {
       </TabPanel>
       <TabPanel value={value} index={1}>
       {eventsList && eventsList.map(event => {
-        if(new Date() - new Date(event.ToDate) > 0){
+        if(!checkDate(event.ToDate)){
           return(<div className="event-container" onClick={() => getEventDetail(event)}>
           <div className="event-title">
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />

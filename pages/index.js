@@ -19,6 +19,7 @@ import ChangeRole from '../components/ChangeRole';
 import ApproveAccounts from '../components/ApproveAccounts';
 import MemberDetail from '../components/memberDetail';
 import Download from '../components/download';
+import DownloadPoints from '../components/downloadPoints';
 import IssueDetail from '../components/issueDetail';
 import ChangeMyPassword from '../components/changePassword';
 import SewaResults from '../components/sewaResults';
@@ -69,6 +70,8 @@ const Index = () => {
 			return <MemberDetail />;
 			case 'download':
 			return <Download />;
+			case 'downloadPoints':
+			return <DownloadPoints />;
 			case 'changeMyPassword':
 			return <ChangeMyPassword />;
 			case 'sewaResults':
