@@ -441,7 +441,7 @@
     padding: 15px;
     font-size: 15px;
     font-weight: 600;
-    color: #673ab7;
+    color: #3D8EE1;
   }
 
   .plus-icon{
@@ -476,7 +476,7 @@
   .total-hazri{
     font-size: 20px;
     text-align: center;
-    color: #673ab7;
+    color: #3D8EE1;
     font-weight: 600;
     margin-bottom: 0rem;
   }
@@ -484,7 +484,7 @@
   .search-date-icon{
     width: 2rem !important;
     height: 2rem !important;
-    fill: #673ab7 !important;
+    fill: #3D8EE1 !important;
   }
   .create-event-container{
     margin-top: 80px;
@@ -554,7 +554,7 @@
   .user-detail-dashboard{
     text-align: center;
     font-size: 20px;
-    color: #673ab7;
+    color: #3D8EE1;
     font-weight: 700;
     display: flex;
     justify-content: space-evenly;
@@ -605,6 +605,6 @@
   }
   .carousel-inner{
     margin-left: 6px;
-    border: 3px solid #673ab7;
+    border: 3px solid #3D8EE1;
     border-radius: 10px;
   }

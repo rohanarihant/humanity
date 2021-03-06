@@ -6,7 +6,7 @@ import { searchUsers } from '../utils/apis';
 import { toast } from 'react-toastify';
 const roleList = ['National Member', 'State Member', 'District Member', 'Team Member', 'Block Member', 'Legal Member'];
 const Profile = () => {
-    const {account: { changeRoleUser, setRoute, screen, title, toggleShowLoader}} = useContext(AccountContext);
+    const {account: { changeRoleUser, setRoute, screen, title, toggleShowLoader, selectedUser}} = useContext(AccountContext);
     const [role, setRole] = useState('');
     const [myrole, setMyrole] = useState([]);
     const [approveMember, updateApproveMember] = useState(false);
@@ -40,7 +40,22 @@ const Profile = () => {
         const res = await searchUsers.getUserRoles();
         setMyrole(res.myrole);
         }
+        async function getPermissionDetail(){
+        const userid = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const memId = selectedUser && selectedUser[0].usrid;
+        const power = selectedUser && selectedUser[0].categoryname;
+        const ress = await searchUsers.getPermissionDetail(userid, authpassword, memId, power);
+        if(ress && ress.success){
+            updateApproveMember(ress.approvemem);
+            updateDownOwnState(ress.singlestate);
+            updateDownAllState(ress.downallstate);
+            updateDownSewaPoint(ress.download_pointlist);
+            updateBroadcast(ress.sendbroad);
+        }
+        }
         getUserRoles();
+        getPermissionDetail();
     },[]);
     const addDefaultSrc = (ev) => {
         ev.target.src = './static/img/head.png';

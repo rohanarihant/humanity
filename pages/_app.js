@@ -39,7 +39,7 @@ export default class MyApp extends App {
 					default: '#EEE',
 				},
 				primary: {
-					main: '#673ab7',
+					main: '#3D8EE1',
 				},
 			},
 		})

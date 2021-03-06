@@ -10,7 +10,9 @@ async function fetchData({
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Headers': 'X-Requested-With',
+        'Access-Control-Allow-Headers': '*',
+        "Content-Type": "application/x-www-form-urlencoded",
+        'mode': "no-cors",
       },
       method,
     };
@@ -239,14 +241,18 @@ async function fetchData({
       endpoint: 'api/fetch_memberdetail/',
       data: { userid, authpassword, memberid},
     }),
+    getPermissionDetail: async (userid, authpassword, accessforpermission, power) => postData({
+      endpoint: 'api/accessforpermission/',
+      data: { userid, authpassword, accessforpermission, power },
+    }),
   };
   export const download = {
     downloadMembers: async (userid, authpassword, countryid, gender) => postData({
       endpoint: `downloadapi/download_selected_state_json/${userid}/${authpassword}/${countryid}/${gender}`,
       data: {}
     }),
-    downloadMembersPoints: async (userid, authpassword, countryid, gender) => postData({
-      endpoint: `downloadapi/download_selected_state_sewapoint_json/${userid}/${authpassword}/${countryid}/${gender}`,
+    downloadMembersPoints: async (userid, authpassword, countryid, gender, fromdate, todate) => postData({
+      endpoint: `downloadapi/download_selected_state_sewapoint_json/${userid}/${authpassword}/${countryid}/${gender}/${fromdate}/${todate}`,
       data: {}
     }),
   };
@@ -282,5 +288,15 @@ async function fetchData({
       data: {userid, authpassword, power, countryid, state_id, dist_id, block_id, gender, distid}
     }),
   };
+  export const broadcast = {
+    getAllBroadcast: async (userid, authpassword, lastid, power, gender, stateid) => postData({
+      endpoint: `api/fetch_broadcastlist/`,
+      data: {userid, authpassword, lastid, power, gender, stateid}
+    }),
+    createBroadcast: async (userid, authpassword, lastid, power, gender, stateid) => postData({
+      endpoint: `api/send_broadcast/`,
+      data: {userid, authpassword, lastid, power, gender, stateid}
+    })
+  }
 
   

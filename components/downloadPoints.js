@@ -10,6 +10,11 @@ export default function DownloadPoints() {
     const [selectedState, updateSelectedState] = useState('');
     const [selectedStateData, updateSelectedStateData] = useState([]);
     const [errorMsg, updateError] = useState('');
+    const MinDate = new Date().toISOString().slice(0,10)
+    const MaxDate = new Date().toISOString().split("T")[0];
+    const [startDate, updateStartDate] = useState('');
+    const [endDate, updateEndDate] = useState('');
+
     useEffect(() => {
         async function getALLStates(){
             const userid = localStorage.getItem('userId')
@@ -43,7 +48,7 @@ export default function DownloadPoints() {
         const authpassword = localStorage.getItem('authpassword')
         const MemberDetaildet = JSON.parse(localStorage.getItem('MemberDetaildet'));
         const gender = MemberDetaildet && MemberDetaildet[0].usrgen;
-        const stateRecord = await download.downloadMembersPoints(userid, authpassword, selectedState, gender);
+        const stateRecord = await download.downloadMembersPoints(userid, authpassword, selectedState, gender, startDate, endDate);
         stateRecord.length > 0 && parseDownloadPoints(stateRecord);
         stateRecord.length > 0 && await updateSelectedStateData(parseDownloadPoints(stateRecord));
         stateRecord.length === 0 && updateError('No Record Found');
@@ -59,6 +64,10 @@ export default function DownloadPoints() {
             <NavBarBack />
             <div style={{ marginTop: 80 }}>
                 <div class="form-group">
+                    <label for="email" style={{marginTop: '1em'}}>From Date</label>
+                    <input type="date" id="text" placeholder="Start Date" min="2020-01-23" max={MaxDate} value={startDate} onChange={(e) => updateStartDate(e.target.value)} class="form-control" />
+                    <label for="email" style={{marginTop: '1em'}}>To Date</label>
+                    <input type="date" id="text" placeholder="End Date" max={MaxDate} value={endDate} onChange={(e) => updateEndDate(e.target.value)} class="form-control" />
                     <label for="email">Select State</label>
                     <select class="form-control" value={selectedState} name="itWingPrashad" onChange={(e) => selectState(e.target.value)}>
                         {allStates && allStates.map(state => (<option value={state.stateid}>{state.statename}</option>))}

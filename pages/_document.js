@@ -11,7 +11,7 @@ class MyDocument extends Document {
 						name="viewport"
 						content="width=device-width, initial-scale=1.0"
 					/>
-					<meta name="theme-color" content="#673ab7" />
+					<meta name="theme-color" content="#3D8EE1" />
 					<meta
 						name="Description"
 						content="an example of NextJS app with 100% accessible lighthouse score"

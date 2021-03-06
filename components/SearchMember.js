@@ -157,7 +157,7 @@ export default function SearchMember() {
                     border-radius: 10px;
                     margin-top: 10px;
                     font-size: 20px;
-                    border: 1px solid #673ab7;
+                    border: 1px solid #3D8EE1;
                     margin: 3vw 10px;
                     width: 100%;
                 }
@@ -171,7 +171,7 @@ export default function SearchMember() {
                     border-radius: 6px;
                     padding: 10px;
                     background-color: rgb(235, 224, 255);
-                    border: 1px solid #673ab7;
+                    border: 1px solid #3D8EE1;
                     width: 95%;
                     font-weight: 500;
                     left: 0%;

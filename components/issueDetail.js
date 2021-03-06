@@ -72,7 +72,7 @@ const IssueDetail = () => {
                 font-size: 15px;
             }
             .create-by{
-                color: #673ab7;
+                color: #3D8EE1;
                 font-size: 18px;
                 text-align: center;
             }

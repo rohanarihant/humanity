@@ -116,7 +116,7 @@ const SewaResultsBlock = () => {
             margin-top: 20px;
             text-align: center;
             margin-bottom: 1rem;
-            color: #673ab7;
+            color: #3D8EE1;
             font-size: 20px;
         }
         .social-media-title{

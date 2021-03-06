@@ -31,6 +31,8 @@ import PointList from '../components/addSewaPointList';
 import EventDetail from '../components/eventDetail';
 import SewaResultsDestrict from '../components/resultDestrict';
 import SewaResultsBlock from '../components/resultBlock';
+import Broadcast from '../components/broadcast';
+import AddBroadcast from '../components/addBroadcast';
 
 const Index = () => {
 	const { account : { route, showLoader }} = useContext(AccountContext);
@@ -88,10 +90,14 @@ const Index = () => {
 			return <PointList />;
 			case 'eventDetail':
 			return <EventDetail />;
+			case 'broadcast':
+			return <Broadcast />;
 			case 'sewaResultsDestrict':
 			return <SewaResultsDestrict />;
 			case 'sewaResultsBlock':
 			return <SewaResultsBlock />;
+			case 'addBroadcast':
+			return <AddBroadcast />;
 			default:
 			return <HomePage />;
 		}

@@ -32,14 +32,14 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: '#fff',
         height: 120,
-        backgroundColor: '#673ab7',
+        backgroundColor: '#3D8EE1',
         boxShadow: '10px 10px 5px #aaaaaa',
     },
     note: {
         marginTop: '20px',
         fontSize: '18px',
         textAlign: 'center',
-        color: '#673ab7',
+        color: '#3D8EE1',
     },
     link: {
         margin: '20px',
@@ -164,6 +164,7 @@ export default function SimplePaper() {
         ev.target.src = './static/img/head.png';
     }
     return (
+        <>
         <div style={{ marginTop: 20 }}>
             <div className="user-detail-dashboard">
                 <img class="profile-image" style={{height: 85, width: 90, borderRadius: "50%"}} src={`http://humanity.rubrutech.com/profileimage/${userID}.jpg`}  onError={(e) => addDefaultSrc(e)}  alt="profile image" />
@@ -172,7 +173,56 @@ export default function SimplePaper() {
                     <p>{ItwingRank}</p>
                 </div>
             </div>
-            <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
+            <div>
+                <div className="full-width-border"></div>
+                <div className="home-block">
+                    <div className="home-block-container">
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 1</p>
+                    </div>
+                    <div className="home-block-container">
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 2</p>
+                    </div>
+                    <div className="home-block-container" style={{borderRight: 0}}>
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 3</p>
+                    </div>
+                </div>
+                <div className="full-width-border"></div>
+                <div className="home-block">
+                    <div className="home-block-container">
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 1</p>
+                    </div>
+                    <div className="home-block-container">
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 2</p>
+                    </div>
+                    <div className="home-block-container" style={{borderRight: 0}}>
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 3</p>
+                    </div>
+                </div>
+                <div className="full-width-border"></div>
+                <div className="home-block">
+                    <div className="home-block-container">
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 1</p>
+                    </div>
+                    <div className="home-block-container">
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 2</p>
+                    </div>
+                    <div className="home-block-container" style={{borderRight: 0}}>
+                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
+                        <p>Block 3</p>
+                    </div>
+                </div>
+                <div className="full-width-border"></div>
+
+            </div>
+            {/* <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
                 <Grid container item xs={12} spacing={3}>
                     <FormRow />
                 </Grid>
@@ -182,7 +232,7 @@ export default function SimplePaper() {
                 <Grid container item xs={12} spacing={3}>
                     <FormRowThird />
                 </Grid>
-            </Grid>
+            </Grid> */}
             <Grid container justify="center" className={classes.note}>
                 If you are facing any problem with this app then please send us an email
             </Grid>
@@ -198,7 +248,33 @@ export default function SimplePaper() {
                     msghumanity@gmail.com
                 </Link>
             </Grid>
-
         </div>
+            <style jsx>
+                    {`
+                    .full-width-border{
+                        width: 80%;
+                        border: 1px solid #F1F1F1;
+                        margin: 10px 0px 10px 10%;
+                    }
+                    .home-block{
+                        display: flex;
+                        justify-content: start;
+                    }
+                    .home-block-container{
+                        border: 1px solid #F1F1F1;
+                        width: 33.3%;
+                        border-left: 0px;
+                        border-top: 0px;
+                        justify-content: center;
+                        align-items: center;
+                        display: flex;
+                        height: 100px;
+                        flex-direction: column;
+                        border-bottom:0px;
+                    }
+                    
+                    `}
+            </style>
+        </>
     );
 }

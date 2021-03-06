@@ -152,7 +152,7 @@ function MemberDetails(){
             {`
             .member-detail-container{
                 background-color: #fff;
-                color: #673ab7;
+                color: #3D8EE1;
             }
             .member-details{
                 margin-top: 80px;
