@@ -1,2 +1,2 @@
-/api/*      http://humanitydemo.rubrutech.com/api/:splat 200!
-/login/*    http://humanitydemo.rubrutech.com/login/:splat 200!
+/api/*      https://humanitydemo.rubrutech.com/api/:splat 200!
+/login/*    https://humanitydemo.rubrutech.com/login/:splat 200!

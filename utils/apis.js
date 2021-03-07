@@ -11,9 +11,9 @@ async function fetchData({
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Headers': '*',
-        "Content-Type": "application/x-www-form-urlencoded",
-        'mode': "no-cors",
+        'Access-Control-Max-Age': '8640',
       },
+      mode: "no-cors",
       method,
     };
     if (method !== 'GET') {

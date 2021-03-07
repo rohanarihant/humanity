@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
     },
     note: {
         marginTop: '20px',
-        fontSize: '18px',
+        fontSize: '16px',
         textAlign: 'center',
-        color: '#3D8EE1',
+        color: '#ACA6A5',
     },
     link: {
         margin: '20px',
@@ -177,46 +177,46 @@ export default function SimplePaper() {
                 <div className="full-width-border"></div>
                 <div className="home-block">
                     <div className="home-block-container">
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 1</p>
+                        <img src="./static/desktop/my-hazri-detail.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">My Hazri Detail</p>
                     </div>
                     <div className="home-block-container">
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 2</p>
+                        <img src="./static/desktop/useful-info.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">Userful Information</p>
                     </div>
                     <div className="home-block-container" style={{borderRight: 0}}>
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 3</p>
+                        <img src="./static/desktop/results.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">Result</p>
                     </div>
                 </div>
                 <div className="full-width-border"></div>
                 <div className="home-block">
                     <div className="home-block-container">
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 1</p>
+                        <img src="./static/desktop/add-sewa-detail.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">Add Sewa Detail</p>
                     </div>
                     <div className="home-block-container">
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 2</p>
+                        <img src="./static/desktop/events.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">Events</p>
                     </div>
                     <div className="home-block-container" style={{borderRight: 0}}>
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 3</p>
+                        <img src="./static/desktop/escalation-matrix.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">Escalation Matrix</p>
                     </div>
                 </div>
                 <div className="full-width-border"></div>
                 <div className="home-block">
                     <div className="home-block-container">
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 1</p>
+                        <img src="./static/desktop/my-profile.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">My Profile</p>
                     </div>
                     <div className="home-block-container">
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 2</p>
+                        <img src="./static/desktop/simran-dairy.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">Simran Diary</p>
                     </div>
                     <div className="home-block-container" style={{borderRight: 0}}>
-                        <img src="./static/img/head.png" style={{height: 40, width: 40}} />
-                        <p>Block 3</p>
+                        <img src="./static/desktop/broadcast.jpg" style={{height: 40, width: 40}} />
+                        <p className="block-name">Broadcast</p>
                     </div>
                 </div>
                 <div className="full-width-border"></div>
@@ -272,7 +272,11 @@ export default function SimplePaper() {
                         flex-direction: column;
                         border-bottom:0px;
                     }
-                    
+                    .block-name{
+                        font-size: 12px;
+                        margin: 0.6rem 0px 0px 0px;
+                        color: #1270E9;
+                    }
                     `}
             </style>
         </>
