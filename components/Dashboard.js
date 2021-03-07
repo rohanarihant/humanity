@@ -123,7 +123,7 @@ function FormRowThird() {
 
 export default function SimplePaper() {
     const classes = useStyles();
-    const { account: { getProfileDetails, setPermissions, setItwingRank, setRoute } } = useContext(AccountContext);
+    const { account: { getProfileDetails, setPermissions, setItwingRank, setRoute, updateSelectedScreen } } = useContext(AccountContext);
     const router = useRouter();
     const [ItwingRank,updateItwingRank] = useState('');
     const [MemberDetaildet,setMemberDetaildet] = useState('');

@@ -170,7 +170,7 @@ export default function SearchMember() {
                     font-size: 18px;
                     border-radius: 6px;
                     padding: 10px;
-                    background-color: rgb(235, 224, 255);
+                    background-color: #B8D4F7;
                     border: 1px solid #3D8EE1;
                     width: 95%;
                     font-weight: 500;

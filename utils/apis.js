@@ -9,8 +9,7 @@ async function fetchData({
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding',
-        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': '*',
       },
       // mode: "no-cors",
       method,
