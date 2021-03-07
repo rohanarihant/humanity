@@ -9,11 +9,10 @@ async function fetchData({
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Max-Age': '8640',
+        'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding',
+        'Content-Type': 'application/json',
       },
-      mode: "no-cors",
+      // mode: "no-cors",
       method,
     };
     if (method !== 'GET') {

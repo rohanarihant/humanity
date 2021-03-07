@@ -93,7 +93,7 @@ export default function TemporaryDrawer() {
   }
   React.useEffect(() => {
     updateLoginStatus(!localStorage.getItem('userId'));
-    // !localStorage.getItem('userId') && router.push('/login');
+    !localStorage.getItem('userId') && router.push('/login');
   },[]);
   const onLogout = async() => {
     var conf = confirm(`Are you sure you want to logout?`);

@@ -13,6 +13,7 @@ import Link from '@material-ui/core/Link';
 import AccountContext from '../contexts/accountContext';
 import {auth} from '../utils/apis';
 import { useRouter } from 'next/router'
+import { dashboardGrids } from '../constants/url';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -76,10 +77,7 @@ function FormRowSecond() {
     const classes = useStyles();
     const { account: { setRoute, updateSelectedScreen } } = useContext(AccountContext);
 
-    const openRoute = (route) => {
-        setRoute(`${route}`);
-        updateSelectedScreen(`${route === 'sewa' ? 'Sewa' : 'Events'}`);
-    }
+
     return (
         <React.Fragment>
             <Grid item xs={6}>
@@ -125,7 +123,7 @@ function FormRowThird() {
 
 export default function SimplePaper() {
     const classes = useStyles();
-    const { account: { getProfileDetails, setPermissions, setItwingRank } } = useContext(AccountContext);
+    const { account: { getProfileDetails, setPermissions, setItwingRank, setRoute } } = useContext(AccountContext);
     const router = useRouter();
     const [ItwingRank,updateItwingRank] = useState('');
     const [MemberDetaildet,setMemberDetaildet] = useState('');
@@ -163,6 +161,10 @@ export default function SimplePaper() {
     const addDefaultSrc = (ev) => {
         ev.target.src = './static/img/head.png';
     }
+    const openRoute = (route) => {
+        setRoute(`${route}`);
+        updateSelectedScreen(`${route === 'sewa' ? 'Sewa' : 'Events'}`);
+    }
     return (
         <>
         <div style={{ marginTop: 20 }}>
@@ -174,53 +176,22 @@ export default function SimplePaper() {
                 </div>
             </div>
             <div>
+                {dashboardGrids &&
+                dashboardGrids.map((grid) => {
+                    return(
+                    <>
+                    <div className="full-width-border"></div>
+                    <div className="home-block">
+                    {grid && grid.row.map((r) => (
+                        <div className="home-block-container" onClick={() => openRoute(r.route)}>
+                            <img src={`./static/desktop/${r.img}.jpg`} style={{height: 40, width: 40}} />
+                            <p className="block-name">{r.name}</p>
+                        </div>
+                    ))}
+                    </div>
+                    </>        
+                )})}
                 <div className="full-width-border"></div>
-                <div className="home-block">
-                    <div className="home-block-container">
-                        <img src="./static/desktop/my-hazri-detail.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">My Hazri Detail</p>
-                    </div>
-                    <div className="home-block-container">
-                        <img src="./static/desktop/useful-info.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">Userful Information</p>
-                    </div>
-                    <div className="home-block-container" style={{borderRight: 0}}>
-                        <img src="./static/desktop/results.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">Result</p>
-                    </div>
-                </div>
-                <div className="full-width-border"></div>
-                <div className="home-block">
-                    <div className="home-block-container">
-                        <img src="./static/desktop/add-sewa-detail.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">Add Sewa Detail</p>
-                    </div>
-                    <div className="home-block-container">
-                        <img src="./static/desktop/events.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">Events</p>
-                    </div>
-                    <div className="home-block-container" style={{borderRight: 0}}>
-                        <img src="./static/desktop/escalation-matrix.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">Escalation Matrix</p>
-                    </div>
-                </div>
-                <div className="full-width-border"></div>
-                <div className="home-block">
-                    <div className="home-block-container">
-                        <img src="./static/desktop/my-profile.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">My Profile</p>
-                    </div>
-                    <div className="home-block-container">
-                        <img src="./static/desktop/simran-dairy.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">Simran Diary</p>
-                    </div>
-                    <div className="home-block-container" style={{borderRight: 0}}>
-                        <img src="./static/desktop/broadcast.jpg" style={{height: 40, width: 40}} />
-                        <p className="block-name">Broadcast</p>
-                    </div>
-                </div>
-                <div className="full-width-border"></div>
-
             </div>
             {/* <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
                 <Grid container item xs={12} spacing={3}>

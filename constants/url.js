@@ -34,4 +34,28 @@ export const stateList = [
     {name: 'Uttar Pardesh', id: 3},
     {name: 'Uttarakhand', id: 3},
     {name: 'West Bengal', id: 3},
-]
+];
+
+export const dashboardGrids = [
+    {
+        row: [
+            { name: 'My Hazri Detail', img: 'my-hazri-detail', route: 'myHazri'},
+            { name: 'Userful Information', img: 'useful-info', route: 'info'},
+            { name: 'Result', img: 'results', route: 'sewaResults'},
+        ]
+    },
+    {
+        row: [
+            { name: 'Add Sewa Detail', img: 'add-sewa-detail', route: 'sewa'},
+            { name: 'Events', img: 'events', route: 'events'},
+            { name: 'Escalation Matrix', img: 'escalation-matrix', route: 'escalation'},
+        ]
+    },
+    {
+        row: [
+            { name: 'My Profile', img: 'my-profile', route: 'profile'},
+            { name: 'Simran Diary', img: 'simran-dairy', route: ''},
+            { name: 'Broadcast', img: 'broadcast', route: ''},
+        ]
+    },
+];
