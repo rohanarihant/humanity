@@ -604,7 +604,8 @@
     float: left;
   }
   .carousel-inner{
-    margin-left: 6px;
+    width: 96% !important;
+    margin: 0px 2%;
     border: 3px solid #3D8EE1;
     border-radius: 10px;
   }

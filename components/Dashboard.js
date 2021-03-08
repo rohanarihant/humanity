@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
 function FormRow() {
     const classes = useStyles();
     const { account: { setRoute, updateSelectedScreen } } = useContext(AccountContext);
-    const openRoute = (route) => {
-        setRoute(`${route}`);
-        updateSelectedScreen(`${route === 'sewaResults' ? 'Sewa Results' : 'My Hazri'}`);
+    const openRoute = (route, name) => {
+        updateSelectedScreen(name);
+        setRoute(route);
     }
 
     return (
@@ -161,9 +161,9 @@ export default function SimplePaper() {
     const addDefaultSrc = (ev) => {
         ev.target.src = './static/img/head.png';
     }
-    const openRoute = (route) => {
+    const openRoute = (route, name) => {
         setRoute(`${route}`);
-        updateSelectedScreen(`${route === 'sewa' ? 'Sewa' : 'Events'}`);
+        updateSelectedScreen(name);
     }
     return (
         <>
@@ -183,7 +183,7 @@ export default function SimplePaper() {
                     <div className="full-width-border"></div>
                     <div className="home-block">
                     {grid && grid.row.map((r) => (
-                        <div className="home-block-container" onClick={() => openRoute(r.route)}>
+                        <div className="home-block-container" onClick={() => openRoute(r.route, r.name)}>
                             <img src={`./static/desktop/${r.img}.jpg`} style={{height: 40, width: 40}} />
                             <p className="block-name">{r.name}</p>
                         </div>
@@ -247,6 +247,7 @@ export default function SimplePaper() {
                         font-size: 12px;
                         margin: 0.6rem 0px 0px 0px;
                         color: #1270E9;
+                        text-align: center;
                     }
                     `}
             </style>
