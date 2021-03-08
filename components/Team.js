@@ -201,12 +201,12 @@ export default function Escalation() {
 
         .team-container{
           display: grid;
-          grid-template-columns: 70px 100px auto;
+          grid-template-columns: 60px 90px auto;
           gap: 10px;
         }
         .profile-image{
-          height: 70px;
-          width: 70px;
+          height: 60px;
+          width: 60px;
           border-radius: 20px;
           margin: 4px;
         }

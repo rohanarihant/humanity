@@ -42,7 +42,7 @@ const Broadcast = () => {
                             <p className="broadcast-date broadcast-text">{getTimeInterval(new Date(brod.msgdate))}</p>
                         </div>)
                 })}
-            <img className="plus-icon" src="/static/img/add-broadcast.png" onClick={() => setRoute('addBroadcast')} />
+            {/* <img className="plus-icon" src="/static/img/add-broadcast.png" onClick={() => setRoute('addBroadcast')} /> */}
             </div>
             <style jsx>
         {`
