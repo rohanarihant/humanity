@@ -33,6 +33,8 @@ import SewaResultsDestrict from '../components/resultDestrict';
 import SewaResultsBlock from '../components/resultBlock';
 import Broadcast from '../components/broadcast';
 import AddBroadcast from '../components/addBroadcast';
+import AddSimran from '../components/addSimran';
+import SimranReport from '../components/simranReport';
 
 const Index = () => {
 	const { account : { route, showLoader }} = useContext(AccountContext);
@@ -98,6 +100,10 @@ const Index = () => {
 			return <SewaResultsBlock />;
 			case 'addBroadcast':
 			return <AddBroadcast />;
+			case 'addSimran':
+			return <AddSimran />;
+			case 'simranReport':
+			return <SimranReport />;
 			default:
 			return <HomePage />;
 		}

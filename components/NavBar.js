@@ -130,7 +130,6 @@ export default function TemporaryDrawer() {
       </List>
     </div>
   );
-  console.log(title,'title title title')
   return (
     <div>
       {['left'].map((anchor) => (

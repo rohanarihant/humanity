@@ -121,7 +121,7 @@ class EditProfile extends React.Component{
             res.success && toast.success('User Profile updated successfully!');
             res.success && setRoute('home');
             toggleShowLoader(false);
-    }
+        }
         }
     render(){
         const {mobileNumber, telegramNumber, otherEmail, twitterHandle, education, profession, skills, device,

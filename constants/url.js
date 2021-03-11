@@ -54,7 +54,7 @@ export const dashboardGrids = [
     {
         row: [
             { name: 'My Profile', img: 'my-profile', route: 'profile'},
-            { name: 'Simran Diary', img: 'simran-dairy', route: ''},
+            { name: 'Simran Diary', img: 'simran-dairy', route: 'addSimran'},
             { name: 'Broadcast', img: 'broadcast', route: 'broadcast'},
         ]
     },

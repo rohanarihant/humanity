@@ -39,6 +39,7 @@ export class AccountProvider extends React.Component {
       prevRoute: '',
       userRoles: [],
       searchMemberBackState: 'searchMember',
+      memberPermission: {},
     };
     this.state = this.defaultState;
 
@@ -68,6 +69,7 @@ export class AccountProvider extends React.Component {
       setSelectedStateName: this.setSelectedStateName.bind(this),
       setSelectedDestrictName: this.setSelectedDestrictName.bind(this),
       setSearchMemberBackState: this.setSearchMemberBackState.bind(this),
+      updateMemberPermission: this.updateMemberPermission.bind(this),
       setUserRoles: this.setUserRoles.bind(this),
     };
   }
@@ -164,6 +166,9 @@ export class AccountProvider extends React.Component {
   }
   async setSearchMemberBackState(searchMemberBackState){
     this.setState({searchMemberBackState});
+  }
+  async updateMemberPermission(memberPermission){
+    this.setState({memberPermission});
   }
   render() {
     const context = {

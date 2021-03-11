@@ -34,9 +34,9 @@ const StateMembers = [
     {title: 'Useful Information', icon: <Info />, route: 'info'},
     {title: 'Events', icon: <EventAvailable />, route: 'events'},
     // {title: 'Issues', icon: <BugReport />, route: 'issues'},
-    {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
+    // {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
     {title: 'Search Members', icon: <Person />, route: 'searchMember'},
-    {title: 'Download State Members', icon: <Person />, route: 'download'},
+    // {title: 'Download State Members', icon: <Person />, route: 'download'},
     {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
     {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
     {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
@@ -52,8 +52,8 @@ const NationalMembers = [
     {title: 'Search Members', icon: <Person />, route: 'searchMember'},
     {title: 'Change Role', icon: <Accessibility />, route: 'searchMember'},
     {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
-    {title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'},
-    {title: 'Download All Member', icon: <PeopleOutline />, route: 'download'},
+    // {title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'},
+    // {title: 'Download All Member', icon: <PeopleOutline />, route: 'download'},
     {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
     {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
     {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
@@ -69,34 +69,51 @@ const ManagementMembers = [
     {title: 'Search Members', icon: <Person />, route: 'searchMember'},
     {title: 'Change Role', icon: <Accessibility />, route: 'searchMember'},
     {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
-    {title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'},
-    {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
-    {title: 'Download', icon: <Person />, route: 'download'},
-    {title: 'Download Points', icon: <Person />, route: 'downloadPoints'},
+    // {title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'},
+    // {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
+    // {title: 'Download', icon: <Person />, route: 'download'},
+    // {title: 'Download Points', icon: <Person />, route: 'downloadPoints'},
     {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
     {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
     {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
 ];
 
+const checkPermissions = (membersArray, userPermissions) => {
+    for (let x in userPermissions) {
+        if(userPermissions['approvemem'] === 'true'){
+            !membersArray.some(obj => obj.route === 'approveAccounts') && membersArray.push({title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'});
+        }
+        if(userPermissions['deletemem'] === 'true'){
+            !membersArray.some(obj => obj.route === 'searchMember') && membersArray.push({title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'});
+        }
+        if(userPermissions['downallstate'] === 'true'){
+            !membersArray.some(obj => obj.route === 'download') && membersArray.push({title: 'Download', icon: <Person />, route: 'download'});
+        }
+        if(userPermissions['download_pointlist'] === 'true'){
+            !membersArray.some(obj => obj.route === 'downloadPoints') && membersArray.push({title: 'Download Points', icon: <Person />, route: 'downloadPoints'});
+        }
+      }
+      return membersArray;
+}
 const selectNavBarForUser = (userType, userPermissions) => {
     let selected = '';
     switch(userType){
         case "Team Member":
         case "Block Member":
         case "District Member":
-            selected = TeamMembers;
+            selected = checkPermissions(TeamMembers, userPermissions);
             break;
         case "State Member":
-            selected = StateMembers;
+            selected = checkPermissions(StateMembers, userPermissions);
             break;
         case "National Member":
-            selected =  NationalMembers;
+            selected =  checkPermissions(NationalMembers, userPermissions);
             break;
         case "Management Member":
-            selected =  ManagementMembers;
+            selected =  checkPermissions(ManagementMembers, userPermissions);
             break;
         default:
-            selected = TeamMembers;
+            selected = checkPermissions(TeamMembers, userPermissions);
     }
     return selected;
 }
