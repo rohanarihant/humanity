@@ -11,17 +11,7 @@ const Multiselect = dynamic(
         ssr: false
     }
 )
-// const educationList = ['Class 1st', 'Class 2nd', 'Class 3rd', 'Class 4th', 'Class 5th', 'Class 6th', 'Class 7th', 'Class 8th', 'Class 9th', 'Class 10th', 'Class 11th', 'Class 12th',
-//     'B.Arch - Bechelor of Architecure', 'B.A - Bechelore of Arts', 'BAMS - Bechelore of Ayurvedic Medicine & Surgery', 'B.B.A - Bechelore of Business Administration', 'B.Com - Bechelore of Commerce',
-//     'B.C.A - Bechelore of Computer Application', 'B.D.S - Bechelore of Dental Surgery', 'B.Des/B.D', 'B.Ed', 'B.E/B.Tech', 'BFA/BVA', 'B.F.Sc/B.Sc', 'B.H.M.S', 'L.L.B',
-//     'B.Lib/B.Lib.Sc', 'B.M.C/B.M.M', 'M.B.B.S', 'Bechelore of Nursing', 'B.Pharm/B.Pharma', 'B.P.Ed', 'B.P.T', 'B.Sc', 'BSW/B.A(SW)', 'B.V.Sc & A.H / B.V.Sc', 'M.D', 'M.D (Homeophathy)',
-//     'Pharm D', 'Ph. D', 'D.M', 'M.Arch', 'M.A', 'M.B.A', 'M.CH', 'M.Com', 'M.C.A', 'M.D.S', 'M.Des/M.Design', 'M.Ed', 'M.E/M.Tech', 'MFA/MVA', 'L.L.M', 'MLib / MLib.Sc', 'M.M.C / M.M.M', 'M.Pharm',
-//     'M.Phil', 'MPEd / M.P.E', 'M.P.T', 'M.Sc', 'M.S.W/M.A (SW)', 'M.Sc (Agriculture)', 'M.S (Master in Surgury)', 'M.V.Sc', '3 Years of Diploma', '2 Years of ITI Cource'];
-// const professionList = ['A.C Repairing', 'Accountant', 'Advocate', 'Agent', 'Agriculture/farmer', 'Anganwadi Worker',
-//     'ANM', 'Army Servent', 'Artist', 'Barber Hair Dresser', 'Beautician', 'Beldaar', 'Black Smith', 'Bool Seller', 'Broker',
-//     'Businessman', 'Care Taker', 'Carpenter', 'Chartered Accountant', 'Chemist', 'Civil Engineer', 'Cloth Die (kapade di chappai)',
-//     'Cobbler', 'Combine Operator', 'Computer-Operator', 'Conductor', 'Construction', 'Contractor', 'Cook', 'D.J Sound', 'Dairy Farm',
-//     'Dentor', 'Driver', 'Electrician', 'Engineer', 'Ex-man'];
+
 const skillsLists = [
     { name: 'Acting', id: 1 }, { name: 'Basic Computer Knowledge', id: 2 }, { name: 'Content Writing in English', id: 3 }, { name: 'Content Writing in Hindi', id: 4 }, { name: 'Dancing', id: 5 },
     { name: 'Good Communication skills in English', id: 6 }, { name: 'Mobile App Developer', id: 7 }, { name: 'Networking', id: 8 }, { name: 'Content Writing in Hindi', id: 9 }, { name: 'Public Speaking', id: 10 },

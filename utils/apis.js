@@ -296,5 +296,19 @@ async function fetchData({
       data: {userid, authpassword, lastid, power, gender, stateid}
     })
   }
+  export const simranAPI = {
+    addSimran: async (userid, authpassword, hh, mm, simrandate) => postData({
+      endpoint: `api/add_simrandata/`,
+      data: {userid, authpassword, hh, mm, simrandate}
+    }),
+    getSimrans: async (userid, authpassword, pagging) => postData({
+      endpoint: `api/fetch_simran_report/`,
+      data: {userid, authpassword, pagging}
+    }),
+    deleteSimrans: async (userid, authpassword, reportid) => postData({
+      endpoint: `api/delete_simran_report/`,
+      data: {userid, authpassword, reportid}
+    })
+  }
 
   

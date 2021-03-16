@@ -2,23 +2,48 @@ import React, { useEffect, useState, useContext } from 'react';
 import NavBar from './NavBarBack';
 import { results } from '../utils/apis';
 import AccountContext from '../contexts/accountContext';
+import { simranAPI } from '../utils/apis'; 
 
 
 const SimranReport = () => {
+    const [siranData, setSiranData] = useState([]);
+    const { account: { setRoute } } = useContext(AccountContext);
+
+    async function getAllSimran(){
+        const userid = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const res = await simranAPI.getSimrans(userid, authpassword, 0);
+        if(res){
+            setSiranData(res);
+        }
+    }
+    useEffect(() => {
+        getAllSimran();
+    },[]);
+
+    const deleteSimran = async(id) => {
+        const userid = localStorage.getItem('userId');
+        const authpassword = localStorage.getItem('authpassword');
+        const res = await simranAPI.deleteSimrans(userid, authpassword, id);
+        if(res.success){
+            getAllSimran();
+        }
+    }
+
     return(
         <div>
         <div>
             <NavBar prevRoute="addSimran" />
             <div className="simran-container">
-                <div className="simran-block">
-                    <p>0.10 hr</p>
-                    {/* <div className="simran-date"> */}
-                        <p>11 Mar 21 <img src="./static/img/delete.svg" className="simran-delete" /></p>
-                        
-                    {/* </div> */}
-                </div>
+                {siranData && siranData.map((data) => (
+                    <div className="simran-block">
+                        <p>{data.simran_time}</p>
+                            <p>{data.simrandate}<img src="./static/img/delete.svg" className="simran-delete" onClick={() => deleteSimran(data.report_id)} /></p>
+                    </div>
+                ))}
             </div>
         </div>
+        <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addSimran')} />
         <style jsx>
         {`
         .simran-heading{
@@ -27,8 +52,7 @@ const SimranReport = () => {
             color: #3D8EE1;
         }
         .simran-container{
-            margin-top: 60px;
-            border: 1px solid #000;
+            margin-top: 60px; 
             margin: 65px 10px 5px 10px;
         }
         .simran-block{
@@ -37,6 +61,8 @@ const SimranReport = () => {
             align-items: center;
             padding: 10px 10px 0px 10px;
             font-size: 16px;
+            border: 1px solid #000;
+            margin-top:10px;
         }
         .simran-date{
             margin-top: 1em;
@@ -45,6 +71,7 @@ const SimranReport = () => {
         .simran-delete{
             height: 25px;
             width: 25px;
+            margin-left: 10px;
         }
         `}
         </style>

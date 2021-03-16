@@ -103,6 +103,7 @@ export default function TemporaryDrawer() {
       await localStorage.clear();
       updateLoginStatus(false);
       setItwingRank('');
+      
       router.push('/login');
     }
   }
