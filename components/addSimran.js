@@ -6,13 +6,14 @@ import { simranAPI } from '../utils/apis';
 import { toast } from 'react-toastify';
 
 const AddSimran = () => {
-    const {account: { setRoute}} = useContext(AccountContext);
+    const {account: { setRoute, toggleShowLoader}} = useContext(AccountContext);
     const [simranDate,setSimranDate] = useState('');
     const [simranHour,setSimranHour] = useState('');
     const [simranMinute,setSimranMinute] = useState('');
 
     const submitSimran = async() => {
         if(simranDate && simranHour && simranMinute && (Number(simranMinute) > 0 || Number(simranHour) > 0)){
+            toggleShowLoader(true);
             const userid = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
             const res = await simranAPI.addSimran(userid, authpassword, simranHour, simranMinute, simranDate );
@@ -21,7 +22,9 @@ const AddSimran = () => {
                 setSimranDate('');
                 setSimranHour('');
                 setSimranMinute('');
+                setRoute('simranReport');
             }
+            toggleShowLoader(false);
         }
     }
 
@@ -38,10 +41,16 @@ const AddSimran = () => {
                     <p>सिमरन किस तारीख में किया</p>
                     <input type="date" onChange={(e) => setSimranDate(e.target.value)} />
                 </div>
-                <div className="simran-block">
-                    <p>कुल कितना सिमरन किया</p>
-                    <input type="text" className="simran-text" maxLength={2} onChange={(e) => setSimranHour(e.target.value)} />
-                    <input type="text" className="simran-text" maxLength={2} onChange={(e) => setSimranMinute(e.target.value)} />
+                <div className="simran-block marginTop">
+                    <p className="total-simran">कुल कितना सिमरन किया</p>
+                    <div>
+                        <input type="number" className="simran-text" placceholder="hh" maxLength={2} onChange={(e) => setSimranHour(e.target.value)} />
+                        <label className="simran-label">Hours</label>
+                    </div>
+                    <div>
+                        <input type="number" className="simran-text"  placceholder="mm" maxLength={2} onChange={(e) => setSimranMinute(e.target.value)} />
+                        <label className="simran-label">Minutes</label>
+                    </div>
                 </div>
                 <p className="iconSwitch" onClick={() => submitSimran()}>Save</p>
             </div>
@@ -56,10 +65,21 @@ const AddSimran = () => {
         .simran-container{
             padding: 15px;
         }
+        .total-simran{
+            margin-right: 20px;
+        }
         .simran-block{
             display:flex;
             justify-content: space-between;
             margin-top: 15px;
+        }
+        .marginTop{
+            margin-top: 55px;
+        }
+        .simran-label{
+            position: relative;
+            bottom: 28px;
+            right: 46px;
         }
         .simran-text{
             height: 30px;

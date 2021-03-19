@@ -7,27 +7,31 @@ import { simranAPI } from '../utils/apis';
 
 const SimranReport = () => {
     const [siranData, setSiranData] = useState([]);
-    const { account: { setRoute } } = useContext(AccountContext);
+    const { account: { setRoute, toggleShowLoader } } = useContext(AccountContext);
 
     async function getAllSimran(){
         const userid = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
+        toggleShowLoader(true);
         const res = await simranAPI.getSimrans(userid, authpassword, 0);
         if(res){
             setSiranData(res);
         }
+        toggleShowLoader(false);
     }
     useEffect(() => {
         getAllSimran();
     },[]);
-
+    
     const deleteSimran = async(id) => {
         const userid = localStorage.getItem('userId');
         const authpassword = localStorage.getItem('authpassword');
+        toggleShowLoader(true);
         const res = await simranAPI.deleteSimrans(userid, authpassword, id);
         if(res.success){
             getAllSimran();
         }
+        toggleShowLoader(false);
     }
 
     return(
