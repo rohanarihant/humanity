@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import NavBar from './NavBarBack';
-import { results } from '../utils/apis';
 import AccountContext from '../contexts/accountContext';
 import { simranAPI } from '../utils/apis'; 
 

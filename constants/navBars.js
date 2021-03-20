@@ -13,6 +13,7 @@ import BugReport from '@material-ui/icons/BugReport';
 import EventAvailable from '@material-ui/icons/EventAvailable';
 import PostAdd from '@material-ui/icons/PostAdd';
 import LibraryAdd from '@material-ui/icons/LibraryAdd';
+import Assignment from '@material-ui/icons/Assignment';
 
 const checkPermissions = (membersArray, userPermissions) => {
     let newMembersArray = membersArray;
@@ -39,10 +40,11 @@ const selectNavBarForUser = (userType, userPermissions) => {
         {title: 'Escalation Matrix', icon: <People />, route: 'escalation'},
         {title: 'Add Sewa', icon: <PostAdd />, route: 'sewa'},
         {title: 'My Hazri Details', icon: <LibraryAdd />, route: 'myHazri'},
+        {title: 'Simran Diary', icon: <Assignment />, route: 'addSimran'},
         {title: 'Useful Information', icon: <Info />, route: 'info'},
         {title: 'Events', icon: <EventAvailable />, route: 'events'},
         // {title: 'Issues', icon: <BugReport />, route: 'issues'},
-        {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
+        // {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
         {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
         {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
     ];
@@ -51,13 +53,14 @@ const selectNavBarForUser = (userType, userPermissions) => {
         {title: 'Escalation Matrix', icon: <People />, route: 'escalation'},
         {title: 'Add Sewa', icon: <PostAdd />, route: 'sewa'},
         {title: 'My Hazri Details', icon: <LibraryAdd />, route: 'myHazri'},
+        {title: 'Simran Diary', icon: <Assignment />, route: 'addSimran'},
         {title: 'Useful Information', icon: <Info />, route: 'info'},
         {title: 'Events', icon: <EventAvailable />, route: 'events'},
         // {title: 'Issues', icon: <BugReport />, route: 'issues'},
         // {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
         {title: 'Search Members', icon: <Person />, route: 'searchMember'},
         // {title: 'Download State Members', icon: <Person />, route: 'download'},
-        {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
+        // {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
         {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
         {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
     ];
@@ -66,15 +69,16 @@ const selectNavBarForUser = (userType, userPermissions) => {
         {title: 'Escalation Matrix', icon: <People />, route: 'escalation'},
         {title: 'Add Sewa', icon: <PostAdd />, route: 'sewa'},
         {title: 'My Hazri Details', icon: <LibraryAdd />, route: 'myHazri'},
+        {title: 'Simran Diary', icon: <Assignment />, route: 'addSimran'},
         {title: 'Useful Information', icon: <Info />, route: 'info'},
         {title: 'Events', icon: <EventAvailable />, route: 'events'},
         // {title: 'Issues', icon: <BugReport />, route: 'issues'},
         {title: 'Search Members', icon: <Person />, route: 'searchMember'},
-        {title: 'Change Role', icon: <Accessibility />, route: 'searchMember'},
-        {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
+        // {title: 'Change Role', icon: <Accessibility />, route: 'searchMember'},
+        // {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
         // {title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'},
         // {title: 'Download All Member', icon: <PeopleOutline />, route: 'download'},
-        {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
+        // {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
         {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
         {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
     ];
@@ -83,6 +87,7 @@ const selectNavBarForUser = (userType, userPermissions) => {
         {title: 'Escalation Matrix', icon: <People />, route: 'escalation'},
         {title: 'Add Sewa', icon: <PostAdd />, route: 'sewa'},
         {title: 'My Hazri Details', icon: <LibraryAdd />, route: 'myHazri'},
+        {title: 'Simran Diary', icon: <Assignment />, route: 'addSimran'},
         {title: 'Useful Information', icon: <Info />, route: 'info'},
         {title: 'Events', icon: <EventAvailable />, route: 'events'},
         // {title: 'Issues', icon: <BugReport />, route: 'issues'},
