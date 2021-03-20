@@ -44,7 +44,7 @@ const selectNavBarForUser = (userType, userPermissions) => {
         {title: 'Useful Information', icon: <Info />, route: 'info'},
         {title: 'Events', icon: <EventAvailable />, route: 'events'},
         // {title: 'Issues', icon: <BugReport />, route: 'issues'},
-        // {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
+        {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
         {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
         {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
     ];
@@ -60,7 +60,7 @@ const selectNavBarForUser = (userType, userPermissions) => {
         // {title: 'Approve Accounts', icon: <Person />, route: 'approveAccounts'},
         {title: 'Search Members', icon: <Person />, route: 'searchMember'},
         // {title: 'Download State Members', icon: <Person />, route: 'download'},
-        // {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
+        {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
         {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
         {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
     ];
@@ -78,7 +78,7 @@ const selectNavBarForUser = (userType, userPermissions) => {
         // {title: 'Set Permission', icon: <Person />, route: 'searchMember'},
         // {title: 'Delete Profile', icon: <PeopleOutline />, route: 'searchMember'},
         // {title: 'Download All Member', icon: <PeopleOutline />, route: 'download'},
-        // {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
+        {title: 'Broadcast', icon: <AcUnit />, route: 'broadcast'},
         {title: 'How to Work', icon: <LiveTv />, route: 'howtowork'},
         {title: 'ChangeMyPassword', icon: <LockOpen />, route: 'changeMyPassword'},
     ];

@@ -7,9 +7,10 @@ import AccountContext from '../contexts/accountContext';
 const Broadcast = () => {
 
     const [allBroadcasts, setAllBroadcasts] = useState([]);
-    const {account: { setRoute}} = useContext(AccountContext);
+    const {account: { toggleShowLoader}} = useContext(AccountContext);
     useEffect(() => {
         async function getAllBroadcast() {
+            toggleShowLoader(true);
             const userid = localStorage.getItem('userId');
             const authpassword = localStorage.getItem('authpassword');
             const power = localStorage.getItem('power');
@@ -18,6 +19,7 @@ const Broadcast = () => {
             const stateid = memberDetaildet && memberDetaildet[0].usrstaid;
             const res = await broadcast.getAllBroadcast(userid, authpassword, userid, power, usrgen.toLowerCase(), stateid);
             res.success && setAllBroadcasts(res.broadmessage);
+            toggleShowLoader(false);
         }
         getAllBroadcast();
     }, []);
@@ -31,7 +33,7 @@ const Broadcast = () => {
             <div style={{marginTop: 70}}>
                 {allBroadcasts && allBroadcasts.map(brod => {
                     return (
-                        <div className="broadcast-container" onClick={() => setRoute('eventDetail')}>
+                        <div className="broadcast-container">
                             <div className="broadcast-top">
                                 <img src={`http://humanity.rubrutech.com/profileimage/${brod.msgid}.jpg`} className="broadcast-user-image" onError={(e) => addDefaultSrc(e)} />
                                 <strong className="broadcast-text">{brod.msgname}</strong>
@@ -42,7 +44,7 @@ const Broadcast = () => {
                             <p className="broadcast-date broadcast-text">{getTimeInterval(new Date(brod.msgdate))}</p>
                         </div>)
                 })}
-            {/* <img className="plus-icon" src="/static/img/add-broadcast.png" onClick={() => setRoute('addBroadcast')} /> */}
+                {allBroadcasts && allBroadcasts.length === 0 && <h4 className="broadcast-error">No Broadcast</h4>}
             </div>
             <style jsx>
         {`
@@ -78,6 +80,9 @@ const Broadcast = () => {
       .broadcast-date{
         text-align: right;
         font-weight: 500;
+      }
+      .broadcast-error{
+        text-align: center;
       }
       `}
       </style>

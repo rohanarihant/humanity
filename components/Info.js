@@ -96,6 +96,15 @@ export default function SplitButton() {
         getOfficialHandler();
     }, []);
 
+    const checkURL = (url) => {
+        const urlSplit = url && url.split(":");
+        const newURL = url && url.replace('http','https');
+        if(urlSplit[0] === 'http'){
+            return newURL;
+        }else{
+            return url;
+        }
+    }
     return (
         <div className="official-info">
             <NavBar prevRoute="home" />
@@ -151,8 +160,8 @@ export default function SplitButton() {
                 {selectedIndex === 0 && <p className="selection-option">Please select any option</p>}
             </div>
 
-            {selectedIndex > 0 && <div>
-                <iframe src={"https://humanity.rubrutech.com/htmlpage/officialhandle.html"} className="iframe-class" />
+            {selectedIndex > 0 && <div className="selected-iframe">
+                <iframe src={officialHandlerDetail && officialHandlerDetail[selectedIndex - 1] && checkURL(officialHandlerDetail[selectedIndex - 1].handler_url)} className="iframe-class" />
             </div>}
             <style jsx>
                 {`
@@ -166,6 +175,9 @@ export default function SplitButton() {
             text-align: center;
             margin-top: 20px;
             font-size: 20px;
+        }
+        .selected-iframe{
+            margin-top: 30px;
         }
         `}
             </style>
