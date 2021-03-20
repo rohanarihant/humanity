@@ -35,7 +35,7 @@ const Broadcast = () => {
                     return (
                         <div className="broadcast-container">
                             <div className="broadcast-top">
-                                <img src={`http://humanity.rubrutech.com/profileimage/${brod.msgid}.jpg`} className="broadcast-user-image" onError={(e) => addDefaultSrc(e)} />
+                                <img src={`http://humanity.rubrutech.com/profileimage/${brod.msgby}.jpg`} className="broadcast-user-image" onError={(e) => addDefaultSrc(e)} />
                                 <strong className="broadcast-text">{brod.msgname}</strong>
                             </div>
                                 <div className="broadcast-user-detail">
