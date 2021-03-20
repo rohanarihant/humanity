@@ -152,7 +152,7 @@ export default function SplitButton() {
             </div>
 
             {selectedIndex > 0 && <div>
-                <iframe src={"http://humanity.rubrutech.com/htmlpage/officialhandle.html"} className="iframe-class" />
+                <iframe src={"https://humanity.rubrutech.com/htmlpage/officialhandle.html"} className="iframe-class" />
             </div>}
             <style jsx>
                 {`
