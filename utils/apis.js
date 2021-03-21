@@ -291,9 +291,9 @@ async function fetchData({
       endpoint: `api/fetch_broadcastlist/`,
       data: {userid, authpassword, lastid, power, gender, stateid}
     }),
-    createBroadcast: async (userid, authpassword, lastid, power, gender, stateid) => postData({
+    createBroadcast: async (userid, authpassword, power, gen, des, countryid, stateid, distid, block, mm, nm, sm, dm, bm, tm, stateids, broadimage) => postData({
       endpoint: `api/send_broadcast/`,
-      data: {userid, authpassword, lastid, power, gender, stateid}
+      data: {userid, authpassword, power, gen, des, countryid, stateid, distid, block, mm, nm, sm, dm, bm, tm, stateids, broadimage}
     })
   }
   export const simranAPI = {

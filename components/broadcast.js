@@ -7,7 +7,7 @@ import AccountContext from '../contexts/accountContext';
 const Broadcast = () => {
 
     const [allBroadcasts, setAllBroadcasts] = useState([]);
-    const {account: { toggleShowLoader}} = useContext(AccountContext);
+    const {account: { toggleShowLoader, setRoute}} = useContext(AccountContext);
     useEffect(() => {
         async function getAllBroadcast() {
             toggleShowLoader(true);
@@ -45,6 +45,7 @@ const Broadcast = () => {
                         </div>)
                 })}
                 {allBroadcasts && allBroadcasts.length === 0 && <h4 className="broadcast-error">No Broadcast</h4>}
+                <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addBroadcast')} />
             </div>
             <style jsx>
         {`
