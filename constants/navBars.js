@@ -27,9 +27,9 @@ const checkPermissions = (membersArray, userPermissions) => {
         if(userPermissions['downallstate'] === 'true'){
             !newMembersArray.some(obj => obj.route === 'download') && membersArray.push({title: 'Download', icon: <Person />, route: 'download'});
         }
-        if(userPermissions['download_pointlist'] === 'true'){
-            !newMembersArray.some(obj => obj.route === 'downloadPoints') && membersArray.push({title: 'Download Points', icon: <Person />, route: 'downloadPoints'});
-        }
+        // if(userPermissions['download_pointlist'] === 'true'){
+        //     !newMembersArray.some(obj => obj.route === 'downloadPoints') && membersArray.push({title: 'Download Points', icon: <Person />, route: 'downloadPoints'});
+        // }
       }
       return newMembersArray;
 }

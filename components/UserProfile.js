@@ -6,10 +6,12 @@ import { accountApproval } from '../utils/apis';
 import { toast } from 'react-toastify';
 
 const UserProfile = () => {
-    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank, searchMemberBackState}} = useContext(AccountContext);
+    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank, getEduProList, searchMemberBackState}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
     const selectedUserData =  selectedUser;
     const educationObj = educationList && educationList.find(edu => edu.qualificationid === userProfileData[0].usreduid);
+    console.log(educationList,'educationList educationList')
+    console.log(userProfileData[0].usreduid,'userProfileData[0].usreduid')
     const educationName = educationObj && educationObj.qualificationname;
     //  || (selectedUserData && selectedUserData[0].usreduid); .qualificationname;
     const professionObj = professionList && professionList.find(pro => pro.professionid === userProfileData[0].usrprofessionid);
@@ -29,6 +31,10 @@ const UserProfile = () => {
             }
             toggleShowLoader(false);
         }
+        async function getEduProfessionList(){
+            await getEduProList();
+        }
+        getEduProfessionList();
         getProfile();
     }, []);
 
@@ -232,7 +238,7 @@ const UserProfile = () => {
                                 <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
                                     Role in Humanity
         </label>
-                                <input type="text" id="defaultFormRegisterConfirmEx" value={localStorage.getItem('ItwingRank')} className="form-control" />
+                                <input type="text" id="defaultFormRegisterConfirmEx" value={user.categoryname} className="form-control" />
                                 <br />
                                 <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
                                     Samiti

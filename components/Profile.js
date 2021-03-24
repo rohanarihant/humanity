@@ -10,7 +10,7 @@ const Profile = () => {
         Object.keys(obj).map(o => obj[o] === "undefined" ? obj[o] = "" : obj[o]);
         return obj;
     }
-    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank}} = useContext(AccountContext);
+    const {account: { getProfileDetails, screen, toggleShowLoader, setRoute, selectedUser, educationList, professionList, setItwingRank, getEduProList}} = useContext(AccountContext);
     const [userProfileData, setUserProfileData] = useState([{}]);
     const selectedUserDt = screen === 'Delete Member' ? selectedUser : userProfileData;
     const selectedUserData = [scanMemberObject(selectedUserDt[0])];
@@ -37,6 +37,10 @@ const Profile = () => {
             toggleShowLoader(false);
         }
         updateItwingRank(JSON.parse(localStorage.getItem('ItwingRank')));
+        async function getEduProfessionList(){
+            await getEduProList();
+        }
+        getEduProfessionList();
         getProfile();
     }, []);
 
