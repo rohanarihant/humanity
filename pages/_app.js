@@ -47,7 +47,7 @@ export default class MyApp extends App {
 		return (
 			<>
 				<Head>
-					<title>Todo App</title>
+					<title>HUManITy</title>
 					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 				</Head>
 				<AccountProvider>
