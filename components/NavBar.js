@@ -33,7 +33,7 @@ import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
 import { toast } from 'react-toastify';
-import selectNavBarForUser from '../constants/navBars';
+import selectNavBarForUser, {checkSearchMemberPermission} from '../constants/navBars';
 
 // const useStyles = makeStyles({
 // root: {
@@ -103,7 +103,7 @@ export default function TemporaryDrawer() {
       await localStorage.clear();
       updateLoginStatus(false);
       setItwingRank('');
-      
+
       router.push('/login');
     }
   }
@@ -150,7 +150,7 @@ export default function TemporaryDrawer() {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          	<Search className={classes.notification} onClick={() => onSearch()} />
+          	{!checkSearchMemberPermission(ItwingRank) && <Search className={classes.notification} onClick={() => onSearch()} />}
           	<Notifications className={classes.notification} />
             {/* onClick={() => router.push('/notifications')} */}
           	{!loginStatus &&

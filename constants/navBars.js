@@ -34,6 +34,10 @@ const checkPermissions = (membersArray, userPermissions) => {
       return newMembersArray;
 }
 
+export const checkSearchMemberPermission = (userType) => {
+    return ["Team Member", "Block Member", "District Member"].includes(userType);
+}
+
 const selectNavBarForUser = (userType, userPermissions) => {
     const TeamMembers = [
         {title: 'My Profile', icon: <Person />, route: 'profile'},

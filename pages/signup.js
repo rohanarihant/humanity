@@ -106,13 +106,13 @@ class Register extends React.Component{
     }
 
     async componentDidMount(){
-      // const {account: { toggleShowLoader }} = this.props;
+      const {account: { toggleShowLoader }} = this.props;
 
-      // toggleShowLoader(true);
-      // const eduList = await user.getEducationList();
-      // const proList = await user.getProfessionList();
-      // this.setState({educationList : eduList.educations,professionList: proList.profession });
-      // toggleShowLoader(false);
+      toggleShowLoader(true);
+      const eduList = await user.getEducationList();
+      const proList = await user.getProfessionList();
+      this.setState({educationList : eduList.educations,professionList: proList.profession });
+      toggleShowLoader(false);
       }
 
     validateField(selectedPage, pageNo){
