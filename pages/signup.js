@@ -299,10 +299,10 @@ class Register extends React.Component{
         <div class="container" id="myApp">
           		{showLoader && <img className="loader" src="./static/img/loader.svg" />}
 
-  <section class="section login" v-class="flip : signup" style={{opacity : showLoader ? 0.2 : 1 }}>
+  <form class="section login" v-class="flip : signup" style={{opacity : showLoader ? 0.2 : 1 }}>
       {pageNo !== 0 && <img src="./static/img/back.png" class="back-button" onClick={this.moveBack} />}
     <h2>SignUp</h2>
-    <form action="#">
+    {/* <form action="#"> */}
       {/* {pageNo === 1 &&
       <> */}
       <div class="form-group">
@@ -477,7 +477,7 @@ class Register extends React.Component{
       <p class="iconSwitch" onClick={() => this.checkForm()}>SignUp</p>
       <p><a href="javascript:;" class="create-account" onClick={() => Router.push({ pathname: '/login' })}>Login</a></p>
     </form>
-  </section>
+  {/* </section> */}
 </div>
     )
 }

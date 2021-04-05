@@ -134,6 +134,7 @@ export default function SimplePaper() {
     const [ItwingRank,updateItwingRank] = useState('');
     const [MemberDetaildet,setMemberDetaildet] = useState('');
     const [userID,setUserID] = useState('');
+    const [isIphoneDevice,setIsIphoneDevice] = useState(false);
 
     useEffect(() => {
         async function getProfile() {
@@ -164,6 +165,30 @@ export default function SimplePaper() {
         getProfile();
         checkLoginStatus();
     }, []);
+    const isMobile = {
+        Windows: function() {
+            return /IEMobile/i.test(navigator.userAgent);
+        },
+        Android: function() {
+            return /Android/i.test(navigator.userAgent);
+        },
+        BlackBerry: function() {
+            return /BlackBerry/i.test(navigator.userAgent);
+        },
+        iOS: function() {
+            return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+        }
+    };
+    useEffect(() => {
+        console.log(isMobile.Android(),'navigator.userAgent')
+        setIsIphoneDevice(isMobile.Android());
+        if( /iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+            console.log('Android')
+        }
+    },[]);
     const addDefaultSrc = (ev) => {
         ev.target.src = './static/img/head.png';
     }
@@ -210,9 +235,9 @@ export default function SimplePaper() {
                     <FormRowThird />
                 </Grid>
             </Grid> */}
-            <Grid container justify="center" className={classes.mobilenote}>
+            {isIphoneDevice && <Grid container justify="center" className={classes.mobilenote}>
                 कृपया इस एप्लीकेशन के बैक (back) बटन का ही प्रयोग करें, मोबाईल के बैक (back) बटन का नहीं
-            </Grid>
+            </Grid>}
             <Grid container justify="center" className={classes.note}>
                 If you are facing any problem with this app then please send us an email
             </Grid>
