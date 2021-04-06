@@ -111,7 +111,7 @@ const MyHazri = () => {
                 <input type="date" className="search-date-input" value={searchTo} onChange={(e) => setSearchTo(e.target.value)} />
                 <Search className={classes.notification} className="search-date-icon" onClick={() => searchMyHazri()} />
             </div>}
-            <p class="my-hazri-instruction" style={{marginTop: enableSearch ? 0 : 60}}>यहाँ पर आप पिछले 45 दिनों में की गई सेवा की जानकारी भर सकते हैं। भरी गई सेवा के अनुसार आपकी हाज़री अपने आप ही जुड़ती जाएगी।वर्ष 2020 में आपकी अब तक की कुल हाज़री सबसे ऊपर दिखाई गयी है।</p>
+            <p class="my-hazri-instruction" style={{marginTop: enableSearch ? 0 : 60}}>यहाँ पर आप पिछले 45 दिनों में की गई सेवा की जानकारी भर सकते हैं। भरी गई सेवा के अनुसार आपकी हाज़री अपने आप ही जुड़ती जाएगी।वर्ष 2021 में आपकी अब तक की कुल हाज़री सबसे ऊपर दिखाई गयी है।</p>
             <p className="total-hazri">Total Hazri :- {totalHazri}</p>
             <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addHazri')} />
         </div>
