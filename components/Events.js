@@ -19,7 +19,7 @@ import Divider from '@material-ui/core/Divider';
 import { events, searchUsers } from '../utils/apis';
 import { useRouter } from 'next/router'
 import AccountContext from '../contexts/accountContext';
-
+import { checkSearchMemberPermission } from '../constants/navBars';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -87,7 +87,7 @@ export default function Events() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { account: { getProfileDetails, setRoute, toggleShowLoader, saveSelectedEvent, setUserRoles, userRoles } } = useContext(AccountContext);
+  const { account: { getProfileDetails, setRoute, toggleShowLoader, saveSelectedEvent, setUserRoles, userRoles, ItwingRank } } = useContext(AccountContext);
   const [managementMem, setManagementMem] = useState([{}]);
   const [nationalMem, setNationalMem] = useState([{}]);
   const [stateMem, setStateMem] = useState([{}]);
@@ -151,7 +151,7 @@ export default function Events() {
       <TabPanel value={value} index={0}>
       {eventsList && eventsList.map(event => {
         if(checkDate(event.ToDate)){
-          return(<div className="event-container" onClick={() => setRoute('eventDetail')}>
+          return(<div className="event-container" onClick={() => getEventDetail(event)}>
           <div className="event-title">
             <img src={`http://humanity.rubrutech.com/profileimage/${event.CreateBy}.jpg`} className="event-user-image" onError={(e) => addDefaultSrc(e)} />
             <div className="event-user-detail">
@@ -187,7 +187,7 @@ export default function Events() {
         </div>)}
       })}
       </TabPanel>
-      <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addEvent')} />
+      {!checkSearchMemberPermission(ItwingRank) && <img className="plus-icon" src="/static/img/plus.png" onClick={() => setRoute('addEvent')} />}
       <style jsx>
         {`
       .event-container{

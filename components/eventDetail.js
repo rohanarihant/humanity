@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import AccountContext from '../contexts/accountContext';
 import Navbar from './NavBarBack';
+import { getTimeInterval } from '../utils/commonMethods';
+
+
 const getEventCreatedBy = (userRoles, event) => {
   const match = userRoles.map((role) => role.categoryid === event.CreateBy);
   return match && match.categoryid;
 }
 const EventDetail = () => {
-    const { account: { selectedEventDetail: event , userRoles} } = useContext(AccountContext);
-
+    const { account: { selectedEventDetail, selectedEventDetail: event , userRoles} } = useContext(AccountContext);
+    const addDefaultSrc = (ev) => {
+      ev.target.src = './static/img/head.png';
+    }
     return(
         <>
         <Navbar prevRoute="events" />
