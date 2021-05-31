@@ -144,7 +144,7 @@ async function fetchData({
     }
   export const user = {
       getProfile: async (userid, authpassword) => postData({
-          endpoint: 'api/option-chain-indices?symbol=NIFTY',
+          endpoint: 'api/my_profile/',
           data: { userid, authpassword },
       }),
       getMyTeam: async (userid, authpassword, power, gender, countryid, stateid) => postData({
