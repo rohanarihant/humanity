@@ -151,6 +151,11 @@ class Register extends React.Component{
                         }else{
                             this.setState({['blockError']: ''});
                         }
+                        if(this.state['insanNo'] === ''){
+                            this.setState({['insanNoError']: `enter insanNo`});
+                        }else{
+                            this.setState({['insanNoError']: ''});
+                        }
                     }
                 }
             });
@@ -288,12 +293,12 @@ class Register extends React.Component{
       });
     }
     render(){
-        const {pageNo, name, fatherName, gender, address, insanNo, nameError, fatherNameError, insanNoError,
-            addressError, dateofBirth, dateofBirthError, email, emailError, alternateEmail, password, passwordError,
-            confirmPassword, confirmPasswordError, mobileNo, mobileNoError, telegramMobileNo, telegramMobileNoError,
-            twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, educationList, professionList, twitterHandleError,
-            profession, educationError, block, blockError, blocksList, alternateEmailError, professionError, instagramProfile,
-            instagramProfileError, facebookProfile, facebookProfileError } = this.state;
+      const {pageNo, name, fatherName, gender, address, insanNo, nameError, fatherNameError, insanNoError,
+        addressError, dateofBirth, dateofBirthError, email, emailError, alternateEmail, password, passwordError,
+        confirmPassword, confirmPasswordError, mobileNo, mobileNoError, telegramMobileNo, telegramMobileNoError,
+        twitterHandle, itWingPrashad, education, skills, bloodGroup, device, sewaSamiti, educationList, professionList, twitterHandleError,
+        profession, educationError, block, blockError, blocksList, alternateEmailError, professionError, instagramProfile,
+        instagramProfileError, facebookProfile, facebookProfileError } = this.state;
         const {account: { showLoader }} = this.props;
     return(
         <div class="container" id="myApp">
@@ -356,7 +361,7 @@ class Register extends React.Component{
     </div>
 
     <div class="form-group">
-      <label for="text">Insan No</label>
+      <label for="text">Insan No</label><span class="asterisk">*</span>
       <input type="number" maxLength="7" name="insanNo" id="text" placeholder="Insan No"  value={insanNo} onChange={(e) => this.updateField(e)} class="form-control" />
       <p class="error">{insanNoError}</p>
     </div>
